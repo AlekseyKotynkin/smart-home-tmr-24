@@ -24,7 +24,27 @@
  20. Blog Realted Post activation
  21.Best Seller  Unique Activation
 
-
+ 1. Всплывающее окно новостной рассылки
+  2. Активация Мобильного Меню
+  3 Активация страницы Оформления Заказа
+  4. Активация NivoSlider
+  5. Активация Новых Продуктов
+  6. Активация нового продукта Upsell
+  7. Активация левой бокового блока продукции
+  8. Активация Бестселлера
+  9. Активация Ручного Инструмента
+  10. Активация Баннера Бренда
+  11. Активация Блога
+  12. Активация второго блога
+  13. Активация WOW Js
+  14. Прокрутите Активацию вверх
+  15. Активация Липкого Меню
+  16. Активация Ценового Слайдера
+  17. Скользкая Карусель Отзывов
+  18. Активация Бестселлера
+  19. Лучшая Активация Продукта
+  20. Активация поста, связанного с блогом
+  21.Уникальная активация Бестселлера
 
 ================================================*/
 
@@ -71,7 +91,7 @@
     });
 
     /*----------------------------
-    4. NivoSlider Activation
+    4. NivoSlider Activation    Главный слайдер index.html
     -----------------------------*/
     $('#slider').nivoSlider({
         effect: 'random',
@@ -87,36 +107,36 @@
     });
 
     /*----------------------------------------------------
-    5. New Products Activation
+    5. New Products Activation  Бок с товарами правый index.html
     -----------------------------------------------------*/
-    $('.new-pro-active').owlCarousel({
-            loop: false,
-            nav: true,
-            dots: false,
-            smartSpeed: 1000,
-
-            navText: ["<i class='fa fa-angle-left'></i>", "<i class='fa fa-angle-right'></i>"],
-            margin: 30,
-            responsive: {
-                0: {
-                    items: 1,
-                    autoplay:true
-                },
-                480: {
-                    items: 2
-                },
-                768: {
-                    items: 2
-                },
-                1000: {
-                    items: 2
-                },
-                1200: {
-                    items: 3
-                }
-            }
-
-        })
+    // $('.new-pro-active').owlCarousel({
+    //         loop: false,
+    //         nav: true,
+    //         dots: false,
+    //         smartSpeed: 1000,
+    //
+    //         navText: ["<i class='fa fa-angle-left'></i>", "<i class='fa fa-angle-right'></i>"],
+    //         margin: 30,
+    //         responsive: {
+    //             0: {
+    //                 items: 1,
+    //                 autoplay:true
+    //             },
+    //             480: {
+    //                 items: 2
+    //             },
+    //             768: {
+    //                 items: 2
+    //             },
+    //             1000: {
+    //                 items: 2
+    //             },
+    //             1200: {
+    //                 items: 3
+    //             }
+    //         }
+    //
+    //     })
     /*----------------------------------------------------
     6. New Upsell Product Activation
     -----------------------------------------------------*/
@@ -150,36 +170,36 @@
         })
 
     /*----------------------------------------------------
-    7. Side Product Activation
+    7. Side Product Activation   7. Активация левой бокового блока продукции
     -----------------------------------------------------*/
-    $('.side-product-list-active')
-        .on('changed.owl.carousel initialized.owl.carousel', function (event) {
-            $(event.target)
-                .find('.owl-item').removeClass('last')
-                .eq(event.item.index + event.page.size - 1).addClass('last');
-        }).owlCarousel({
-            loop: false,
-            nav: true,
-            dots: false,
-            smartSpeed: 1500,
-            navText: ["<i class='fa fa-angle-left'></i>", "<i class='fa fa-angle-right'></i>"],
-            margin: 1,
-            responsive: {
-                0: {
-                    items: 1,
-                    autoplay:true
-                },
-               480: {
-                    items: 2
-                },
-                768: {
-                    items: 2
-                },
-                991: {
-                    items: 1
-                }
-            }
-        })
+    // $('.side-product-list-active')
+    //     .on('changed.owl.carousel initialized.owl.carousel', function (event) {
+    //         $(event.target)
+    //             .find('.owl-item').removeClass('last')
+    //             .eq(event.item.index + event.page.size - 1).addClass('last');
+    //     }).owlCarousel({
+    //         loop: false,
+    //         nav: true,
+    //         dots: false,
+    //         smartSpeed: 1500,
+    //         navText: ["<i class='fa fa-angle-left'></i>", "<i class='fa fa-angle-right'></i>"],
+    //         margin: 1,
+    //         responsive: {
+    //             0: {
+    //                 items: 1,
+    //                 autoplay:true
+    //             },
+    //            480: {
+    //                 items: 2
+    //             },
+    //             768: {
+    //                 items: 2
+    //             },
+    //             991: {
+    //                 items: 1
+    //             }
+    //         }
+    //     })
 
     /*----------------------------------------------------
     8. Best Seller Activation
@@ -450,7 +470,7 @@ $('.brand-banner').on('changed.owl.carousel initialized.owl.carousel', function 
                 }
             }
         })
-    
+
     /*-------------------------------------
     20. Blog Realted Post activation
     --------------------------------------*/
@@ -481,7 +501,7 @@ $('.brand-banner').on('changed.owl.carousel initialized.owl.carousel', function 
             }
         }
     })
-    
+
     /*----------------------------------------------------
     21.Best Seller  Unique Activation
     -----------------------------------------------------*/
@@ -509,6 +529,6 @@ $('.brand-banner').on('changed.owl.carousel initialized.owl.carousel', function 
             }
         }
     })
-     
-    
+
+
 })(jQuery);
