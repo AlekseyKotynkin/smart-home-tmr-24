@@ -84,7 +84,7 @@
 @media (min-width: 768px) and (max-width: 991px) {
  .cart-box.text-right {
     padding-top: 12px;
-}   
+}
 .nivo2 .text-content h1 {
     font-size: 33px;
     line-height: 43px;
@@ -159,10 +159,10 @@
 .logo {
     padding: 21px 0;
 }
-.main-categorie #list-view .single-product {
+.main-categorie #list_view .single-product {
     padding: 10px 0;
 }
-.main-categorie #list-view .pro-img {
+.main-categorie #list_view .pro-img {
     width: 170px;
 }
 .product-link li a {
@@ -273,7 +273,7 @@
 .new-products .product-list {
     margin-bottom: 30px;
 }
-    
+
 .nivo-caption .banner-readmore a {
     line-height: 32px;
     padding: 0 15px;
@@ -291,13 +291,13 @@
 .blog-content h1 {
     font-size: 18px;
     margin-top: 20px;
-}    
+}
 .single-footer h3 {
     margin-bottom: 12px;
 }
   .new-customer {
         margin-bottom: 30px;
-    }  
+    }
 .about-content h3, .single-misson h3, .ht-single-about h3 {
     margin-bottom: 8px;
     font-size: 18px;
@@ -543,7 +543,7 @@
 .toolbar-sorter-footer select {
     width: 125px;
 }
-.main-categorie #list-view .pro-img {
+.main-categorie #list_view .pro-img {
     width: 100%;
 }
 .thubnail-desc {
@@ -752,7 +752,7 @@ p.checkout-coupon input[type="submit"] {
 }
 .pt-sm-35{
     padding-top: 35px;
-} 
+}
 .pt-sm-30{
     padding-top: 30px;
 }
@@ -770,10 +770,10 @@ p.checkout-coupon input[type="submit"] {
 }
 .pt-sm-5{
     padding-top: 5px;
-} 
+}
 .pt-sm-0{
     padding-top: 0px;
-} 
+}
 .pb-sm-60{
     padding-bottom: 60px;
 }
@@ -818,13 +818,13 @@ p.checkout-coupon input[type="submit"] {
 }
 .ptb-sm-55{
     padding: 55px 0;
-} 
+}
 .ptb-sm-60{
     padding: 60px 0;
 }
 .ptb-sm-30{
     padding: 30px 0;
-} 
+}
 .ptb-sm-0{
     padding: 0px 0;
 }

@@ -25,7 +25,7 @@
  21.Best Seller  Unique Activation
 
 ================================================*/
-
+// Заполнения index.html блок правой части экрана товары
 /*====================================================*/
 
 // Initialize Cloud Firestore and get a reference to the service
@@ -37,49 +37,48 @@ db.collection("product").where("p_Filtr_index", "==", "ipdl")
         querySnapshot.forEach((doc) => {
             // doc.data() is never undefined for query doc snapshots
             console.log(doc.id, " => ", doc.data());
-                cycle_blok = cycle_blok + 1;
-                var doc_product = doc.data();
-                var p_Foto_link = doc_product.p_Foto_link;
-                var p_Title = doc_product.p_Title;
-                var p_price_max = doc_product.p_price_max;
-                var p_price_min = doc_product.p_price_min;
-                var html = [
-                        '<div class="pro-img">'+
-                            '<a href="product.html">'+
-                                // '<img id="myImgId_0" class="primary-img" src="" alt="single-product">'+
-                                '<img class="primary-img" src='+p_Foto_link+' alt="single-product">'+
-                                // '<img id="myImgId_1" class="secondary-img" src="" alt="single-product">'+
-                                '<img class="secondary-img" src='+p_Foto_link+' alt="single-product">'+
-                            '</a>'+
+            cycle_blok = cycle_blok + 1;
+            var doc_product = doc.data();
+            var p_Foto_link = doc_product.p_Foto_link;
+            var p_Title = doc_product.p_Title;
+            var p_price_max = doc_product.p_price_max;
+            var p_price_min = doc_product.p_price_min;
+            var html = [
+                    '<div class="pro-img">'+
+                        '<a href="product.html">'+
+                            // '<img id="myImgId_0" class="primary-img" src="" alt="single-product">'+
+                            '<img class="primary-img" src='+p_Foto_link+' alt="single-product">'+
+                            // '<img id="myImgId_1" class="secondary-img" src="" alt="single-product">'+
+                            '<img class="secondary-img" src='+p_Foto_link+' alt="single-product">'+
+                        '</a>'+
+                    '</div>'+
+                    '<div class="pro-content">'+
+                        '<div class="product-rating">'+
+                            '<i class="fa fa-star"></i>'+
+                            '<i class="fa fa-star"></i>'+
+                            '<i class="fa fa-star"></i>'+
+                            '<i class="fa fa-star"></i>'+
+                            '<i class="fa fa-star"></i>'+
                         '</div>'+
-                        '<div class="pro-content">'+
-                            '<div class="product-rating">'+
-                                '<i class="fa fa-star"></i>'+
-                                '<i class="fa fa-star"></i>'+
-                                '<i class="fa fa-star"></i>'+
-                                '<i class="fa fa-star"></i>'+
-                                '<i class="fa fa-star"></i>'+
+                        '<h4><a href="product.html">'+p_Title+'</a></h4>'+
+                        '<p><span class="price">'+p_price_min+' ₽</span><del class="prev-price">'+p_price_max+' ₽</del></p>'+
+                        '<div class="pro-actions">'+
+                            '<div class="actions-secondary">'+
+                                '<a href="wishlist.html" data-toggle="tooltip" title="в избранное"><i class="fa fa-heart"></i></a>'+
+                                '<a class="add-cart" href="cart.html" data-toggle="tooltip" title="в корзину">в корзину</a>'+
+                                '<a href="compare.html" data-toggle="tooltip" title="сравнить"><i class="fa fa-signal"></i></a>'+
                             '</div>'+
-                            '<h4><a href="product.html">'+p_Title+'</a></h4>'+
-                            '<p><span class="price">'+p_price_min+' ₽</span><del class="prev-price">'+p_price_max+' ₽</del></p>'+
-                            '<div class="pro-actions">'+
-                                '<div class="actions-secondary">'+
-                                    '<a href="wishlist.html" data-toggle="tooltip" title="в избранное"><i class="fa fa-heart"></i></a>'+
-                                    '<a class="add-cart" href="cart.html" data-toggle="tooltip" title="в корзину">в корзину</a>'+
-                                    '<a href="compare.html" data-toggle="tooltip" title="сравнить"><i class="fa fa-signal"></i></a>'+
-                                '</div>'+
-                            '</div>'+
-                        '</div>'
-                ].join('');
-                var div = document.createElement('div');
-                div.setAttribute('class', 'single-product');
-                div.innerHTML = html;
-                if (cycle_blok > 0 && cycle_blok <= 7){
-                  ipdl_blok.prepend(div); // вставить liFirst в начало <ol>
-                }
-                console.log("Переполнен список");
+                        '</div>'+
+                    '</div>'
+            ].join('');
+            var div = document.createElement('div');
+            div.setAttribute('class', 'single-product');
+            div.innerHTML = html;
+            if (cycle_blok > 0 && cycle_blok <= 7){
+              ipdl_blok.prepend(div); // вставить liFirst в начало <ol>
+            }
+            console.log("Переполнен список");
 
-                // console.log("вариант 2");
         });
         // console.log("вариант 1");
         startBlok();
@@ -89,40 +88,39 @@ db.collection("product").where("p_Filtr_index", "==", "ipdl")
         console.log("Error getting documents: ", error);
     });
 
-function startBlok(){
-  $('.new-pro-active').owlCarousel({
-          loop: false,
-          nav: true,
-          dots: false,
-          smartSpeed: 1000,
+    function startBlok(){
+      $('.new-pro-active').owlCarousel({
+              loop: false,
+              nav: true,
+              dots: false,
+              smartSpeed: 1000,
 
-          navText: ["<i class='fa fa-angle-left'></i>", "<i class='fa fa-angle-right'></i>"],
-          margin: 30,
-          responsive: {
-              0: {
-                  items: 1,
-                  autoplay:true
-              },
-              480: {
-                  items: 2
-              },
-              768: {
-                  items: 2
-              },
-              1000: {
-                  items: 2
-              },
-              1200: {
-                  items: 3
+              navText: ["<i class='fa fa-angle-left'></i>", "<i class='fa fa-angle-right'></i>"],
+              margin: 30,
+              responsive: {
+                  0: {
+                      items: 1,
+                      autoplay:true
+                  },
+                  480: {
+                      items: 2
+                  },
+                  768: {
+                      items: 2
+                  },
+                  1000: {
+                      items: 2
+                  },
+                  1200: {
+                      items: 3
+                  }
               }
-          }
 
-      });
-  }
+          });
+      }
 
   /*====================================================*/
-  // Initialize Cloud Firestore and get a reference to the service
-  // var db = firebase.firestore();
+  // Заполнения index.html блок левой части экрана
   /*====================================================*/
 
   // Initialize Cloud Firestore and get a reference to the service
@@ -135,40 +133,40 @@ function startBlok(){
               // doc.data() is never undefined for query doc snapshots
               console.log(doc.id, " => ", doc.data());
               cycle_blok_l = cycle_blok_l + 1;
-                  var doc_product = doc.data();
-                  var p_Foto_link = doc_product.p_Foto_link;
-                  var p_Title = doc_product.p_Title;
-                  var p_price_max = doc_product.p_price_max;
-                  var p_price_min = doc_product.p_price_min;
-                  var html = [
-                          '<div class="pro-img">'+
-                              '<a href="product.html"><img class="img" src='+p_Foto_link+' alt="product-image"></a>'+
+              var doc_product = doc.data();
+              var p_Foto_link = doc_product.p_Foto_link;
+              var p_Title = doc_product.p_Title;
+              var p_price_max = doc_product.p_price_max;
+              var p_price_min = doc_product.p_price_min;
+              var html = [
+                      '<div class="pro-img">'+
+                          '<a href="product.html"><img class="img" src='+p_Foto_link+' alt="product-image"></a>'+
+                      '</div>'+
+                      '<div class="pro-content">'+
+                          '<div class="product-rating">'+
+                              '<i class="fa fa-star"></i>'+
+                              '<i class="fa fa-star"></i>'+
+                              '<i class="fa fa-star"></i>'+
+                              '<i class="fa fa-star"></i>'+
+                              '<i class="fa fa-star"></i>'+
                           '</div>'+
-                          '<div class="pro-content">'+
-                              '<div class="product-rating">'+
-                                  '<i class="fa fa-star"></i>'+
-                                  '<i class="fa fa-star"></i>'+
-                                  '<i class="fa fa-star"></i>'+
-                                  '<i class="fa fa-star"></i>'+
-                                  '<i class="fa fa-star"></i>'+
-                              '</div>'+
-                              '<h4><a href="product.html">'+p_Title+'</a></h4>'+
-                              '<p><span class="price">'+p_price_min+'</span><del class="prev-price">'+p_price_max+'</del></p>'+
-                          '</div>'
-                  ].join('');
-                  var div = document.createElement('div');
-                  div.setAttribute('class', 'single-product');
-                  div.innerHTML = html;
-                  if (cycle_blok_l > 0 && cycle_blok_l <= 5){
-                    product_blok_sale_1.prepend(div); // вставить liFirst в начало <ol>
-                  }
-                  if (cycle_blok_l > 5 && cycle_blok_l <= 10){
-                    product_blok_sale_2.prepend(div); // вставить liFirst в начало <ol>
-                  }
-                  if (cycle_blok_l > 10 && cycle_blok_l <= 15){
-                    product_blok_sale_3.prepend(div); // вставить liFirst в начало <ol>
-                  }
-                  console.log("Переполнен список");
+                          '<h4><a href="product.html">'+p_Title+'</a></h4>'+
+                          '<p><span class="price">'+p_price_min+'</span><del class="prev-price">'+p_price_max+'</del></p>'+
+                      '</div>'
+              ].join('');
+              var div = document.createElement('div');
+              div.setAttribute('class', 'single-product');
+              div.innerHTML = html;
+              if (cycle_blok_l > 0 && cycle_blok_l <= 5){
+                product_blok_sale_1.prepend(div); // вставить liFirst в начало <ol>
+              }
+              if (cycle_blok_l > 5 && cycle_blok_l <= 10){
+                product_blok_sale_2.prepend(div); // вставить liFirst в начало <ol>
+              }
+              if (cycle_blok_l > 10 && cycle_blok_l <= 15){
+                product_blok_sale_3.prepend(div); // вставить liFirst в начало <ol>
+              }
+              console.log("Переполнен список");
           });
           // console.log("вариант 1");
           startBlok_l();
@@ -178,43 +176,39 @@ function startBlok(){
           console.log("Error getting documents: ", error);
       });
 
-  function startBlok_l(){
-    $('.side-product-list-active')
-        .on('changed.owl.carousel initialized.owl.carousel', function (event) {
-            $(event.target)
-                .find('.owl-item').removeClass('last')
-                .eq(event.item.index + event.page.size - 1).addClass('last');
-        }).owlCarousel({
-            loop: false,
-            nav: true,
-            dots: false,
-            smartSpeed: 1500,
-            navText: ["<i class='fa fa-angle-left'></i>", "<i class='fa fa-angle-right'></i>"],
-            margin: 1,
-            responsive: {
-                0: {
-                    items: 1,
-                    autoplay:true
-                },
-               480: {
-                    items: 2
-                },
-                768: {
-                    items: 2
-                },
-                991: {
-                    items: 1
+      function startBlok_l(){
+        $('.side-product-list-active')
+            .on('changed.owl.carousel initialized.owl.carousel', function (event) {
+                $(event.target)
+                    .find('.owl-item').removeClass('last')
+                    .eq(event.item.index + event.page.size - 1).addClass('last');
+            }).owlCarousel({
+                loop: false,
+                nav: true,
+                dots: false,
+                smartSpeed: 1500,
+                navText: ["<i class='fa fa-angle-left'></i>", "<i class='fa fa-angle-right'></i>"],
+                margin: 1,
+                responsive: {
+                    0: {
+                        items: 1,
+                        autoplay:true
+                    },
+                   480: {
+                        items: 2
+                    },
+                    768: {
+                        items: 2
+                    },
+                    991: {
+                        items: 1
+                    }
                 }
-            }
-        })
-    }
+            })
+        }
 
     /*====================================================*/
 
-
-  /*====================================================*/
-
-  /*====================================================*/
 
 
 
