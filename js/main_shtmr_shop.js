@@ -134,7 +134,7 @@ db.collection("product_group").get().then((querySnapshot) => {
         var doc_category = doc.data();
         var category_title = doc_category.category_title;
         var html_category = [
-          '<li><a href="#">'+category_title+'</a></li>'
+          '<a href="#">'+category_title+'</a>'
         ].join('');
         var div_category = document.createElement('li');
         // div.setAttribute('class', 'single-product');
@@ -148,5 +148,29 @@ db.collection("product_group").get().then((querySnapshot) => {
 
 
 /*====================================================*/
+// Заполнения shop.html Производитель
+/*====================================================*/
+// Initialize Cloud Firestore and get a reference to the service
+var cycle_manufacturer = 0;
+db.collection("manufacturer").get().then((querySnapshot) => {
+    querySnapshot.forEach((doc) => {
+        // doc.data() is never undefined for query doc snapshots
+        cycle_manufacturer = cycle_manufacturer + 1;
+        var doc_manufacturer = doc.data();
+        var m_title = doc_manufacturer.m_title;
+        var html_manufacturer = [
+          '<li><a href="#">'+m_title+'</a></li>'
+        ].join('');
+        var div_manufacturer = document.createElement('li');
+        // div.setAttribute('class', 'single-product');
+        div_manufacturer.innerHTML = html_manufacturer;
+        if (cycle_manufacturer > 0 && cycle_manufacturer <= 7){
+        list_manufacturer.prepend(div_manufacturer); // вставить liFirst в начало <ol>
+        }
+        console.log(doc.id, " => ", doc.data());
+    });
+});
 
+
+/*====================================================*/
 /*====================================================*/

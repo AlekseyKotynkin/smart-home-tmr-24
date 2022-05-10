@@ -385,14 +385,14 @@ $('.brand-banner').on('changed.owl.carousel initialized.owl.carousel', function 
     $("#slider-range").slider({
         range: true,
         min: 0,
-        max: 80,
-        values: [0, 74],
+        max: 30000,
+        values: [0, 15000],
         slide: function (event, ui) {
-            $("#amount").val("$" + ui.values[0] + "  $" + ui.values[1]);
+            $("#amount").val("₽" + ui.values[0] + "  ₽" + ui.values[1]);
         }
     });
-    $("#amount").val("$" + $("#slider-range").slider("values", 0) +
-        "  $" + $("#slider-range").slider("values", 1));
+    $("#amount").val("₽" + $("#slider-range").slider("values", 0) +
+        "  ₽" + $("#slider-range").slider("values", 1));
 
     /*--------------------------------
     17. Testimonial Slick Carousel
