@@ -360,15 +360,15 @@
                                     <i class="fa fa-star-o"></i>
                                 </div>
                                 <div class="rating-feedback f-left">
-                                    <a href="#">(1 отзыв)</a>
-                                    <a href="#">добавить отзыв</a>
+                                    <!-- <a href="#">(1 отзыв)</a>
+                                    <a href="#">добавить отзыв</a> -->
                                 </div>
                             </div>
                             <div id = "product_price" class="pro-price mb-10">
                                 <!-- <p><span class="price">$30.00</span><del class="prev-price">-32.00</del></p> -->
                             </div>
-                            <div class="pro-ref mb-15">
-                                <p><span class="in-stock">В наличие</span><span class="sku">50</span></p>
+                            <div id = "product_availability" class="pro-ref mb-15">
+                                <!-- <p><span class="in-stock">В наличие</span><span class="sku">50</span></p> -->
                             </div>
                             <div class="box-quantity">
                                 <form action="#">
@@ -402,35 +402,91 @@
                             <li><a class="active" data-toggle="tab" href="#d_tail">Описание</a></li>
                             <li><a data-toggle="tab" href="#d_specifications">Характеристики</a></li>
                             <li><a data-toggle="tab" href="#d_documentation">Документация</a></li>
-                            <li><a data-toggle="tab" href="#review">Отзовы</a></li>
+                            <!-- <li><a data-toggle="tab" href="#review">Отзовы</a></li> -->
                         </ul>
                         <!-- Product Thumbnail Tab Content Start -->
                         <div class="tab-content thumb-content border-default">
                             <div id="d_tail" class="tab-pane in active">
-                                <p>Everything you need for a trip to the gym will fit inside this surprisingly spacious Products Name Here. Stock it with a water bottle, change of clothes, pair of shoes, and even a few beauty products. Fits inside a locker and zips shut for security.</p>
+                                <!-- <p>Everything you need for a trip to the gym will fit inside this surprisingly spacious Products Name Here. Stock it with a water bottle, change of clothes, pair of shoes, and even a few beauty products. Fits inside a locker and zips shut for security.</p>
                                 <ul class="tab-list-item">
                                     <li> Slip pocket on front.</li>
                                     <li> Contrast piping.</li>
                                     <li> Durable nylon construction.</li>
-                                </ul>
+                                </ul> -->
                             </div>
                             <div id="d_specifications" class="tab-pane">
-                                <p>Everything you need for a trip to the gym will fit inside this surprisingly spacious Products Name Here. Stock it with a water bottle, change of clothes, pair of shoes, and even a few beauty products. Fits inside a locker and zips shut for security.</p>
-                                <ul class="tab-list-item">
+                                <!-- <p>Everything you need for a trip to the gym will fit inside this surprisingly spacious Products Name Here.</p> -->
+                                <!-- <ul class="tab-list-item">
                                     <li> Slip pocket on front.</li>
                                     <li> Contrast piping.</li>
                                     <li> Durable nylon construction.</li>
-                                </ul>
+                                </ul> -->
+                                <div class="your-order-table table-responsive">
+                                    <table>
+                                        <thead>
+                                            <tr>
+                                                <th class="product-name"><h5>Наименование</h5></th>
+                                                <th class="product-total"><h5>Значение</h5></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr class="cart_item">
+                                                <td class="product-name">Products Name Here<strong class="product-quantity"> × 1</strong></td>
+                                                <td class="product-total"><span class="amount">165.00</span></td>
+                                            </tr>
+                                            <tr class="cart_item">
+                                                <td class="product-name">Products Name Here<strong class="product-quantity"> × 1</strong></td>
+                                                <td class="product-total"><span class="amount">50.00</span></td>
+                                            </tr>
+                                            <tr class="cart_item">
+                                                <td class="product-name">Products Name Here <strong class="product-quantity"> × 1</strong></td>
+                                                <td class="product-total"><span class="amount">50.00</span></td>
+                                            </tr>
+
+                                        </tbody>
+                                        <!-- <tfoot>
+                                            <tr class="cart-subtotal">
+                                                <th>Cart Subtotal</th>
+                                                <td><span class="amount">£215.00</span></td>
+                                            </tr>
+                                            <tr class="order-total">
+                                                <th>Order Total</th>
+                                                <td><strong><span class="amount">£215.00</span></strong>
+                                                </td>
+                                            </tr>
+                                        </tfoot> -->
+                                    </table>
+                                </div>
+
                             </div>
                             <div id="d_documentation" class="tab-pane">
-                                <p>Everything you need for a trip to the gym will fit inside this surprisingly spacious Products Name Here. Stock it with a water bottle, change of clothes, pair of shoes, and even a few beauty products. Fits inside a locker and zips shut for security.</p>
-                                <ul class="tab-list-item">
-                                    <li> Slip pocket on front.</li>
-                                    <li> Contrast piping.</li>
-                                    <li> Durable nylon construction.</li>
-                                </ul>
+                                <div class="col-lg-6 col-md-6">
+                                    <div class="ht-single-about">
+                                        <!-- <h3>OUR WORKS</h3> -->
+                                        <div class="ht-about-work">
+                                            <span>1</span>
+                                            <div class="ht-work-text">
+                                                <h5><a href="#">Руководство по эксплуатации.</a></h5>
+                                                <a href="#" download="">Скачать 1.02 МБ  <i class="fa fa-file-pdf-o" aria-hidden="true"></i></a>
+                                            </div>
+                                        </div>
+                                        <div class="ht-about-work">
+                                            <span>2</span>
+                                            <div class="ht-work-text">
+                                                <h5><a href="#">Руководство по эксплуатации.</a></h5>
+                                                <a href="#" download="">Скачать 1.02 МБ  <i class="fa fa-file-pdf-o" aria-hidden="true"></i></a>
+                                            </div>
+                                        </div>
+                                        <div class="ht-about-work">
+                                            <span>3</span>
+                                            <div class="ht-work-text">
+                                                <a data-fancybox="images" href="img/banner/12.jpg"><img src="img/banner/11.jpg" alt="product-view"></a>
+                                                <h5><a href="#" download="">Скачать 1.02 МБ  <i class="fa fa-file-pdf-o" aria-hidden="true"></i></a></h5>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-
                             <div id="review" class="tab-pane">
                                 <!-- Reviews Start -->
                                 <div class="review">
@@ -695,7 +751,7 @@
                         <h2>С этим товаром покупают</h2>
                     </div>
                     <div id = "upsell_product" class="new-upsell-pro owl-carousel">
-                        <div class="single-product">
+                        <!-- <div class="single-product">
                             <div class="pro-img">
                                 <a href="product.html">
                                     <img class="primary-img" src="img/products/4.jpg" alt="single-product">
@@ -721,8 +777,8 @@
                                 </div>
                             </div>
                             <span class="sticker-new">-32%</span>
-                        </div>
-                        <div class="single-product">
+                        </div> -->
+                        <!-- <div class="single-product">
                             <div class="pro-img">
                                 <a href="product.html">
                                     <img class="primary-img" src="img/products/1.jpg" alt="single-product">
@@ -747,8 +803,8 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="single-product">
+                        </div> -->
+                        <!-- <div class="single-product">
                             <div class="pro-img">
                                 <a href="product.html">
                                     <img class="primary-img" src="img/products/2.jpg" alt="single-product">
@@ -774,8 +830,8 @@
                                 </div>
                             </div>
                             <span class="sticker-new">-30%</span>
-                        </div>
-                        <div class="single-product">
+                        </div> -->
+                        <!-- <div class="single-product">
                             <div class="pro-img">
                                 <a href="product.html">
                                     <img class="primary-img" src="img/products/3.jpg" alt="single-product">
@@ -800,8 +856,8 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="single-product">
+                        </div> -->
+                        <!-- <div class="single-product">
                             <div class="pro-img">
                                 <a href="product.html">
                                     <img class="primary-img" src="img/products/4.jpg" alt="single-product">
@@ -827,7 +883,7 @@
                                 </div>
                             </div>
                             <span class="sticker-new">-32%</span>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
             </div>

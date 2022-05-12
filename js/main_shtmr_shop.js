@@ -134,10 +134,13 @@ db.collection("product_group").get().then((querySnapshot) => {
         var doc_category = doc.data();
         var category_title = doc_category.category_title;
         var html_category = [
-          '<a href="#">'+category_title+'</a>'
+            '<div class="checkout-form-list create-acc mb-30">'+
+                '<input id="cbox" type="checkbox" />'+
+                '<label>'+category_title+'</label>'+
+            '</div>'
         ].join('');
-        var div_category = document.createElement('li');
-        // div.setAttribute('class', 'single-product');
+        var div_category = document.createElement('div');
+        div_category.setAttribute('class', 'col-md-12');
         div_category.innerHTML = html_category;
         if (cycle_blok_shop > 0 && cycle_blok_shop <= 7){
         list_category.prepend(div_category); // вставить liFirst в начало <ol>

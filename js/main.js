@@ -140,34 +140,34 @@
     /*----------------------------------------------------
     6. New Upsell Product Activation
     -----------------------------------------------------*/
-    $('.new-upsell-pro').owlCarousel({
-            loop: false,
-            nav: true,
-            dots: false,
-            smartSpeed: 1000,
-
-            navText: ["<i class='fa fa-angle-left'></i>", "<i class='fa fa-angle-right'></i>"],
-            margin: 30,
-            responsive: {
-                0: {
-                    items: 1,
-                    autoplay:true
-                },
-                480: {
-                    items: 2
-                },
-                768: {
-                    items: 2
-                },
-                1000: {
-                    items: 3
-                },
-                1200: {
-                    items: 4
-                }
-            }
-
-        })
+    // $('.new-upsell-pro').owlCarousel({
+    //         loop: false,
+    //         nav: true,
+    //         dots: false,
+    //         smartSpeed: 1000,
+    //
+    //         navText: ["<i class='fa fa-angle-left'></i>", "<i class='fa fa-angle-right'></i>"],
+    //         margin: 30,
+    //         responsive: {
+    //             0: {
+    //                 items: 1,
+    //                 autoplay:true
+    //             },
+    //             480: {
+    //                 items: 2
+    //             },
+    //             768: {
+    //                 items: 2
+    //             },
+    //             1000: {
+    //                 items: 3
+    //             },
+    //             1200: {
+    //                 items: 4
+    //             }
+    //         }
+    //
+    //     })
 
     /*----------------------------------------------------
     7. Side Product Activation   7. Активация левой бокового блока продукции
