@@ -35,20 +35,17 @@ db.collection("product").where("p_Filtr_index", "==", "ipdl")
     .get()
     .then((querySnapshot) => {
         querySnapshot.forEach((doc) => {
-            // doc.data() is never undefined for query doc snapshots
-            console.log(doc.id, " => ", doc.data());
             cycle_blok = cycle_blok + 1;
             var doc_product = doc.data();
+            var doc_id = doc.id;
             var p_Foto_link = doc_product.p_Foto_link;
             var p_Title = doc_product.p_Title;
             var p_price_max = doc_product.p_price_max;
             var p_price_min = doc_product.p_price_min;
             var html = [
                     '<div class="pro-img">'+
-                        '<a href="product.html">'+
-                            // '<img id="myImgId_0" class="primary-img" src="" alt="single-product">'+
+                        '<a onclick="countRabbits(this)" id = '+ doc_id +' >'+
                             '<img class="primary-img" src='+p_Foto_link+' alt="single-product">'+
-                            // '<img id="myImgId_1" class="secondary-img" src="" alt="single-product">'+
                             '<img class="secondary-img" src='+p_Foto_link+' alt="single-product">'+
                         '</a>'+
                     '</div>'+
@@ -77,7 +74,7 @@ db.collection("product").where("p_Filtr_index", "==", "ipdl")
             if (cycle_blok > 0 && cycle_blok <= 7){
               ipdl_blok.prepend(div); // вставить liFirst в начало <ol>
             }
-            console.log("Переполнен список");
+            // console.log("Переполнен список");
 
         });
         // console.log("вариант 1");
@@ -131,16 +128,17 @@ db.collection("product").where("p_Filtr_index", "==", "ipdl")
       .then((querySnapshot) => {
           querySnapshot.forEach((doc) => {
               // doc.data() is never undefined for query doc snapshots
-              console.log(doc.id, " => ", doc.data());
+              // console.log(doc.id, " => ", doc.data());
               cycle_blok_l = cycle_blok_l + 1;
               var doc_product = doc.data();
+              var doc_id = doc.id;
               var p_Foto_link = doc_product.p_Foto_link;
               var p_Title = doc_product.p_Title;
               var p_price_max = doc_product.p_price_max;
               var p_price_min = doc_product.p_price_min;
               var html = [
                       '<div class="pro-img">'+
-                          '<a href="product.html"><img class="img" src='+p_Foto_link+' alt="product-image"></a>'+
+                          '<a onclick="countRabbits(this)" id = '+ doc_id +' ><img class="img" src='+p_Foto_link+' alt="product-image"></a>'+
                       '</div>'+
                       '<div class="pro-content">'+
                           '<div class="product-rating">'+
@@ -166,7 +164,7 @@ db.collection("product").where("p_Filtr_index", "==", "ipdl")
               if (cycle_blok_l > 10 && cycle_blok_l <= 15){
                 product_blok_sale_3.prepend(div); // вставить liFirst в начало <ol>
               }
-              console.log("Переполнен список");
+              // console.log("Переполнен список");
           });
           // console.log("вариант 1");
           startBlok_l();
@@ -207,18 +205,14 @@ db.collection("product").where("p_Filtr_index", "==", "ipdl")
             })
         }
 
-    /*====================================================*/
-
-
-
-
-
-
-
 /*====================================================*/
 
 /*====================================================*/
-
+function countRabbits(obj) {
+  var h = obj.id;
+  localStorage.setItem('product_id', h);
+  window.location.replace("product.html");
+}
 
 
 

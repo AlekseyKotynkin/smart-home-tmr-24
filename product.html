@@ -49,6 +49,13 @@
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-functions.js"></script>
     <!-- init-firebase js -->
     <script src="js/init-firebase.js"></script>
+    <!-- Проверяем наличие localStorage -->
+    <script type="text/javascript">
+      if (localStorage.length === 0)
+      {
+      window.location.replace("index.html");
+      }
+    </script>
 </head>
 
 <body>

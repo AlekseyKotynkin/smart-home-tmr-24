@@ -29,7 +29,8 @@
 /*====================================================*/
 // Initialize Cloud Firestore and get a reference to the service
 var db = firebase.firestore();
-var docRef = db.collection("product").doc("Gt4RDnKjEwXsBfR1J93s");
+var product_id = localStorage.getItem('product_id');
+var docRef = db.collection("product").doc(product_id);
 docRef.get().then((doc) => {
     if (doc.exists) {
         console.log("Document data:", doc.data());
@@ -112,7 +113,7 @@ docRef.get().then((doc) => {
         var html_description_1 = [
           '<p>'+p_description+'</p>'
         ].join('');
-        d_tail.insertAdjacentHTML('beforeBegin', html_description_1);
+        d_tail.insertAdjacentHTML('afterBegin', html_description_1);
 
         // Заполняем сопутствующие товары
         var h = p_upsell_doc_map.length;
@@ -126,6 +127,7 @@ docRef.get().then((doc) => {
               if (doc.exists) {
                   console.log("Document data:", doc.data());
                   var doc_product = doc.data();
+                  var doc_id = doc.id;
                   var p_Foto_link = doc_product.p_Foto_link;
                   var p_Title = doc_product.p_Title;
                   var p_price_max = doc_product.p_price_max;
@@ -140,7 +142,7 @@ docRef.get().then((doc) => {
                   // Заполняем список таблицей
                   var html = [
                     '<div class="pro-img">'+
-                        '<a href="product.html">'+
+                        '<a onclick="countRabbits(this)" id = '+ doc_id +' >'+
                             '<img class="primary-img" src='+p_Foto_link+' alt="single-product">'+
                             '<img class="secondary-img" src='+p_Foto_link+' alt="single-product">'+
                         '</a>'+
@@ -225,4 +227,12 @@ function UpsellPro()
 
       })
 
+}
+/*====================================================*/
+
+/*====================================================*/
+function countRabbits(obj) {
+  var h = obj.id;
+  localStorage.setItem('product_id', h);
+  window.location.replace("product.html");
 }

@@ -37,9 +37,15 @@
     <link rel="stylesheet" href="style.css">
     <!-- responsive css -->
     <link rel="stylesheet" href="css/responsive.css">
-
     <!-- modernizr js -->
     <script src="js/vendor/modernizr-2.8.3.min.js"></script>
+    <!-- Проверяем наличие localStorage -->
+    <script type="text/javascript">
+      if (localStorage.length === 0)
+      {
+      window.location.replace("index.html");
+      }
+    </script>
 </head>
 
 <body>

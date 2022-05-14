@@ -38,6 +38,7 @@ db.collection("product").where("p_Filtr_index", "==", "ipdl")
             console.log(doc.id, " => ", doc.data());
             cycle_blok_shop = cycle_blok_shop + 1;
             var doc_product = doc.data();
+            var doc_id = doc.id;
             var p_Foto_link = doc_product.p_Foto_link;
             var p_Title = doc_product.p_Title;
             var p_price_max = doc_product.p_price_max;
@@ -47,6 +48,7 @@ db.collection("product").where("p_Filtr_index", "==", "ipdl")
             var html = [
               '<div class="pro-img">'+
                   '<a href="product.html">'+
+                  '<a onclick="countRabbits(this)" id = '+ doc_id +' >'+
                       '<img class="primary-img" src='+p_Foto_link+' alt="single-product">'+
                       '<img class="secondary-img" src='+p_Foto_link+' alt="single-product">'+
                   '</a>'+
@@ -162,10 +164,16 @@ db.collection("manufacturer").get().then((querySnapshot) => {
         var doc_manufacturer = doc.data();
         var m_title = doc_manufacturer.m_title;
         var html_manufacturer = [
-          '<li><a href="#">'+m_title+'</a></li>'
+          '<div class="checkout-form-list create-acc mb-30">'+
+              '<input id="cbox" type="checkbox" />'+
+              '<label>'+m_title+'</label>'+
+          '</div>'
+          // '<li><a href="#">'+m_title+'</a></li>'
         ].join('');
-        var div_manufacturer = document.createElement('li');
+        // var div_manufacturer = document.createElement('li');
         // div.setAttribute('class', 'single-product');
+        var div_manufacturer = document.createElement('div');
+        div_manufacturer.setAttribute('class', 'col-md-12');
         div_manufacturer.innerHTML = html_manufacturer;
         if (cycle_manufacturer > 0 && cycle_manufacturer <= 7){
         list_manufacturer.prepend(div_manufacturer); // вставить liFirst в начало <ol>
@@ -173,6 +181,14 @@ db.collection("manufacturer").get().then((querySnapshot) => {
         console.log(doc.id, " => ", doc.data());
     });
 });
+/*====================================================*/
+
+/*====================================================*/
+function countRabbits(obj) {
+  var h = obj.id;
+  localStorage.setItem('product_id', h);
+  window.location.replace("product.html");
+}
 
 
 /*====================================================*/
