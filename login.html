@@ -12,7 +12,6 @@
     <link rel="shortcut icon" type="image/x-icon" href="img/icon/favicon.png">
     <!-- Google Font css -->
     <link href="https://fonts.googleapis.com/css?family=Lily+Script+One" rel="stylesheet">
-
     <!-- mobile menu css -->
     <link rel="stylesheet" href="css/meanmenu.min.css">
     <!-- animate css -->
@@ -37,9 +36,20 @@
     <link rel="stylesheet" href="style.css">
     <!-- responsive css -->
     <link rel="stylesheet" href="css/responsive.css">
-
     <!-- modernizr js -->
     <script src="js/vendor/modernizr-2.8.3.min.js"></script>
+    <script src="https://www.google.com/recaptcha/api.js"></script>
+    <!-- Firebase -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app-check.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-storage.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-functions.js"></script>
+    <!-- init-firebase js -->
+    <script src="js/init-firebase.js"></script>
+
 </head>
 
 <body>
@@ -79,7 +89,7 @@
                                     <!-- Language Start -->
                                     <li><a href="#">Язык: Русский<i class="fa fa-angle-down"></i></a>
                                         <ul class="ht-dropdown">
-                                            <li><a href="#">English</a></li>
+                                            <!-- <li><a href="#">English</a></li> -->
                                             <!-- <li><a href="#">Bengali</a></li>
                                             <li><a href="#">Русский</a></li> -->
                                         </ul>
@@ -177,7 +187,7 @@
                         <div class="col-lg-3 col-sm-7 col-7">
                             <div class="cart-box text-right">
                                 <ul>
-                                    <li><a href="compare.html"><i class="fa fa-cog"></i></a>
+                                    <li><a></i></a>
                                         <ul class="ht-dropdown">
                                             <li><a href="login.html">Вход</a></li>
                                             <li><a href="register.html">Регистрация</a></li>
@@ -185,10 +195,9 @@
                                         </ul>
                                     </li>
                                     <li><a href="wishlist.html"><i class="fa fa-heart-o"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-shopping-basket"></i><span class="cart-counter">2</span></a>
+                                    <!-- <li><a href="#"><i class="fa fa-shopping-basket"></i><span class="cart-counter">2</span></a>
                                         <ul class="ht-dropdown main-cart-box">
                                             <li>
-                                                <!-- Cart Box Start -->
                                                 <div class="single-cart-box">
                                                     <div class="cart-img">
                                                         <a href="#"><img src="img/menu/1.jpg" alt="cart-image"></a>
@@ -199,8 +208,6 @@
                                                     </div>
                                                     <a class="del-icone" href="#"><i class="fa fa-window-close-o"></i></a>
                                                 </div>
-                                                <!-- Cart Box End -->
-                                                <!-- Cart Box Start -->
                                                 <div class="single-cart-box">
                                                     <div class="cart-img">
                                                         <a href="#"><img src="img/menu/2.jpg" alt="cart-image"></a>
@@ -211,18 +218,15 @@
                                                     </div>
                                                     <a class="del-icone" href="#"><i class="fa fa-window-close-o"></i></a>
                                                 </div>
-                                                <!-- Cart Box End -->
-                                                <!-- Cart Footer Inner Start -->
                                                 <div class="cart-footer fix">
                                                     <h5>total :<span class="f-right">$698.00</span></h5>
                                                     <div class="cart-actions">
                                                         <a class="checkout" href="checkout.html">Checkout</a>
                                                     </div>
                                                 </div>
-                                                <!-- Cart Footer Inner End -->
                                             </li>
                                         </ul>
-                                    </li>
+                                    </li> -->
                                 </ul>
                             </div>
                         </div>
@@ -310,10 +314,10 @@
                     <div class="col-sm-6">
                         <div class="well">
                             <div class="new-customer">
-                                <h3>NEW CUSTOMER</h3>
-                                <p class="mtb-10"><strong>Register</strong></p>
-                                <p>By creating an account you will be able to shop faster, be up to date on an order's status, and keep track of the orders you have previously made</p>
-                                <a class="customer-btn" href="register.html">continue</a>
+                                <h3>Регистрация</h3>
+                                <p class="mtb-10"><strong>Создав учетную запись, вы сможете совершать покупки быстрее, быть в курсе статуса заказа и отслеживать ранее сделанные заказы.</strong></p>
+                                <!-- <p>Создав учетную запись, вы сможете совершать покупки быстрее, быть в курсе статуса заказа и отслеживать ранее сделанные заказы.</p> -->
+                                <a class="customer-btn" href="register.html">Продолжить...</a>
                             </div>
                         </div>
                     </div>
@@ -322,19 +326,19 @@
                     <div class="col-sm-6">
                         <div class="well">
                             <div class="return-customer">
-                                <h3 class="mb-10">RETURNING CUSTOMER</h3>
-                                <p class="mb-10"><strong>I am a returning customer</strong></p>
+                                <h3 class="mb-10">Личный кабинет</h3>
+                                <p class="mb-10"><strong>Авторизируйтесь, оставляйте отзывы, высказывайте свое мнение, мы благодарны Вам!</strong></p>
                                 <form action="#">
                                     <div class="form-group">
-                                        <label class="control-label">Введите здесь свой адрес электронной почты...</label>
+                                        <label class="control-label">Логин</label>
                                         <input type="text" name="email" placeholder="Введите здесь свой адрес электронной почты..." id="input-email" class="form-control">
                                     </div>
                                     <div class="form-group">
-                                        <label class="control-label">Password</label>
-                                        <input type="text" name="pass" placeholder="Password" id="input-password" class="form-control">
+                                        <label class="control-label">Пароль</label>
+                                        <input type="text" name="pass" placeholder="Введите пароль..." id="input-password" class="form-control">
                                     </div>
-                                    <p class="lost-password"><a href="forgot-password.html">Forgot password?</a></p>
-                                    <input type="submit" value="Login" class="return-customer-btn">
+                                    <!-- <p class="lost-password"><a href="forgot-password.html">Forgot password?</a></p> -->
+                                    <input onclick="signUpRegister()" type="submit" value="Войти" class="return-customer-btn">
                                 </form>
                             </div>
                         </div>
@@ -522,6 +526,8 @@
         <!-- Footer End -->
     </div>
     <!-- Wrapper End -->
+    <!-- main_shtmr js -->
+    <script src="js/main_shtmr_login.js"></script>
     <!-- jquery 3.12.4 -->
     <script src="js/vendor/jquery-1.12.4.min.js"></script>
     <!-- mobile menu js  -->
@@ -548,7 +554,7 @@
     <!-- plugins -->
     <script src="js/plugins.js"></script>
     <!-- main js -->
-    <script src="js/main.js"></script>
+    <!-- <script src="js/main.js"></script> -->
 </body>
 
 </html>
