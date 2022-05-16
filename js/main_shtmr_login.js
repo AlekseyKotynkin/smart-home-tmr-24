@@ -54,15 +54,26 @@ function signUpRegister()
 {
   var email = document.getElementById("input-email").value;
   var password = document.getElementById("input-password").value;
-  console.log(email);
-  console.log(password);
-
+  // console.log(email);
+  // console.log(password);
+  if (email == "" )
+  {
+    alert ( "Пожалуйста заполните поле 'Логин'." );
+    valid = false;
+  }
+  if (password == "" )
+  {
+    alert ( "Пожалуйста заполните поле 'Пароль'." );
+    valid = false;
+  }
 
   firebase.auth().signInWithEmailAndPassword(email, password)
   .then((userCredential) => {
     // Signed in
     var user = userCredential.user;
+    authStateListener();
     // ...
+    // alert ("Вы вошли!");
   })
   .catch((error) => {
     var errorCode = error.code;
@@ -74,14 +85,90 @@ function signUpRegister()
     // sign up the Username
 }
 
-
-
 /*====================================================*/
-/**   Выход из личного кабинета и очиска localStorage 'firebaseui::rememberedAccounts'.*/
+/** Проверка авторизации'.*/
 /*====================================================*/
 
-   function SignoutAdmin() {
-     localStorage.clear('firebaseui::rememberedAccounts');
-     window.location.replace("index.html")
-   }
+function authStateListener() {
+  // [START auth_state_listener]
+  firebase.auth().onAuthStateChanged((user) => {
+    if (user) {
+      // User is signed in, see docs for a list of available properties
+      // https://firebase.google.com/docs/reference/js/firebase.User
+      var uid = user.uid;
+      var displayName = user.displayName;
+      var displayEmail = user.email;
+      alert ('Вы вошли под логином '+ displayEmail +'! Благодарим Вас '+ displayName +'');
+
+      // ...
+    } else {
+      // User is signed out
+      // ...
+      signUpRegister()
+    }
+  });
+  // [END auth_state_listener]
+}
+
+/*====================================================*/
+
+/*====================================================*/
+/** Проверка авторизации при запросе на восстановления пароля'.*/
+/*====================================================*/
+
+function authStateListenerForgot() {
+  // [START auth_state_listener]
+  firebase.auth().onAuthStateChanged((user) => {
+    if (user) {
+      // User is signed in, see docs for a list of available properties
+      // https://firebase.google.com/docs/reference/js/firebase.User
+      var uid = user.uid;
+      var displayName = user.displayName;
+      var displayEmail = user.email;
+      alert ('Вы вошли под логином '+ displayEmail +'! Благодарим Вас '+ displayName +'');
+      // ...
+      window.location.replace("login.html")
+
+    } else {
+      // User is signed out
+      // ...
+      // signUpRegister()
+    }
+  });
+  // [END auth_state_listener]
+}
+
+/*====================================================*/
+
+/*====================================================*/
+/** отправка ссылки для восстановления пароля'.*/
+/*====================================================*/
+function sendPasswordReset() {
+  // const email = "sam@example.com";
+  var email_forgot = document.getElementById("email-forgot").value;
+  if (email_forgot == "" )
+  {
+    alert ( "Пожалуйста заполните поле 'Ваш электронный адрес'." );
+    valid = false;
+  }
+  // [START auth_send_password_reset]
+  firebase.auth().sendPasswordResetEmail(email_forgot)
+    .then(() => {
+      // Password reset email sent!
+      // ..
+      // Отправлено электронное письмо для сброса пароля!
+      alert ('На Ваш электронный адрес '+ email_forgot +'отправленно письмо! Благодарим Вас!');
+      window.location.replace("login.html")
+    })
+    .catch((error) => {
+      var errorCode = error.code;
+      var errorMessage = error.message;
+      // ..
+    });
+  // [END auth_send_password_reset]
+}
+
+
+
+
 /*====================================================*/

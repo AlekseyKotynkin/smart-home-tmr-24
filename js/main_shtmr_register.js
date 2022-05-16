@@ -65,8 +65,6 @@ function signRegister()
   for(var i = 0; i < rates.length; i++){
       if(rates[i].checked){
           rate_value = rates[i].value;
-          alert (rate_value);
-
       }
   }
   // alert (rates);
@@ -116,18 +114,32 @@ function signRegister()
       // Signed in
       var user = userCredential.user;
       // ...
+      user.updateProfile({
+        displayName: f_name+" "+l_name,
+        // photoURL: "https://example.com/jane-q-user/profile.jpg"
+        phoneNumber: telefon
+      }).then(() => {
+        // Update successful
+        // ...
+        // Обновление прошло успешно
+        alert ( "Вы зарегистрированны!" );
+        window.location.replace("login.html")
+      }).catch((error) => {
+        // An error occurred
+        // ...
+        // Произошла ошибка
+        alert ( "Ошибка регистрации!" );
+        window.location.replace("register.html")
+      });
     })
     .catch((error) => {
       var errorCode = error.code;
       var errorMessage = error.message;
       // ..
       alert (errorCode,errorMessage);
-      window.location.replace("login.html")
-
+      window.location.replace("register.html")
     });
   }
-  console.log(email);
-  console.log(password);
 
 }
 
