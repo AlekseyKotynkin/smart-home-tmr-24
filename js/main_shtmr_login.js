@@ -99,7 +99,7 @@ function authStateListener() {
       var displayName = user.displayName;
       var displayEmail = user.email;
       alert ('Вы вошли под логином '+ displayEmail +'! Благодарим Вас '+ displayName +'');
-
+      window.location.replace("index.html")
       // ...
     } else {
       // User is signed out
@@ -167,8 +167,5 @@ function sendPasswordReset() {
     });
   // [END auth_send_password_reset]
 }
-
-
-
 
 /*====================================================*/

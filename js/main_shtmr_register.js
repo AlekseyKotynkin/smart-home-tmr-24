@@ -142,17 +142,3 @@ function signRegister()
   }
 
 }
-
-
-
-
-
-/*====================================================*/
-/**   Выход из личного кабинета и очиска localStorage 'firebaseui::rememberedAccounts'.*/
-/*====================================================*/
-
-   function SignoutAdmin() {
-     localStorage.clear('firebaseui::rememberedAccounts');
-     window.location.replace("index.html")
-   }
-/*====================================================*/
