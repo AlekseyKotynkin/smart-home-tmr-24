@@ -318,19 +318,19 @@
                         <form action="#">
                             <!-- Table Content Start -->
                             <div class="table-content table-responsive">
-                                <table>
+                                <table id = "table_wishlist">
                                     <thead>
                                         <tr>
-                                            <th class="product-remove">Remove</th>
-                                            <th class="product-thumbnail">Image</th>
-                                            <th class="product-name">Product</th>
-                                            <th class="product-price">Unit Price</th>
-                                            <th class="product-quantity">Stock Status</th>
-                                            <th class="product-subtotal">в корзину</th>
+                                            <th class="product-remove">Исключить</th>
+                                            <th class="product-thumbnail">Картинка</th>
+                                            <th class="product-name">Наименование</th>
+                                            <th class="product-price">Цена</th>
+                                            <th class="product-quantity">Наличие</th>
+                                            <th class="product-subtotal">Дополнить</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
+                                        <!-- <tr>
                                             <td class="product-remove"> <a href="#"><i class="fa fa-times" aria-hidden="true"></i></a></td>
                                             <td class="product-thumbnail">
                                                 <a href="#"><img src="img/products/1.jpg" alt="cart-image" /></a>
@@ -349,9 +349,12 @@
                                             <td class="product-price"><span class="amount">£50.00</span></td>
                                             <td class="product-stock-status"><span>in stock</span></td>
                                             <td class="product-add-to-cart"><a href="#">в корзину</a></td>
-                                        </tr>
+                                        </tr> -->
                                     </tbody>
                                 </table>
+                                <script>
+                                  var container = document.getElementById("table_wishlist").getElementsByTagName("tbody")[0];
+                                </script>
                             </div>
                             <!-- Table Content Start -->
                         </form>
