@@ -185,7 +185,39 @@ function delete_wishlist(obj) {
 /*====================================================*/
 function go_cart(obj) {
   var h = obj.id;
-  alert(h);
-  // localStorage.setItem('product_id', h);
-  window.location.replace("wishlist.html");
+  var arrfy_cart = [];
+  var doc_cart_id;
+  db.collection("cart").where("email", "==", email)
+      .get()
+      .then((querySnapshot) => {
+          querySnapshot.forEach((doc) => {
+              // doc.data() is never undefined for query doc snapshots
+              console.log(doc.id, " => ", doc.data());
+              var doc_cart = doc.data();
+              arrfy_cart = doc_cart.cart;
+              doc_cart_id = doc.id;
+          });
+      })
+      .catch((error) => {
+          console.log("Error getting documents: ", error);
+      })
+      .finally(() => {
+          if ( arrfy_cart.indexOf( h ) === -1 ){
+            arrfy_cart.push(h);
+            var washingtonRef = db.collection("cart").doc(doc_cart_id);
+            // Set the "capital" field of the city 'DC'
+            return washingtonRef.update({
+                cart: arrfy_cart
+            })
+            .then(() => {
+                console.log("Document successfully updated!");
+                alert("Новая позиция добавлена в КОРЗИНУ");
+            })
+            .catch((error) => {
+                // The document probably doesn't exist.
+                console.error("Error updating document: ", error);
+            });
+          }
+          alert("Данная позиция уже добавлена в КОРЗИНУ ранее!");
+      });
 }
