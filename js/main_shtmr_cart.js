@@ -32,7 +32,9 @@ var email;
 var doc_cart_id;
 var db = firebase.firestore();
 var arrfy_cart = [];
-var activ_addEventListener = 0;
+var arrfy_cart_L = 0;
+var arrfy_cart_C = 0;
+
 firebase.auth().onAuthStateChanged((user) => {
   if (user) {
     // User is signed in, see docs for a list of available properties
@@ -52,9 +54,10 @@ firebase.auth().onAuthStateChanged((user) => {
                 doc_cart_id = doc.id;
                 var doc_cart = doc.data();
                 arrfy_cart = doc_cart.cart;
+                arrfy_cart_L = arrfy_cart.length;
+                // var arrfy_cart_C = 0;
                 // Заполняем список таблицей
                 arrfy_cart.forEach(function(entry) {
-                    // alert(entry);
                     var docRef = db.collection("product").doc(entry);
                     // Get a document, forcing the SDK to fetch from the offline cache.
                     docRef.get().then((doc) => {
@@ -135,6 +138,7 @@ firebase.auth().onAuthStateChanged((user) => {
                         /*====================================================*/
                         container.appendChild(tr);
                         cartTotal();
+                        start_addEventListener();
                     }).catch((error) => {
                         console.log("Error getting cached document:", error);
                     });
@@ -200,15 +204,22 @@ function cartTotal() {
         var span = document.getElementById("total_cart");
         span.innerText = span.textContent = total;
     }
-    if(activ_addEventListener === 0){
-      var input = document.querySelector('input[type=number]');
-      activ_addEventListener = 1;
-      input.addEventListener('input', (event) => {
-        cartTotal();
-        // output.innerText = event.target.value;
-      }, true);
-    }
 
+}
+
+/*====================================================*/
+// Старт start_addEventListener();
+/*====================================================*/
+function start_addEventListener() {
+  arrfy_cart_C += 1;
+  if(arrfy_cart_C === arrfy_cart_L){
+    var c_input = document.querySelectorAll('input[type=number]');
+    c_input.forEach(input => {
+      input.addEventListener('click', (event) => {
+        cartTotal();
+      }, true);
+    });
+  }
 }
 
 /*====================================================*/

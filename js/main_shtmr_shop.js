@@ -27,6 +27,23 @@
 ================================================*/
 // Заполнения shop.html
 /*====================================================*/
+var email;
+firebase.auth().onAuthStateChanged((user) => {
+  if (user) {
+    // User is signed in, see docs for a list of available properties
+    // https://firebase.google.com/docs/reference/js/firebase.User
+    var uid = user.uid;
+    var displayName = user.displayName;
+    email = user.email;
+    // ...
+  } else {
+    // User is signed out
+    // ...
+    email = "";
+  }
+});
+// [END auth_state_listener]
+
 // Initialize Cloud Firestore and get a reference to the service
 var cycle_blok_shop = 0;
 var db = firebase.firestore();
@@ -66,9 +83,12 @@ db.collection("product").where("p_Filtr_index", "==", "ipdl")
                   '<p>'+p_comment+'.</p>'+
                   '<div class="pro-actions">'+
                       '<div class="actions-secondary">'+
-                          '<a href="wishlist.html" data-toggle="tooltip" title="в избранное"><i class="fa fa-heart"></i></a>'+
-                          '<a class="add-cart" href="cart.html" data-toggle="tooltip" title="в корзину">в корзину</a>'+
-                          '<a href="compare.html" data-toggle="tooltip" title="сравнить"><i class="fa fa-signal"></i></a>'+
+                          // '<a href="wishlist.html" data-toggle="tooltip" title="в избранное"><i class="fa fa-heart"></i></a>'+
+                          // '<a class="add-cart" href="cart.html" data-toggle="tooltip" title="в корзину">в корзину</a>'+
+                          // '<a href="compare.html" data-toggle="tooltip" title="сравнить"><i class="fa fa-signal"></i></a>'+
+                          '<a id = '+doc_id+' onclick = "go_wishlist(this)" href="#" data-toggle="tooltip" title="в избранное"><i class="fa fa-heart"></i></a>'+
+                          '<a id = '+doc_id+' onclick = "go_cart(this)" class="add-cart" href="#" data-toggle="tooltip" title="в корзину">в корзину</a>'+
+                          '<a id = '+doc_id+' onclick = "go_compare(this)" href="#" data-toggle="tooltip" title="сравнить"><i class="fa fa-signal"></i></a>'+
                       '</div>'+
                   '</div>'+
               '</div>'
@@ -101,9 +121,12 @@ db.collection("product").where("p_Filtr_index", "==", "ipdl")
                       '<p><span class="price">'+p_price_min+' ₽</span><del class="prev-price">'+p_price_max+' ₽</del></p>'+
                       '<div class="pro-actions">'+
                           '<div class="actions-secondary">'+
-                              '<a href="wishlist.html" data-toggle="tooltip" title="в избранное"><i class="fa fa-heart"></i></a>'+
-                              '<a class="add-cart" href="cart.html" data-toggle="tooltip" title="в корзину">в корзину</a>'+
-                              '<a href="compare.html" data-toggle="tooltip" title="сравнить"><i class="fa fa-signal"></i></a>'+
+                              // '<a href="wishlist.html" data-toggle="tooltip" title="в избранное"><i class="fa fa-heart"></i></a>'+
+                              // '<a class="add-cart" href="cart.html" data-toggle="tooltip" title="в корзину">в корзину</a>'+
+                              // '<a href="compare.html" data-toggle="tooltip" title="сравнить"><i class="fa fa-signal"></i></a>'+
+                              '<a id = '+doc_id+' onclick = "go_wishlist(this)" href="#" data-toggle="tooltip" title="в избранное"><i class="fa fa-heart"></i></a>'+
+                              '<a id = '+doc_id+' onclick = "go_cart(this)" class="add-cart" href="#" data-toggle="tooltip" title="в корзину">в корзину</a>'+
+                              '<a id = '+doc_id+' onclick = "go_compare(this)" href="#" data-toggle="tooltip" title="сравнить"><i class="fa fa-signal"></i></a>'+
                           '</div>'+
                       '</div>'+
                   '</div>'+
@@ -190,6 +213,146 @@ function countRabbits(obj) {
   window.location.replace("product.html");
 }
 
+/*====================================================*/
+// Добавить позицию в список КОРЗИНЫ
+/*====================================================*/
+function go_cart(obj) {
+  var h = obj.id;
+  var arrfy_cart = [];
+  var doc_cart_id;
+  if(email !==""){
+    db.collection("cart").where("email", "==", email)
+        .get()
+        .then((querySnapshot) => {
+            querySnapshot.forEach((doc) => {
+                // doc.data() is never undefined for query doc snapshots
+                console.log(doc.id, " => ", doc.data());
+                var doc_cart = doc.data();
+                arrfy_cart = doc_cart.cart;
+                doc_cart_id = doc.id;
+            });
+        })
+        .catch((error) => {
+            console.log("Error getting documents: ", error);
+        })
+        .finally(() => {
+            if ( arrfy_cart.indexOf( h ) === -1 ){
+              arrfy_cart.push(h);
+              var washingtonRef = db.collection("cart").doc(doc_cart_id);
+              // Set the "capital" field of the city 'DC'
+              return washingtonRef.update({
+                  cart: arrfy_cart
+              })
+              .then(() => {
+                  console.log("Document successfully updated!");
+                  alert("Новая позиция добавлена в КОРЗИНУ");
+              })
+              .catch((error) => {
+                  // The document probably doesn't exist.
+                  console.error("Error updating document: ", error);
+              });
+            }
+            alert("Данная позиция уже добавлена в КОРЗИНУ ранее!");
+        });
+
+  }else{
+    alert ('Для работы с функцией "КОРЗИНА" Вам необходимо авторизироваться!');
+    window.location.replace("login.html");
+  }
+
+}
 
 /*====================================================*/
 /*====================================================*/
+// Добавить позицию в список СРАВНИТЬ
+/*====================================================*/
+function go_compare(obj) {
+  var h = obj.id;
+  var arrfy_compare = [];
+  var doc_compare_id;
+  if(email !==""){
+    db.collection("compare").where("email", "==", email)
+        .get()
+        .then((querySnapshot) => {
+            querySnapshot.forEach((doc) => {
+                // doc.data() is never undefined for query doc snapshots
+                console.log(doc.id, " => ", doc.data());
+                var doc_compare = doc.data();
+                arrfy_compare = doc_compare.compare;
+                doc_compare_id = doc.id;
+            });
+        })
+        .catch((error) => {
+            console.log("Error getting documents: ", error);
+        })
+        .finally(() => {
+            if ( arrfy_compare.indexOf( h ) === -1 ){
+              arrfy_compare.push(h);
+              var washingtonRef = db.collection("compare").doc(doc_compare_id);
+              // Set the "capital" field of the city 'DC'
+              return washingtonRef.update({
+                  compare: arrfy_compare
+              })
+              .then(() => {
+                  console.log("Document successfully updated!");
+                  alert("Новая позиция добавлена в СРАВНИТЬ");
+              })
+              .catch((error) => {
+                  // The document probably doesn't exist.
+                  console.error("Error updating document: ", error);
+              });
+            }
+            alert("Данная позиция уже добавлена в СРАВНИТЬ ранее!");
+        });
+      }else{
+        alert ('Для работы с функцией "СРАВНИТЬ" Вам необходимо авторизироваться!');
+        window.location.replace("login.html");
+      }
+}
+
+/*====================================================*/
+// Добавить позицию в список ИЗБРАННОЕ
+/*====================================================*/
+function go_wishlist(obj) {
+  var h = obj.id;
+  var arrfy_wishlist = [];
+  var doc_wishlist_id;
+  if(email !==""){
+    db.collection("wishlist").where("email", "==", email)
+        .get()
+        .then((querySnapshot) => {
+            querySnapshot.forEach((doc) => {
+                // doc.data() is never undefined for query doc snapshots
+                console.log(doc.id, " => ", doc.data());
+                var doc_wishlist = doc.data();
+                arrfy_wishlist = doc_wishlist.wishlist;
+                doc_wishlist_id = doc.id;
+            });
+        })
+        .catch((error) => {
+            console.log("Error getting documents: ", error);
+        })
+        .finally(() => {
+            if ( arrfy_wishlist.indexOf( h ) === -1 ){
+              arrfy_wishlist.push(h);
+              var washingtonRef = db.collection("wishlist").doc(doc_wishlist_id);
+              // Set the "capital" field of the city 'DC'
+              return washingtonRef.update({
+                  wishlist: arrfy_wishlist
+              })
+              .then(() => {
+                  console.log("Document successfully updated!");
+                  alert("Новая позиция добавлена в ИЗБРАННОЕ");
+              })
+              .catch((error) => {
+                  // The document probably doesn't exist.
+                  console.error("Error updating document: ", error);
+              });
+            }
+            alert("Данная позиция уже добавлена в ИЗБРАННОЕ ранее!");
+        });
+      }else{
+        alert ('Для работы с функцией "ИЗБРАННОЕ" Вам необходимо авторизироваться!');
+        window.location.replace("login.html");
+      }
+}

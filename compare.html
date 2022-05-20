@@ -317,11 +317,11 @@
         <div class="compare-product pb-40">
             <div class="container">
                 <div class="table-responsive">
-                    <table class="table text-center compare-content">
+                    <table id="table_compare" class="table text-center compare-content">
                         <tbody>
                             <tr>
-                                <td class="product-title">Product</td>
-                                <td class="product-description">
+                                <td id="table_compare_total" class="product-title">Продукт</td>
+                                <!-- <td class="product-description">
                                     <div class="compare-details">
                                         <div class="compare-detail-img">
                                             <a href="#"><img src="img/products/3.jpg" alt="compare-product"></a>
@@ -331,8 +331,8 @@
                                             <h4><a href="product.html">Products Name Here</a></h4>
                                         </div>
                                     </div>
-                                </td>
-                                <td class="product-description">
+                                </td> -->
+                                <!-- <td class="product-description">
                                     <div class="compare-details">
                                         <div class="compare-detail-img">
                                             <a href="#"><img src="img/products/2.jpg" alt="compare-product"></a>
@@ -340,8 +340,8 @@
                                         <span>Tools</span>
                                         <h4><a href="product.html">Products Name Here</a></h4>
                                     </div>
-                                </td>
-                                <td class="product-description">
+                                </td> -->
+                                <!-- <td class="product-description">
                                     <div class="compare-details">
                                         <div class="compare-detail-img">
                                             <a href="#"><img src="img/products/1.jpg" alt="compare-product"></a>
@@ -349,11 +349,11 @@
                                         <span>Tools</span>
                                         <h4><a href="product.html">Products Name Here</a></h4>
                                     </div>
-                                </td>
+                                </td> -->
                             </tr>
                             <tr>
-                                <td class="product-title">Description</td>
-                                <td class="product-description">
+                                <td id="table_compare_description" class="product-title">Описание</td>
+                                <!-- <td class="product-description">
                                     <p>Impressively thin and light, the HP EliteBook 840 empowers users to create, connect, and collaborate, using enterprise-class performance</p>
                                 </td>
                                 <td class="product-description">
@@ -361,29 +361,29 @@
                                 </td>
                                 <td class="product-description">
                                     <p>Impressively thin and light, the HP EliteBook 840 empowers users to create, connect, and collaborate, using enterprise-class performance</p>
-                                </td>
+                                </td> -->
                             </tr>
                             <tr>
-                                <td class="product-title">Price</td>
-                                <td class="product-description">$235</td>
+                                <td id="table_compare_price" class="product-title">Цена</td>
+                                <!-- <td class="product-description">$235</td>
                                 <td class="product-description">$275</td>
-                                <td class="product-description">$190</td>
+                                <td class="product-description">$190</td> -->
                             </tr>
                             <tr>
-                                <td class="product-title">Color</td>
+                                <td id="table_compare_specifications_1" class="product-title">Color</td>
+                                <!-- <td class="product-description">Black</td>
                                 <td class="product-description">Black</td>
-                                <td class="product-description">Black</td>
-                                <td class="product-description">Black</td>
+                                <td class="product-description">Black</td> -->
                             </tr>
                             <tr>
-                                <td class="product-title">Stock</td>
-                                <td class="product-description">In Stock</td>
+                                <td id="table_compare_stock" class="product-title">Склад</td>
+                                <!-- <td class="product-description">In Stock</td>
                                 <td class="product-description">Stock Out</td>
-                                <td class="product-description">In Stock</td>
+                                <td class="product-description">In Stock</td> -->
                             </tr>
                             <tr>
-                                <td class="product-title">В корзину</td>
-                                <td class="product-description">
+                                <td id="table_compare_cart" class="product-title">Корзина</td>
+                                <!-- <td class="product-description">
                                     <a class="compare-cart text-uppercase" href="cart.html">в корзину</a>
                                 </td>
                                 <td class="product-description">
@@ -391,17 +391,17 @@
                                 </td>
                                 <td class="product-description">
                                     <a class="compare-cart text-uppercase" href="cart.html">в корзину</a>
-                                </td>
+                                </td> -->
                             </tr>
                             <tr>
-                                <td class="product-title">Delete</td>
+                                <td id="table_compare_delete" class="product-title">Удалить</td>
+                                <!-- <td class="product-description"><i class="fa fa-trash-o"></i></td>
                                 <td class="product-description"><i class="fa fa-trash-o"></i></td>
-                                <td class="product-description"><i class="fa fa-trash-o"></i></td>
-                                <td class="product-description"><i class="fa fa-trash-o"></i></td>
+                                <td class="product-description"><i class="fa fa-trash-o"></i></td> -->
                             </tr>
                             <tr>
-                                <td class="product-title">Rating</td>
-                                <td class="product-description">
+                                <td id="table_compare_rating" class="product-title">Рейтинг</td>
+                                <!-- <td class="product-description">
                                     <div class="product-rating">
                                         <i class="fa fa-star"></i>
                                         <i class="fa fa-star"></i>
@@ -427,10 +427,13 @@
                                         <i class="fa fa-star-o"></i>
                                         <i class="fa fa-star-o"></i>
                                     </div>
-                                </td>
+                                </td> -->
                             </tr>
                         </tbody>
                     </table>
+                    <script>
+                      var container = document.getElementById("table_compare").getElementsByTagName("tbody")[0];
+                    </script>
                 </div>
             </div>
         </div>

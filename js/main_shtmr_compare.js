@@ -28,161 +28,183 @@
 // Заполнения shop.html
 /*====================================================*/
 // Initialize Cloud Firestore and get a reference to the service
-var cycle_blok_shop = 0;
+var email;
+var doc_compare_id;
 var db = firebase.firestore();
-db.collection("product").where("p_Filtr_index", "==", "ipdl")
-    .get()
-    .then((querySnapshot) => {
-        querySnapshot.forEach((doc) => {
-            // doc.data() is never undefined for query doc snapshots
-            console.log(doc.id, " => ", doc.data());
-            cycle_blok_shop = cycle_blok_shop + 1;
-            var doc_product = doc.data();
-            var doc_id = doc.id;
-            var p_Foto_link = doc_product.p_Foto_link;
-            var p_Title = doc_product.p_Title;
-            var p_price_max = doc_product.p_price_max;
-            var p_price_min = doc_product.p_price_min;
-            var p_comment = doc_product.p_comment;
-            // Заполняем список таблицей
-            var html = [
-              '<div class="pro-img">'+
-                  '<a href="product.html">'+
-                  '<a onclick="countRabbits(this)" id = '+ doc_id +' >'+
-                      '<img class="primary-img" src='+p_Foto_link+' alt="single-product">'+
-                      '<img class="secondary-img" src='+p_Foto_link+' alt="single-product">'+
-                  '</a>'+
-              '</div>'+
-              '<div class="pro-content">'+
-                  '<div class="product-rating">'+
-                      '<i class="fa fa-star"></i>'+
-                      '<i class="fa fa-star"></i>'+
-                      '<i class="fa fa-star"></i>'+
-                      '<i class="fa fa-star"></i>'+
-                      '<i class="fa fa-star"></i>'+
-                  '</div>'+
-                  '<h4><a href="product.html">'+p_Title+'</a></h4>'+
-                  '<p><span class="price">'+p_price_min+' ₽</span><del class="prev-price">'+p_price_max+' ₽</del></p>'+
-                  '<p>'+p_comment+'.</p>'+
-                  '<div class="pro-actions">'+
-                      '<div class="actions-secondary">'+
-                          '<a href="wishlist.html" data-toggle="tooltip" title="в избранное"><i class="fa fa-heart"></i></a>'+
-                          '<a class="add-cart" href="cart.html" data-toggle="tooltip" title="в корзину">в корзину</a>'+
-                          '<a href="compare.html" data-toggle="tooltip" title="сравнить"><i class="fa fa-signal"></i></a>'+
-                      '</div>'+
-                  '</div>'+
-              '</div>'
-            ].join('');
-            var div = document.createElement('div');
-            div.setAttribute('class', 'single-product');
-            div.innerHTML = html;
-            if (cycle_blok_shop > 0 && cycle_blok_shop <= 7){
-            list_view.prepend(div); // вставить liFirst в начало <ol>
-            }
-            console.log("Переполнен список");
-            // Заполняем список столбиком
-            var html_grid_view = [
-              '<div class="single-product">'+
-                  '<div class="pro-img">'+
-                      '<a href="product.html">'+
-                          '<img class="primary-img" src='+p_Foto_link+' alt="single-product">'+
-                          '<img class="secondary-img" src='+p_Foto_link+' alt="single-product">'+
-                      '</a>'+
-                  '</div>'+
-                  '<div class="pro-content">'+
-                      '<div class="product-rating">'+
-                          '<i class="fa fa-star"></i>'+
-                          '<i class="fa fa-star"></i>'+
-                          '<i class="fa fa-star"></i>'+
-                          '<i class="fa fa-star"></i>'+
-                          '<i class="fa fa-star"></i>'+
-                      '</div>'+
-                      '<h4><a href="product.html">'+p_Title+'</a></h4>'+
-                      '<p><span class="price">'+p_price_min+' ₽</span><del class="prev-price">'+p_price_max+' ₽</del></p>'+
-                      '<div class="pro-actions">'+
-                          '<div class="actions-secondary">'+
-                              '<a href="wishlist.html" data-toggle="tooltip" title="в избранное"><i class="fa fa-heart"></i></a>'+
-                              '<a class="add-cart" href="cart.html" data-toggle="tooltip" title="в корзину">в корзину</a>'+
-                              '<a href="compare.html" data-toggle="tooltip" title="сравнить"><i class="fa fa-signal"></i></a>'+
-                          '</div>'+
-                      '</div>'+
-                  '</div>'+
-              '</div>'
-            ].join('');
-            var div_grid_view = document.createElement('div');
-            div_grid_view.setAttribute('class', 'col-lg-4 col-sm-6');
-            div_grid_view.innerHTML = html_grid_view;
-            if (cycle_blok_shop > 0 && cycle_blok_shop <= 7){
-            grid_view.prepend(div_grid_view); // вставить liFirst в начало <ol>
-            }
-            console.log("Переполнен список");
+var arrfy_compare = [];
+var map_compare = new Map();
+var arrfy_compare_C = 0;
+var arrfy_compare_L = 0;
 
+firebase.auth().onAuthStateChanged((user) => {
+  if (user) {
+    // User is signed in, see docs for a list of available properties
+    // https://firebase.google.com/docs/reference/js/firebase.User
+    var uid = user.uid;
+    email = user.email;
+    // alert ('Вы вошли под логином '+ displayEmail +'! Благодарим Вас '+ displayName +'');
+    // ...
+    var cycle_blok_compare = 0;
+    db.collection("compare").where("email", "==", email)
+        .get()
+        .then((querySnapshot) => {
+            querySnapshot.forEach((doc) => {
+                // doc.data() is never undefined for query doc snapshots
+                // console.log(doc.id, " => ", doc.data());
+                cycle_blok_compare = cycle_blok_compare + 1;
+                doc_compare_id = doc.id;
+                var doc_compare = doc.data();
+                arrfy_compare = doc_compare.compare;
+                arrfy_compare_L = arrfy_compare.length;
+                // var arrfy_cart_C = 0;
+                // Заполняем список таблицей
+                arrfy_compare.forEach(function(entry) {
+                    var docRef = db.collection("product").doc(entry);
+                    // Get a document, forcing the SDK to fetch from the offline cache.
+                    docRef.get().then((doc) => {
+                        // Document was found in the cache. If no cached document exists,
+                        // an error will be returned to the 'catch' block below.
+                        // console.log("Cached document data:", doc.data());
+                        map_compare.set(doc.id, doc.data());
+                        // console.log(map_compare);
+                        fill_in_table()
+                    }).catch((error) => {
+                        console.log("Error getting cached document:", error);
+                    });
+
+                });
+            });
+        })
+        .catch((error) => {
+            console.log("Error getting documents: ", error);
         });
-    })
-    .catch((error) => {
-        console.log("Error getting documents: ", error);
-    });
-
+  } else {
+    // User is signed out
+    // ...
+    window.location.replace("login.html");
+  }
+});
+// [END auth_state_listener]
 /*====================================================*/
-
-// Заполнения shop.html Категория
+// Оформить ЗАКАЗ
 /*====================================================*/
-// Initialize Cloud Firestore and get a reference to the service
-var cycle_category = 0;
-db.collection("product_group").get().then((querySnapshot) => {
-    querySnapshot.forEach((doc) => {
-        // doc.data() is never undefined for query doc snapshots
-        cycle_category = cycle_category + 1;
-        var doc_category = doc.data();
-        var category_title = doc_category.category_title;
-        var html_category = [
-            '<div class="checkout-form-list create-acc mb-30">'+
-                '<input id="cbox" type="checkbox" />'+
-                '<label>'+category_title+'</label>'+
+function fill_in_table() {
+arrfy_compare_C += 1;
+  if(arrfy_compare_C === arrfy_compare_L){
+    for (let entry of map_compare) { // то же самое, что и recipeMap.entries()
+      // alert(entry); // огурец,500 (и так далее)
+      console.log(entry);
+      var doc_id = entry[0];
+      var doc_product = entry[1];
+      var p_Filtr_index = doc_product.p_Filtr_index;
+      var p_Foto_link = doc_product.p_Foto_link;
+      var p_Foto_link_1 = doc_product.p_Foto_link_1;
+      var p_Foto_link_2 = doc_product.p_Foto_link_2;
+      var p_Foto_link_3 = doc_product.p_Foto_link_3;
+      var p_Title = doc_product.p_Title;
+      var p_FuiiTitle = doc_product.p_FuiiTitle;
+      var p_price_max = doc_product.p_price_max;
+      var p_price_min = doc_product.p_price_min;
+      var p_comment = doc_product.p_comment;
+      var p_comment_big = doc_product.p_comment_big;
+      var p_description = doc_product.p_description;
+      var p_description_1 = doc_product.p_description_1;
+      var p_description_2 = doc_product.p_description_2;
+      var p_description_3 = doc_product.p_description_3;
+      var p_sale = doc_product.p_sale;
+      var p_availability = doc_product.p_availability;
+      var p_upsell_doc_map = doc_product.p_upsell_doc_map;
+
+      /*====================================================*/
+      var html_total = [
+            '<div class="compare-details">'+
+                '<div class="compare-detail-img">'+
+                    '<a id = '+doc_id+' onclick = "countRabbits(this)" href="#"><img src='+p_Foto_link+' alt="compare-product"></a>'+
+                '</div>'+
+                '<div class="compare-detail-content">'+
+                    '<span>'+ p_Filtr_index +'</span>'+
+                    '<h4><a id = '+doc_id+' onclick = "countRabbits(this)" href="product.html">'+p_Title+'</a></h4>'+
+                '</div>'+
             '</div>'
-        ].join('');
-        var div_category = document.createElement('div');
-        div_category.setAttribute('class', 'col-md-12');
-        div_category.innerHTML = html_category;
-        if (cycle_blok_shop > 0 && cycle_blok_shop <= 7){
-        list_category.prepend(div_category); // вставить liFirst в начало <ol>
-        }
-        console.log(doc.id, " => ", doc.data());
-    });
-});
+      ].join('');
+      var div_total = document.createElement('td');
+      div_total.setAttribute('class', 'product-description');
+      div_total.innerHTML = html_total;
+      table_compare_total.after(div_total); // вставить liFirst в начало <ol>
+      /*====================================================*/
+      var html_description = [
+        '<p>'+p_comment+'</p>'
+      ].join('');
+      var div_description = document.createElement('td');
+      div_description.setAttribute('class', 'product-description');
+      div_description.innerHTML = html_description;
+      table_compare_description.after(div_description); // вставить liFirst в начало <ol>
+      /*====================================================*/
+      var div_price = document.createElement('td');
+      div_price.setAttribute('class', 'product-description');
+      div_price.innerHTML = p_price_min;
+      table_compare_price.after(div_price); // вставить liFirst в начало <ol>
+      /*====================================================*/
+      var html_specifications_1 = [
+        '<p>'+p_comment+'</p>'
+      ].join('');
+      var div_specifications_1 = document.createElement('td');
+      div_specifications_1.setAttribute('class', 'product-description');
+      div_specifications_1.innerHTML = html_specifications_1;
+      table_compare_specifications_1.after(div_specifications_1); // вставить liFirst в начало <ol>
+      /*====================================================*/
+      // var html_specifications_2 = [
+      //   '<p>'+p_comment+'</p>'
+      // ].join('');
+      // var div_specifications_2 = document.createElement('td');
+      // div_specifications_2.setAttribute('class', 'product-description');
+      // div_specifications_2.innerHTML = specifications_2;
+      // table_compare_specifications_2.after(div_specifications_2); // вставить liFirst в начало <ol>
+      /*====================================================*/
+      var div_stock = document.createElement('td');
+      div_stock.setAttribute('class', 'product-description');
+      div_stock.innerHTML = p_availability;
+      table_compare_stock.after(div_stock); // вставить liFirst в начало <ol>
+      /*====================================================*/
+      var html_cart = [
+        '<a id = '+doc_id+' onclick = "go_cart(this)" class="compare-cart text-uppercase" href="#">в корзину</a>'
+      ].join('');
+      var div_cart = document.createElement('td');
+      div_cart.setAttribute('class', 'product-description');
+      div_cart.innerHTML = html_cart;
+      table_compare_cart.after(div_cart); // вставить liFirst в начало <ol>
+      /*====================================================*/
+      var html_delete = [
+        '<i id = '+doc_id+' onclick = "delete_compare(this)" class="fa fa-trash-o"></i>'
+      ].join('');
+      var div_delete = document.createElement('td');
+      div_delete.setAttribute('class', 'product-description');
+      div_delete.innerHTML = html_delete;
+      table_compare_delete.after(div_delete); // вставить liFirst в начало <ol>
+      /*====================================================*/
+      var html_rating = [
+        '<div class="product-rating">'+
+            '<i class="fa fa-star"></i>'+
+            '<i class="fa fa-star"></i>'+
+            '<i class="fa fa-star"></i>'+
+            '<i class="fa fa-star"></i>'+
+            '<i class="fa fa-star-o"></i>'+
+        '</div>'
+      ].join('');
+      var div_rating = document.createElement('td');
+      div_rating.setAttribute('class', 'product-description');
+      div_rating.innerHTML = html_rating;
+      table_compare_rating.after(div_rating); // вставить liFirst в начало <ol>
+      /*====================================================*/
+
+    }
+
+  }
+}
 
 
 /*====================================================*/
-// Заполнения shop.html Производитель
-/*====================================================*/
-// Initialize Cloud Firestore and get a reference to the service
-var cycle_manufacturer = 0;
-db.collection("manufacturer").get().then((querySnapshot) => {
-    querySnapshot.forEach((doc) => {
-        // doc.data() is never undefined for query doc snapshots
-        cycle_manufacturer = cycle_manufacturer + 1;
-        var doc_manufacturer = doc.data();
-        var m_title = doc_manufacturer.m_title;
-        var html_manufacturer = [
-          '<div class="checkout-form-list create-acc mb-30">'+
-              '<input id="cbox" type="checkbox" />'+
-              '<label>'+m_title+'</label>'+
-          '</div>'
-          // '<li><a href="#">'+m_title+'</a></li>'
-        ].join('');
-        // var div_manufacturer = document.createElement('li');
-        // div.setAttribute('class', 'single-product');
-        var div_manufacturer = document.createElement('div');
-        div_manufacturer.setAttribute('class', 'col-md-12');
-        div_manufacturer.innerHTML = html_manufacturer;
-        if (cycle_manufacturer > 0 && cycle_manufacturer <= 7){
-        list_manufacturer.prepend(div_manufacturer); // вставить liFirst в начало <ol>
-        }
-        console.log(doc.id, " => ", doc.data());
-    });
-});
-/*====================================================*/
-
+// Запись localStorage в  продукта
 /*====================================================*/
 function countRabbits(obj) {
   var h = obj.id;
@@ -190,6 +212,66 @@ function countRabbits(obj) {
   window.location.replace("product.html");
 }
 
+/*====================================================*/
+// Удалить позицию из списка ИЗБРАННОЕ
+/*====================================================*/
+function delete_compare(obj) {
+  var h = obj.id;
+  var new_arrfy_compare = arrfy_compare.filter(function(f) { return f !== h });
+  var washingtonRef = db.collection("compare").doc(doc_compare_id);
+
+  // Set the "capital" field of the city 'DC'
+  return washingtonRef.update({
+      compare: new_arrfy_compare
+  })
+  .then(() => {
+      console.log("Document successfully updated!");
+      window.location.replace("cart.html");
+  })
+  .catch((error) => {
+      // The document probably doesn't exist.
+      console.error("Error updating document: ", error);
+  });
+}
 
 /*====================================================*/
+// Добавить позицию в список КОРЗИНЫ
 /*====================================================*/
+function go_cart(obj) {
+  var h = obj.id;
+  var arrfy_cart = [];
+  var doc_cart_id;
+  db.collection("cart").where("email", "==", email)
+      .get()
+      .then((querySnapshot) => {
+          querySnapshot.forEach((doc) => {
+              // doc.data() is never undefined for query doc snapshots
+              console.log(doc.id, " => ", doc.data());
+              var doc_cart = doc.data();
+              arrfy_cart = doc_cart.cart;
+              doc_cart_id = doc.id;
+          });
+      })
+      .catch((error) => {
+          console.log("Error getting documents: ", error);
+      })
+      .finally(() => {
+          if ( arrfy_cart.indexOf( h ) === -1 ){
+            arrfy_cart.push(h);
+            var washingtonRef = db.collection("cart").doc(doc_cart_id);
+            // Set the "capital" field of the city 'DC'
+            return washingtonRef.update({
+                cart: arrfy_cart
+            })
+            .then(() => {
+                console.log("Document successfully updated!");
+                alert("Новая позиция добавлена в КОРЗИНУ");
+            })
+            .catch((error) => {
+                // The document probably doesn't exist.
+                console.error("Error updating document: ", error);
+            });
+          }
+          alert("Данная позиция уже добавлена в КОРЗИНУ ранее!");
+      });
+}

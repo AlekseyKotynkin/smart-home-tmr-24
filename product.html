@@ -373,15 +373,15 @@
                             </div>
                             <div class="box-quantity">
                                 <form action="#">
-                                    <input class="number" id="numeric" type="number" min="1" value="1">
-                                    <a class="add-cart" href="cart.html">в корзину</a>
+                                    <!-- <input class="number" id="numeric" type="number" min="1" value="1"> -->
+                                    <a class="add-cart" onclick="stateListener_cart()" href="#">в корзину</a>
                                 </form>
                             </div>
                             <div class="product-link">
                                 <ul class="list-inline">
-                                    <li><a href="wishlist.html">в избранное</a></li>
-                                    <li><a onclick="authStateListener_compare()" href="#">сравнить</a></li>
-                                    <li><a href="#">Написать</a></li>
+                                    <li><a onclick="stateListener_wishlist()" href="#">в избранное</a></li>
+                                    <li><a onclick="stateListener_compare()" href="#">сравнить</a></li>
+                                    <!-- <li><a href="#">Написать</a></li> -->
                                 </ul>
                             </div>
                             <!-- <p class="ptb-20">Everything you need for a trip to the gym will fit inside this surprisingly spacious Products Name Here. Stock it with a water bottle, change of clothes, pair of shoes, and even a few beauty products. Fits inside a locker and zips shut for security.</p> -->
