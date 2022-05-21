@@ -677,3 +677,24 @@ function authStateListener_compare() {
 }
 
 /*====================================================*/
+/** 27.Отправка email  для рассылки новостей.*/
+/*====================================================*/
+
+function go_email() {
+  // [START auth_state_listener]
+
+alert("работает")
+  // [END auth_state_listener]
+}
+
+/*====================================================*/
+/** 28.Поиск ПРОДУКЦИИ.*/
+/*====================================================*/
+
+function searchForYourProduct() {
+  // [START auth_state_listener]
+
+  alert("работает")
+
+  // [END auth_state_listener]
+}
