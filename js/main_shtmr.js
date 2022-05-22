@@ -28,6 +28,8 @@
 // Заполнения index.html блок правой части экрана товары
 /*====================================================*/
 var email;
+var cycle_blok_product = 0;
+
 firebase.auth().onAuthStateChanged((user) => {
   if (user) {
     // User is signed in, see docs for a list of available properties
@@ -46,6 +48,10 @@ firebase.auth().onAuthStateChanged((user) => {
 // [END auth_state_listener]
 // Initialize Cloud Firestore and get a reference to the service
 var cycle_blok = 0;
+var cycle_blok_bracket = 0;
+var cycle_blok_casing = 0;
+var cycle_blok_service_equipment = 0;
+
 var db = firebase.firestore();
 db.collection("product").where("p_Filtr_index", "==", "ipdl")
     .get()
@@ -87,13 +93,14 @@ db.collection("product").where("p_Filtr_index", "==", "ipdl")
             var div = document.createElement('div');
             div.setAttribute('class', 'single-product');
             div.innerHTML = html;
-            if (cycle_blok > 0 && cycle_blok <= 7){
+            if (cycle_blok > 0 && cycle_blok <= 12){
               ipdl_blok.prepend(div); // вставить liFirst в начало <ol>
             }
             // console.log("Переполнен список");
 
         });
         // console.log("вариант 1");
+        cycle_blok_product = cycle_blok_product + 1;
         startBlok();
 
     })
@@ -101,36 +108,210 @@ db.collection("product").where("p_Filtr_index", "==", "ipdl")
         console.log("Error getting documents: ", error);
     });
 
+    db.collection("product").where("p_Filtr_index", "==", "bracket")
+        .get()
+        .then((querySnapshot) => {
+            querySnapshot.forEach((doc) => {
+                cycle_blok_bracket = cycle_blok_bracket + 1;
+                var doc_product = doc.data();
+                var doc_id = doc.id;
+                var p_Foto_link = doc_product.p_Foto_link;
+                var p_Title = doc_product.p_Title;
+                var p_price_max = doc_product.p_price_max;
+                var p_price_min = doc_product.p_price_min;
+                var html = [
+                        '<div class="pro-img">'+
+                            '<a onclick="countRabbits(this)" id = '+ doc_id +' >'+
+                                '<img class="primary-img" src='+p_Foto_link+' alt="single-product">'+
+                                '<img class="secondary-img" src='+p_Foto_link+' alt="single-product">'+
+                            '</a>'+
+                        '</div>'+
+                        '<div class="pro-content">'+
+                            '<div class="product-rating">'+
+                                '<i class="fa fa-star"></i>'+
+                                '<i class="fa fa-star"></i>'+
+                                '<i class="fa fa-star"></i>'+
+                                '<i class="fa fa-star"></i>'+
+                                '<i class="fa fa-star"></i>'+
+                            '</div>'+
+                            '<h4><a href="product.html">'+p_Title+'</a></h4>'+
+                            '<p><span class="price">'+p_price_min+' ₽</span><del class="prev-price">'+p_price_max+' ₽</del></p>'+
+                            '<div class="pro-actions">'+
+                                '<div class="actions-secondary">'+
+                                    '<a id = '+doc_id+' onclick = "go_wishlist(this)" href="#" data-toggle="tooltip" title="в избранное"><i class="fa fa-heart"></i></a>'+
+                                    '<a id = '+doc_id+' onclick = "go_cart(this)" class="add-cart" href="#" data-toggle="tooltip" title="в корзину">в корзину</a>'+
+                                    '<a id = '+doc_id+' onclick = "go_compare(this)" href="#" data-toggle="tooltip" title="сравнить"><i class="fa fa-signal"></i></a>'+
+                                '</div>'+
+                            '</div>'+
+                        '</div>'
+                ].join('');
+                var div_bracket = document.createElement('div');
+                div_bracket.setAttribute('class', 'single-product');
+                div_bracket.innerHTML = html;
+                if (cycle_blok_bracket > 0 && cycle_blok_bracket <= 7){
+                  bracket_blok.prepend(div_bracket); // вставить liFirst в начало <ol>
+                }
+                // console.log("Переполнен список");
+
+            });
+            // console.log("вариант 1");
+            cycle_blok_product = cycle_blok_product + 1;
+            startBlok();
+
+        })
+        .catch((error) => {
+            console.log("Error getting documents: ", error);
+        });
+
+
+        db.collection("product").where("p_Filtr_index", "==", "casing")
+            .get()
+            .then((querySnapshot) => {
+                querySnapshot.forEach((doc) => {
+                    cycle_blok_casing = cycle_blok_casing + 1;
+                    var doc_product = doc.data();
+                    var doc_id = doc.id;
+                    var p_Foto_link = doc_product.p_Foto_link;
+                    var p_Title = doc_product.p_Title;
+                    var p_price_max = doc_product.p_price_max;
+                    var p_price_min = doc_product.p_price_min;
+                    var html = [
+                            '<div class="pro-img">'+
+                                '<a onclick="countRabbits(this)" id = '+ doc_id +' >'+
+                                    '<img class="primary-img" src='+p_Foto_link+' alt="single-product">'+
+                                    '<img class="secondary-img" src='+p_Foto_link+' alt="single-product">'+
+                                '</a>'+
+                            '</div>'+
+                            '<div class="pro-content">'+
+                                '<div class="product-rating">'+
+                                    '<i class="fa fa-star"></i>'+
+                                    '<i class="fa fa-star"></i>'+
+                                    '<i class="fa fa-star"></i>'+
+                                    '<i class="fa fa-star"></i>'+
+                                    '<i class="fa fa-star"></i>'+
+                                '</div>'+
+                                '<h4><a href="product.html">'+p_Title+'</a></h4>'+
+                                '<p><span class="price">'+p_price_min+' ₽</span><del class="prev-price">'+p_price_max+' ₽</del></p>'+
+                                '<div class="pro-actions">'+
+                                    '<div class="actions-secondary">'+
+                                        '<a id = '+doc_id+' onclick = "go_wishlist(this)" href="#" data-toggle="tooltip" title="в избранное"><i class="fa fa-heart"></i></a>'+
+                                        '<a id = '+doc_id+' onclick = "go_cart(this)" class="add-cart" href="#" data-toggle="tooltip" title="в корзину">в корзину</a>'+
+                                        '<a id = '+doc_id+' onclick = "go_compare(this)" href="#" data-toggle="tooltip" title="сравнить"><i class="fa fa-signal"></i></a>'+
+                                    '</div>'+
+                                '</div>'+
+                            '</div>'
+                    ].join('');
+                    var div_casing = document.createElement('div');
+                    div_casing.setAttribute('class', 'single-product');
+                    div_casing.innerHTML = html;
+                    if (cycle_blok_casing > 0 && cycle_blok_casing <= 7){
+                      casing_blok.prepend(div_casing); // вставить liFirst в начало <ol>
+                    }
+                    // console.log("Переполнен список");
+
+                });
+                // console.log("вариант 1");
+                cycle_blok_product = cycle_blok_product + 1;
+                startBlok();
+
+            })
+            .catch((error) => {
+                console.log("Error getting documents: ", error);
+            });
+
+            db.collection("product").where("p_Filtr_index", "==", "service_equipment")
+                .get()
+                .then((querySnapshot) => {
+                    querySnapshot.forEach((doc) => {
+                        cycle_blok_service_equipment = cycle_blok_service_equipment + 1;
+                        var doc_product = doc.data();
+                        var doc_id = doc.id;
+                        var p_Foto_link = doc_product.p_Foto_link;
+                        var p_Title = doc_product.p_Title;
+                        var p_price_max = doc_product.p_price_max;
+                        var p_price_min = doc_product.p_price_min;
+                        var html = [
+                                '<div class="pro-img">'+
+                                    '<a onclick="countRabbits(this)" id = '+ doc_id +' >'+
+                                        '<img class="primary-img" src='+p_Foto_link+' alt="single-product">'+
+                                        '<img class="secondary-img" src='+p_Foto_link+' alt="single-product">'+
+                                    '</a>'+
+                                '</div>'+
+                                '<div class="pro-content">'+
+                                    '<div class="product-rating">'+
+                                        '<i class="fa fa-star"></i>'+
+                                        '<i class="fa fa-star"></i>'+
+                                        '<i class="fa fa-star"></i>'+
+                                        '<i class="fa fa-star"></i>'+
+                                        '<i class="fa fa-star"></i>'+
+                                    '</div>'+
+                                    '<h4><a href="product.html">'+p_Title+'</a></h4>'+
+                                    '<p><span class="price">'+p_price_min+' ₽</span><del class="prev-price">'+p_price_max+' ₽</del></p>'+
+                                    '<div class="pro-actions">'+
+                                        '<div class="actions-secondary">'+
+                                            '<a id = '+doc_id+' onclick = "go_wishlist(this)" href="#" data-toggle="tooltip" title="в избранное"><i class="fa fa-heart"></i></a>'+
+                                            '<a id = '+doc_id+' onclick = "go_cart(this)" class="add-cart" href="#" data-toggle="tooltip" title="в корзину">в корзину</a>'+
+                                            '<a id = '+doc_id+' onclick = "go_compare(this)" href="#" data-toggle="tooltip" title="сравнить"><i class="fa fa-signal"></i></a>'+
+                                        '</div>'+
+                                    '</div>'+
+                                '</div>'
+                        ].join('');
+                        var div_service_equipment = document.createElement('div');
+                        div_service_equipment.setAttribute('class', 'single-product');
+                        div_service_equipment.innerHTML = html;
+                        if (cycle_blok_service_equipment > 0 && cycle_blok_service_equipment <= 7){
+                          service_equipment_blok.prepend(div_service_equipment); // вставить liFirst в начало <ol>
+                        }
+                        // console.log("Переполнен список");
+
+                    });
+                    // console.log("вариант 1");
+                    cycle_blok_product = cycle_blok_product + 1;
+                    startBlok();
+
+                })
+                .catch((error) => {
+                    console.log("Error getting documents: ", error);
+                });
+
+
+
+
+
+
     function startBlok(){
-      $('.new-pro-active').owlCarousel({
-              loop: false,
-              nav: true,
-              dots: false,
-              smartSpeed: 1000,
+      if(cycle_blok_product === 4){
 
-              navText: ["<i class='fa fa-angle-left'></i>", "<i class='fa fa-angle-right'></i>"],
-              margin: 30,
-              responsive: {
-                  0: {
-                      items: 1,
-                      autoplay:true
-                  },
-                  480: {
-                      items: 2
-                  },
-                  768: {
-                      items: 2
-                  },
-                  1000: {
-                      items: 2
-                  },
-                  1200: {
-                      items: 3
-                  }
-              }
+        $('.new-pro-active').owlCarousel({
+                loop: false,
+                nav: true,
+                dots: false,
+                smartSpeed: 1000,
 
-          });
-      }
+                navText: ["<i class='fa fa-angle-left'></i>", "<i class='fa fa-angle-right'></i>"],
+                margin: 30,
+                responsive: {
+                    0: {
+                        items: 1,
+                        autoplay:true
+                    },
+                    480: {
+                        items: 2
+                    },
+                    768: {
+                        items: 2
+                    },
+                    1000: {
+                        items: 2
+                    },
+                    1200: {
+                        items: 3
+                    }
+                }
+
+            });
+       }
+    }
 
   /*====================================================*/
   // Заполнения index.html блок левой части экрана
