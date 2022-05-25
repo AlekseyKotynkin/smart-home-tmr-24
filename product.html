@@ -423,7 +423,7 @@
                                     <li> Durable nylon construction.</li>
                                 </ul> -->
                                 <div class="your-order-table table-responsive">
-                                    <table>
+                                    <table id = "table_product">
                                         <thead>
                                             <tr>
                                                 <th class="product-name"><h5>Наименование</h5></th>
@@ -431,7 +431,7 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr class="cart_item">
+                                            <!-- <tr class="cart_item">
                                                 <td class="product-name">Products Name Here<strong class="product-quantity"> × 1</strong></td>
                                                 <td class="product-total"><span class="amount">165.00</span></td>
                                             </tr>
@@ -443,7 +443,7 @@
                                                 <td class="product-name">Products Name Here <strong class="product-quantity"> × 1</strong></td>
                                                 <td class="product-total"><span class="amount">50.00</span></td>
                                             </tr>
-
+ -->
                                         </tbody>
                                         <!-- <tfoot>
                                             <tr class="cart-subtotal">
@@ -457,14 +457,15 @@
                                             </tr>
                                         </tfoot> -->
                                     </table>
+                                    <script>
+                                      var container = document.getElementById("table_product").getElementsByTagName("tbody")[0];
+                                    </script>
                                 </div>
-
                             </div>
                             <div id="d_documentation" class="tab-pane">
                                 <div class="col-lg-6 col-md-6">
-                                    <div class="ht-single-about">
-                                        <!-- <h3>OUR WORKS</h3> -->
-                                        <div class="ht-about-work">
+                                    <div id="d_documentation_list" class="ht-single-about">
+                                        <!-- <div class="ht-about-work">
                                             <span>1</span>
                                             <div class="ht-work-text">
                                                 <h5><a href="#">Руководство по эксплуатации.</a></h5>
@@ -484,7 +485,7 @@
                                                 <a data-fancybox="images" href="img/banner/12.jpg"><img src="img/banner/11.jpg" alt="product-view"></a>
                                                 <h5><a href="#" download="">Скачать 1.02 МБ  <i class="fa fa-file-pdf-o" aria-hidden="true"></i></a></h5>
                                             </div>
-                                        </div>
+                                        </div> -->
                                     </div>
                                 </div>
                             </div>

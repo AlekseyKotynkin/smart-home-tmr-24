@@ -64,7 +64,7 @@ db.collection("product").where("p_Filtr_index", "==", "ipdl")
             // Заполняем список таблицей
             var html = [
               '<div class="pro-img">'+
-                  '<a href="product.html">'+
+                  '<a onclick="countRabbits(this)" id = '+ doc_id +' href="product.html">'+
                   '<a onclick="countRabbits(this)" id = '+ doc_id +' >'+
                       '<img class="primary-img" src='+p_Foto_link+' alt="single-product">'+
                       '<img class="secondary-img" src='+p_Foto_link+' alt="single-product">'+
@@ -78,7 +78,7 @@ db.collection("product").where("p_Filtr_index", "==", "ipdl")
                       '<i class="fa fa-star"></i>'+
                       '<i class="fa fa-star"></i>'+
                   '</div>'+
-                  '<h4><a href="product.html">'+p_Title+'</a></h4>'+
+                  '<h4><a onclick="countRabbits(this)" id = '+ doc_id +' href="product.html">'+p_Title+'</a></h4>'+
                   '<p><span class="price">'+p_price_min+' ₽</span><del class="prev-price">'+p_price_max+' ₽</del></p>'+
                   '<p>'+p_comment+'.</p>'+
                   '<div class="pro-actions">'+
@@ -104,7 +104,7 @@ db.collection("product").where("p_Filtr_index", "==", "ipdl")
             var html_grid_view = [
               '<div class="single-product">'+
                   '<div class="pro-img">'+
-                      '<a href="product.html">'+
+                      '<a onclick="countRabbits(this)" id = '+ doc_id +' href="product.html">'+
                           '<img class="primary-img" src='+p_Foto_link+' alt="single-product">'+
                           '<img class="secondary-img" src='+p_Foto_link+' alt="single-product">'+
                       '</a>'+
@@ -117,7 +117,7 @@ db.collection("product").where("p_Filtr_index", "==", "ipdl")
                           '<i class="fa fa-star"></i>'+
                           '<i class="fa fa-star"></i>'+
                       '</div>'+
-                      '<h4><a href="product.html">'+p_Title+'</a></h4>'+
+                      '<h4><a onclick="countRabbits(this)" id = '+ doc_id +' href="product.html">'+p_Title+'</a></h4>'+
                       '<p><span class="price">'+p_price_min+' ₽</span><del class="prev-price">'+p_price_max+' ₽</del></p>'+
                       '<div class="pro-actions">'+
                           '<div class="actions-secondary">'+
