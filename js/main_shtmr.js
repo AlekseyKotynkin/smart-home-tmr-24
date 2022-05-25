@@ -80,7 +80,8 @@ db.collection("product").where("p_Filtr_index", "==", "ipdl")
                             '<i class="fa fa-star"></i>'+
                         '</div>'+
                         '<h4><a onclick="countRabbits(this)" id = '+ doc_id +' href="product.html">'+p_Title+'</a></h4>'+
-                        '<p><span class="price">'+p_price_min+' ₽</span><del class="prev-price">'+p_price_max+' ₽</del></p>'+
+                        '<p><span class="price">оптовая '+p_price_min+' ₽</span></p>'+
+                        '<p><span class="prev-price">розничная '+p_price_max+' ₽</span></p>'+
                         '<div class="pro-actions">'+
                             '<div class="actions-secondary">'+
                                 '<a id = '+doc_id+' onclick = "go_wishlist(this)" href="#" data-toggle="tooltip" title="в избранное"><i class="fa fa-heart"></i></a>'+
@@ -135,7 +136,9 @@ db.collection("product").where("p_Filtr_index", "==", "ipdl")
                                 '<i class="fa fa-star"></i>'+
                             '</div>'+
                             '<h4><a onclick="countRabbits(this)" id = '+ doc_id +' href="product.html">'+p_Title+'</a></h4>'+
-                            '<p><span class="price">'+p_price_min+' ₽</span><del class="prev-price">'+p_price_max+' ₽</del></p>'+
+                            // '<p><span class="price">'+p_price_min+' ₽</span><del class="prev-price">'+p_price_max+' ₽</del></p>'+
+                            '<p><span class="price">оптовая '+p_price_min+' ₽</span></p>'+
+                            '<p><span class="prev-price">розничная '+p_price_max+' ₽</span></p>'+
                             '<div class="pro-actions">'+
                                 '<div class="actions-secondary">'+
                                     '<a id = '+doc_id+' onclick = "go_wishlist(this)" href="#" data-toggle="tooltip" title="в избранное"><i class="fa fa-heart"></i></a>'+
@@ -191,7 +194,9 @@ db.collection("product").where("p_Filtr_index", "==", "ipdl")
                                     '<i class="fa fa-star"></i>'+
                                 '</div>'+
                                 '<h4><a onclick="countRabbits(this)" id = '+ doc_id +' href="product.html">'+p_Title+'</a></h4>'+
-                                '<p><span class="price">'+p_price_min+' ₽</span><del class="prev-price">'+p_price_max+' ₽</del></p>'+
+                                // '<p><span class="price">'+p_price_min+' ₽</span><del class="prev-price">'+p_price_max+' ₽</del></p>'+
+                                '<p><span class="price">оптовая '+p_price_min+' ₽</span></p>'+
+                                '<p><span class="prev-price">розничная '+p_price_max+' ₽</span></p>'+
                                 '<div class="pro-actions">'+
                                     '<div class="actions-secondary">'+
                                         '<a id = '+doc_id+' onclick = "go_wishlist(this)" href="#" data-toggle="tooltip" title="в избранное"><i class="fa fa-heart"></i></a>'+
@@ -246,7 +251,9 @@ db.collection("product").where("p_Filtr_index", "==", "ipdl")
                                         '<i class="fa fa-star"></i>'+
                                     '</div>'+
                                     '<h4><a onclick="countRabbits(this)" id = '+ doc_id +' href="product.html">'+p_Title+'</a></h4>'+
-                                    '<p><span class="price">'+p_price_min+' ₽</span><del class="prev-price">'+p_price_max+' ₽</del></p>'+
+                                    // '<p><span class="price">'+p_price_min+' ₽</span><del class="prev-price">'+p_price_max+' ₽</del></p>'+
+                                    '<p><span class="price">оптовая '+p_price_min+' ₽</span></p>'+
+                                    '<p><span class="prev-price">розничная '+p_price_max+' ₽</span></p>'+
                                     '<div class="pro-actions">'+
                                         '<div class="actions-secondary">'+
                                             '<a id = '+doc_id+' onclick = "go_wishlist(this)" href="#" data-toggle="tooltip" title="в избранное"><i class="fa fa-heart"></i></a>'+
@@ -346,7 +353,9 @@ db.collection("product").where("p_Filtr_index", "==", "ipdl")
                               '<i class="fa fa-star"></i>'+
                           '</div>'+
                           '<h4><a onclick="countRabbits(this)" id = '+ doc_id +' href="product.html">'+p_Title+'</a></h4>'+
-                          '<p><span class="price">'+p_price_min+' ₽</span><del class="prev-price">'+p_price_max+'</del></p>'+
+                          // '<p><span class="price">'+p_price_min+' ₽</span><del class="prev-price">'+p_price_max+'</del></p>'+
+                          '<p><span class="price">оптовая '+p_price_min+' ₽</span></p>'+
+                          '<p><span class="prev-price">розничная '+p_price_max+' ₽</span></p>'+
                       '</div>'
               ].join('');
               var div = document.createElement('div');

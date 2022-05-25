@@ -587,12 +587,12 @@ function authStateListenerGlob() {
 
 function authExitListenerGlob() {
 
-firebase.auth().signOut().then(function() {
-  console.log('Signed Out');
-  window.location.replace("login.html");
-}, function(error) {
-  console.error('Sign Out Error', error);
-});
+    firebase.auth().signOut().then(function() {
+      console.log('Signed Out');
+      window.location.replace("login.html");
+    }, function(error) {
+      console.error('Sign Out Error', error);
+    });
 
 }
 /*====================================================*/
@@ -608,7 +608,6 @@ function authStateListener_cart() {
       var uid = user.uid;
       var displayName = user.displayName;
       var displayEmail = user.email;
-      // alert ('Вы вошли под логином '+ displayEmail +'! Благодарим Вас '+ displayName +'');
       window.location.replace("cart.html");
       // ...
     } else {
@@ -635,7 +634,6 @@ function authStateListener_wishlist() {
       var uid = user.uid;
       var displayName = user.displayName;
       var displayEmail = user.email;
-      // alert ('Вы вошли под логином '+ displayEmail +'! Благодарим Вас '+ displayName +'');
       window.location.replace("wishlist.html");
       // ...
     } else {
@@ -662,7 +660,6 @@ function authStateListener_compare() {
       var uid = user.uid;
       var displayName = user.displayName;
       var displayEmail = user.email;
-      // alert ('Вы вошли под логином '+ displayEmail +'! Благодарим Вас '+ displayName +'');
       window.location.replace("compare.html");
       // ...
     } else {
@@ -682,8 +679,40 @@ function authStateListener_compare() {
 
 function go_email() {
   // [START auth_state_listener]
-
-alert("работает")
+  var email_newsletter = document.getElementById('email_newsletter').value;
+  var email_newsletter_array = [];
+  var docRef = db.collection("email_newsletter").doc("b2zlXp7eiHV22tXwcXqq");
+  docRef.get().then((doc) => {
+      if (doc.exists) {
+          // console.log("Document data:", doc.data());
+          var doc_array = doc.data();
+          email_newsletter_array = doc_array.email_newsletter;
+          if ( email_newsletter_array.indexOf( email_newsletter ) === -1 ){
+            email_newsletter_array.push(email_newsletter);
+            var washingtonRef = db.collection("email_newsletter").doc("b2zlXp7eiHV22tXwcXqq");
+            // Set the "capital" field of the city 'DC'
+            return washingtonRef.update({
+                email_newsletter: email_newsletter_array
+            })
+            .then(() => {
+                console.log("Document successfully updated!");
+                alert('Ваш email '+ email_newsletter +' добавлен!');
+                window.location.reload();
+            })
+            .catch((error) => {
+                // The document probably doesn't exist.
+                console.error("Error updating document: ", error);
+            });
+          }
+          alert('Ваш email '+ email_newsletter +' был добавлен ранее!');
+          window.location.reload();
+      } else {
+          // doc.data() will be undefined in this case
+          console.log("No such document!");
+      }
+  }).catch((error) => {
+      console.log("Error getting document:", error);
+  });
   // [END auth_state_listener]
 }
 
