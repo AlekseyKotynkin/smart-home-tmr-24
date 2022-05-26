@@ -552,19 +552,20 @@
                                 <ul class="list-inline nav">
                                     <li><a data-toggle="tab" href="#grid-view"><i class="fa fa-th"></i></a></li>
                                     <li><a  class="active" data-toggle="tab" href="#list_view"><i class="fa fa-list-ul"></i></a></li>
-                                    <li><span class="grid-item-list"> Страницы 1-12 of 13</span></li>
+                                    <li><span id="number_of_products_id" class="grid-item-list"> Страницы 1-12 of 13</span></li>
                                 </ul>
                             </div>
                             <!-- Toolbar Short Area Start -->
                             <div class="main-toolbar-sorter f-right">
                                 <div class="toolbar-sorter">
                                     <label>сортировать</label>
-                                    <select class="sorter" name="sorter">
-                                        <option value="Position" selected="selected">популярность</option>
+                                    <select class="sorter" id="sascending_descending" onchange="pageSorterActiv()">
+                                        <option value="Position">популярность</option>
                                         <option value="Product Name">наименование</option>
                                         <option value="Price">цена</option>
                                     </select>
-                                    <span><a href="#"><i class="fa fa-arrow-up"></i></a></span>
+                                    <!-- <span><a href="#"><i class="fa fa-arrow-up"></i></a></span> -->
+                                    <span><a href="#"><i id="ascending_descending" onclick="ascendingDescending()" class="fa fa-arrow-down"></i></a></span>
                                 </div>
                             </div>
                             <!-- Toolbar Short Area End -->
@@ -594,10 +595,11 @@
                             </ul>
                             <div class="toolbar-sorter-footer">
                                 <label>Позиций</label>
-                                <select class="sorter" name="sorter">
-                                    <option value="Position" selected="selected">12</option>
-                                    <option value="Product Name">15</option>
-                                    <option value="Price">30</option>
+                                <select class="sorter" id="Ultra" onchange="pagePositionsActiv()">
+                                    <!-- <option value="12" selected="selected">12</option> -->
+                                    <option value="12">12</option>
+                                    <option value="21">21</option>
+                                    <option value="30">30</option>
                                 </select>
                                 <span>на страницу</span>
                             </div>

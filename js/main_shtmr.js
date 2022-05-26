@@ -327,8 +327,8 @@ db.collection("product").where("p_Filtr_index", "==", "ipdl")
   // Initialize Cloud Firestore and get a reference to the service
   var cycle_blok_l = 0;
   var db = firebase.firestore();
-  db.collection("product").where("p_Filtr_index", "==", "ipdl")
-      .get()
+  // db.collection("product").where("p_Filtr_index", "==", "ipdl")
+  db.collection("product").get()
       .then((querySnapshot) => {
           querySnapshot.forEach((doc) => {
               // doc.data() is never undefined for query doc snapshots
@@ -369,6 +369,9 @@ db.collection("product").where("p_Filtr_index", "==", "ipdl")
               }
               if (cycle_blok_l > 10 && cycle_blok_l <= 15){
                 product_blok_sale_3.prepend(div); // вставить liFirst в начало <ol>
+              }
+              if (cycle_blok_l > 15 && cycle_blok_l <= 20){
+                product_blok_sale_4.prepend(div); // вставить liFirst в начало <ol>
               }
               // console.log("Переполнен список");
           });

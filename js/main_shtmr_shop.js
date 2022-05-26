@@ -27,6 +27,7 @@
 ================================================*/
 // Заполнения shop.html
 /*====================================================*/
+var db = firebase.firestore();
 var email;
 firebase.auth().onAuthStateChanged((user) => {
   if (user) {
@@ -43,12 +44,128 @@ firebase.auth().onAuthStateChanged((user) => {
   }
 });
 // [END auth_state_listener]
+/*====================================================*/
+//Считываем сколько позиций товара надо отображать на странице
+/*====================================================*/
+var page_positions = localStorage.getItem('page_positions');
+if (page_positions === null){
+  page_positions = 12;
+}
+var select = document.getElementById('Ultra');
+var option;
+for (var i=0; i<select.options.length; i++) {
+  option = select.options[i];
+  if (option.value == page_positions) {
+     option.setAttribute('selected', true);
+  }
+}
+/*====================================================*/
+// Устанавливаем сортировку на странице
+/*====================================================*/
+var page_sascending_descending = localStorage.getItem('page_sascending_descending');
+if (page_sascending_descending === null){
+  page_sascending_descending = "Position";
+}
+var select_sascending_descending = document.getElementById('sascending_descending');
+var option_sascending_descending;
+for (var i=0; i<select_sascending_descending.options.length; i++) {
+  option_sascending_descending = select_sascending_descending.options[i];
+  if (option_sascending_descending.value == page_sascending_descending) {
+     option_sascending_descending.setAttribute('selected', true);
+  }
+}
+
+/*====================================================*/
+// Устанавливаем сортировку на странице
+/*====================================================*/
+var number_of_products = 0;
+var list_product = [];
+var selection_criteria = localStorage.getItem('selection_criteria');
+if (selection_criteria === null){
+  db.collection("product").get()
+      .then((querySnapshot) => {
+          querySnapshot.forEach((doc) => {
+              // doc.data() is never undefined for query doc snapshots
+              // console.log(doc.id, " => ", doc.data());
+              var doc_data = doc.data();
+              var p_popularity = doc_data.p_popularity;
+              var p_Title = doc_data.p_Title;
+              var p_price_min = doc_data.p_price_min;
+              // console.log(doc.id, " => ", doc.data());
+              var doc_map = { doc_title: p_Title, doc_popularity: p_popularity, doc_price: p_price_min, doc_id: doc.id, doc_data: doc.data() }
+              list_product.push(doc_map);
+          });
+      })
+      .catch((error) => {
+          console.log("Error getting documents: ", error);
+      }).finally(() => {
+         number_of_products = list_product.length;
+         var number_of_products_text = 'Страница 1 - '+ page_positions +' из '+ number_of_products +'.';
+         document.getElementById("number_of_products_id").innerText = number_of_products_text;
+         console.log(number_of_products);
+         // var mapSort1 = new Map([...list_product.entries()].sort((a, b) => b.doc_popularity - a.doc_popularity));
+         // console.log(mapSort1);
+         var byDate_1 = list_product.slice(0);
+         byDate_1.sort(function(a,b) {
+             return a.doc_price - b.doc_price;
+         });
+         // console.log('by date:');
+         console.log(byDate_1);
+
+
+         var byDate = list_product.slice(0);
+         byDate.sort(function(a,b) {
+             return a.doc_popularity - b.doc_popularity;
+         });
+         // console.log('by date:');
+         console.log(byDate);
+
+         var byName = list_product.slice(0);
+         byName.sort(function(a,b) {
+             var x = a.doc_title.toLowerCase();
+             var y = b.doc_title.toLowerCase();
+             return x < y ? -1 : x > y ? 1 : 0;
+         });
+
+         // console.log('by name:');
+         console.log(byName);
+
+
+      });
+}else{
+  db.collection("product").where("p_Filtr_index", "==", selection_criteria)
+      .get()
+      .then((querySnapshot) => {
+          querySnapshot.forEach((doc) => {
+              // doc.data() is never undefined for query doc snapshots
+              var doc_data = doc.data();
+              var p_popularity = doc_data.p_popularity;
+              var p_Title = doc_data.p_Title;
+              var p_price_min = doc_data.p_price_min;
+              // console.log(doc.id, " => ", doc.data());
+              var doc_map = { doc_title: p_Title, doc_popularity: p_popularity, doc_price: p_price_min, doc_id: doc.id, doc_data: doc.data() }
+              list_product.push(doc_map);
+
+          });
+      })
+      .catch((error) => {
+          console.log("Error getting documents: ", error);
+      }).finally(() => {
+         number_of_products = list_product.length;
+         var number_of_products_text = 'Страница 1 - '+ page_positions +' из '+ number_of_products +'.';
+         document.getElementById("number_of_products_id").innerText = number_of_products_text;
+         console.log(number_of_products);
+      });
+
+}
+
+
+
 
 // Initialize Cloud Firestore and get a reference to the service
 var cycle_blok_shop = 0;
-var db = firebase.firestore();
-db.collection("product").where("p_Filtr_index", "==", "ipdl")
-    .get()
+// db.collection("product").where("p_Filtr_index", "==", "ipdl")
+db.collection("product").get()
     .then((querySnapshot) => {
         querySnapshot.forEach((doc) => {
             // doc.data() is never undefined for query doc snapshots
@@ -98,7 +215,7 @@ db.collection("product").where("p_Filtr_index", "==", "ipdl")
             var div = document.createElement('div');
             div.setAttribute('class', 'single-product');
             div.innerHTML = html;
-            if (cycle_blok_shop > 0 && cycle_blok_shop <= 7){
+            if (cycle_blok_shop > 0 && cycle_blok_shop <= page_positions){
             list_view.prepend(div); // вставить liFirst в начало <ol>
             }
             console.log("Переполнен список");
@@ -139,7 +256,7 @@ db.collection("product").where("p_Filtr_index", "==", "ipdl")
             var div_grid_view = document.createElement('div');
             div_grid_view.setAttribute('class', 'col-lg-4 col-sm-6');
             div_grid_view.innerHTML = html_grid_view;
-            if (cycle_blok_shop > 0 && cycle_blok_shop <= 7){
+            if (cycle_blok_shop > 0 && cycle_blok_shop <= page_positions){
             grid_view.prepend(div_grid_view); // вставить liFirst в начало <ol>
             }
             console.log("Переполнен список");
@@ -171,7 +288,7 @@ db.collection("product_group").get().then((querySnapshot) => {
         var div_category = document.createElement('div');
         div_category.setAttribute('class', 'col-md-12');
         div_category.innerHTML = html_category;
-        if (cycle_blok_shop > 0 && cycle_blok_shop <= 7){
+        if (cycle_category > 0 && cycle_category <= 7){
         list_category.prepend(div_category); // вставить liFirst в начало <ol>
         }
         console.log(doc.id, " => ", doc.data());
@@ -209,7 +326,7 @@ db.collection("manufacturer").get().then((querySnapshot) => {
     });
 });
 /*====================================================*/
-
+// Записываем в localStorage карточку какова продукта открывать.
 /*====================================================*/
 function countRabbits(obj) {
   var h = obj.id;
@@ -359,4 +476,52 @@ function go_wishlist(obj) {
         alert ('Для работы с функцией "ИЗБРАННОЕ" Вам необходимо авторизироваться!');
         window.location.replace("login.html");
       }
+}
+
+/*====================================================*/
+// Записываем в localStorage количество позиций для вывода на странице.
+/*====================================================*/
+function pagePositionsActiv() {
+  page_positions = document.getElementById("Ultra").value;
+  localStorage.setItem('page_positions', page_positions);
+  window.location.replace("shop.html");
+}
+
+/*====================================================*/
+// Выбираем сортировку товаров.
+/*====================================================*/
+function pageSorterActiv() {
+  var page_sorter = document.getElementById("sascending_descending").value;
+  localStorage.setItem('sascending_descending', page_sorter);
+    if(page_sorter === "Position"){
+
+
+      window.location.replace("shop.html");
+    }
+    if(page_sorter === "Product Name"){
+
+
+      window.location.replace("shop.html");
+    }
+    if(page_sorter === "Price"){
+
+
+      window.location.replace("shop.html");
+    }
+
+}
+
+/*====================================================*/
+// Выбираем сортировку ао возрастанию или убыванию.
+/*====================================================*/
+function ascendingDescending() {
+  var page_positions_AD = document.getElementById("ascending_descending");
+  var className = page_positions_AD.className;
+  if(className === "fa fa-arrow-up"){
+    document.getElementById("ascending_descending").className = "fa fa-arrow-down";
+  }
+  if(className === "fa fa-arrow-down"){
+    document.getElementById("ascending_descending").className = "fa fa-arrow-up";
+  }
+
 }
