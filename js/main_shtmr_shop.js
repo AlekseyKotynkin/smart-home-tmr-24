@@ -62,18 +62,31 @@ for (var i=0; i<select.options.length; i++) {
 /*====================================================*/
 // Устанавливаем сортировку на странице
 /*====================================================*/
-var page_sascending_descending = localStorage.getItem('page_sascending_descending');
-if (page_sascending_descending === null){
-  page_sascending_descending = "Position";
+var page_sorter = localStorage.getItem('page_sorter');
+if (page_sorter === null){
+  page_sorter = "Position";
 }
-var select_sascending_descending = document.getElementById('sascending_descending');
-var option_sascending_descending;
-for (var i=0; i<select_sascending_descending.options.length; i++) {
-  option_sascending_descending = select_sascending_descending.options[i];
-  if (option_sascending_descending.value == page_sascending_descending) {
-     option_sascending_descending.setAttribute('selected', true);
+var select_page_sorter = document.getElementById('page_sorter');
+var option_page_sorter;
+for (var i=0; i<select_page_sorter.options.length; i++) {
+  option_page_sorter = select_page_sorter.options[i];
+  if (option_page_sorter.value == page_sorter) {
+     option_page_sorter.setAttribute('selected', true);
   }
 }
+/*====================================================*/
+// Устанавливаем сортировку от убывания к возрастанию или на оборот на странице
+/*====================================================*/
+var className = localStorage.getItem('page_sascending_descending');
+  if (className === null){
+    className = "fa fa-arrow-up";
+  }
+  if(className === "fa fa-arrow-down"){
+
+
+    // document.getElementById("sascending_descending").className = "fa fa-arrow-up";
+  }
+
 
 /*====================================================*/
 // Устанавливаем сортировку на странице
@@ -491,9 +504,10 @@ function pagePositionsActiv() {
 // Выбираем сортировку товаров.
 /*====================================================*/
 function pageSorterActiv() {
-  var page_sorter = document.getElementById("sascending_descending").value;
-  localStorage.setItem('sascending_descending', page_sorter);
+  page_sorter = document.getElementById("page_sorter").value;
+  localStorage.setItem('page_sorter', page_sorter);
     if(page_sorter === "Position"){
+      // window.location.replace("shop.html");
 
 
       window.location.replace("shop.html");
@@ -515,13 +529,13 @@ function pageSorterActiv() {
 // Выбираем сортировку ао возрастанию или убыванию.
 /*====================================================*/
 function ascendingDescending() {
-  var page_positions_AD = document.getElementById("ascending_descending");
-  var className = page_positions_AD.className;
+  var sascending_descending = document.getElementById("sascending_descending");
+  className = sascending_descending.className;
   if(className === "fa fa-arrow-up"){
-    document.getElementById("ascending_descending").className = "fa fa-arrow-down";
+    document.getElementById("sascending_descending").className = "fa fa-arrow-down";
   }
   if(className === "fa fa-arrow-down"){
-    document.getElementById("ascending_descending").className = "fa fa-arrow-up";
+    document.getElementById("sascending_descending").className = "fa fa-arrow-up";
   }
 
 }
