@@ -724,6 +724,41 @@ function searchForYourProduct() {
   // [START auth_state_listener]
 
   alert("работает")
-
   // [END auth_state_listener]
+}
+
+/*====================================================*/
+/** 29.Переход в каталог
+/*====================================================*/
+function openTheCatalog() {
+  localStorage.removeItem('selection_criteria');
+  window.location.replace("shop.html");
+}
+/*====================================================*/
+/** 30. Переход в каталог ИПДЛ
+/*====================================================*/
+function openTheCatalog_IPDL() {
+  localStorage.setItem('selection_criteria', "ipdl");
+  window.location.replace("shop.html");
+}
+/*====================================================*/
+/** 31. Переход в каталог Кожухи casing
+/*====================================================*/
+function openTheCatalog_Casing() {
+  localStorage.setItem('selection_criteria', "casing");
+  window.location.replace("shop.html");
+}
+/*====================================================*/
+/** 32. Переход в каталог Кронштейны bracket
+/*====================================================*/
+function openTheCatalog_Bracket() {
+  localStorage.setItem('selection_criteria', "bracket");
+  window.location.replace("shop.html");
+}
+/*====================================================*/
+/** 33. Переход в каталог Сервисное оборудование service_equipment
+/*====================================================*/
+function openTheCatalog_ServiceEquipment() {
+  localStorage.setItem('selection_criteria', "service_equipment");
+  window.location.replace("shop.html");
 }

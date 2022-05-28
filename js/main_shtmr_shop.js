@@ -25,7 +25,7 @@
  21.Best Seller  Unique Activation
 
 ================================================*/
-// Заполнения shop.html
+// Проверяем авторизирован ли сеанс shop.html
 /*====================================================*/
 var db = firebase.firestore();
 var email;
@@ -44,8 +44,17 @@ firebase.auth().onAuthStateChanged((user) => {
   }
 });
 // [END auth_state_listener]
+
 /*====================================================*/
-//Считываем сколько позиций товара надо отображать на странице
+// Считываем какую страницу надо отображать на экране.
+/*====================================================*/
+var blog_pagination = localStorage.getItem('blog_pagination');
+if (blog_pagination === null){
+  blog_pagination = 1;
+}
+
+/*====================================================*/
+// Считываем сколько позиций товара надо отображать на странице.
 /*====================================================*/
 var page_positions = localStorage.getItem('page_positions');
 if (page_positions === null){
@@ -60,7 +69,7 @@ for (var i=0; i<select.options.length; i++) {
   }
 }
 /*====================================================*/
-// Устанавливаем сортировку на странице
+// Устанавливаем сортировку на странице (рейтинг, наименование, цена)
 /*====================================================*/
 var page_sorter = localStorage.getItem('page_sorter');
 if (page_sorter === null){
@@ -84,12 +93,11 @@ var className = localStorage.getItem('page_sascending_descending');
   if(className === "fa fa-arrow-down"){
 
 
-    // document.getElementById("sascending_descending").className = "fa fa-arrow-up";
   }
 
 
 /*====================================================*/
-// Устанавливаем сортировку на странице
+// Формируем массив полного ассортимента или с отбором по группе
 /*====================================================*/
 var number_of_products = 0;
 var list_product = [];
@@ -104,7 +112,6 @@ if (selection_criteria === null){
               var p_popularity = doc_data.p_popularity;
               var p_Title = doc_data.p_Title;
               var p_price_min = doc_data.p_price_min;
-              // console.log(doc.id, " => ", doc.data());
               var doc_map = { doc_title: p_Title, doc_popularity: p_popularity, doc_price: p_price_min, doc_id: doc.id, doc_data: doc.data() }
               list_product.push(doc_map);
           });
@@ -113,35 +120,88 @@ if (selection_criteria === null){
           console.log("Error getting documents: ", error);
       }).finally(() => {
          number_of_products = list_product.length;
-         var number_of_products_text = 'Страница 1 - '+ page_positions +' из '+ number_of_products +'.';
-         document.getElementById("number_of_products_id").innerText = number_of_products_text;
-         console.log(number_of_products);
-         // var mapSort1 = new Map([...list_product.entries()].sort((a, b) => b.doc_popularity - a.doc_popularity));
-         // console.log(mapSort1);
-         var byDate_1 = list_product.slice(0);
-         byDate_1.sort(function(a,b) {
-             return a.doc_price - b.doc_price;
-         });
-         // console.log('by date:');
-         console.log(byDate_1);
+         // var number_of_products_text = 'Страница 1 - '+ page_positions +' из '+ number_of_products +'.';
+         // document.getElementById("number_of_products_id").innerText = number_of_products_text;
+         if(page_sorter === "Position"){
+           var list_product_popularity = list_product.slice(0);
+           list_product_popularity.sort(function(a,b) {
+               return a.doc_popularity - b.doc_popularity;
+           });
+           list_product = list_product_popularity;
+         }
+         if(page_sorter === "Product Name"){
+           var list_product_title = list_product.slice(0);
+           list_product_title.sort(function(a,b) {
+               var x = a.doc_title.toLowerCase();
+               var y = b.doc_title.toLowerCase();
+               return x < y ? -1 : x > y ? 1 : 0;
+           });
+           list_product = list_product_title;
+         }
+         if(page_sorter === "Price"){
+           var list_product_price = list_product.slice(0);
+           list_product_price.sort(function(a,b) {
+               return a.doc_price - b.doc_price;
+           });
+           list_product = list_product_price;
+         }
+          var k = 0;
+          var l = 0 + page_positions;
+          var list_product_array = [];
+          for (let i = 0; i <= list_product.length - 1; i = i + page_positions) {
+            var list_product_page = list_product.slice(k, l)
+            k = l + 1;
+            l = l + page_positions;
+            list_product_array.push(list_product_page);
+          }
+          var m = list_product_array.length;
+// blog_pagination
+          var number_of_products_text = 'Страница 1 - '+ page_positions +' из '+ number_of_products +'.';
+          document.getElementById("number_of_products_id").innerText = number_of_products_text;
+            // alert("работает");
+          // }
+          var select_blog_pagination = document.getElementById('blog_pagination');
+          var html_blog_pagination = [
+                '<a href="#">'+ blog_pagination +'</a>'
+          ].join('');
+          var div_blog_pagination = document.createElement('li');
+          div_blog_pagination.setAttribute('class', 'active');
+          div_blog_pagination.innerHTML = html_blog_pagination;
+          select_blog_pagination.prepend(div_blog_pagination);
+          // blog_pagination.insertAdjacentHTML('beforebegin', html_blog_pagination);
+          // blog_pagination.insertAdjacentElement('beforebegin', div_blog_pagination)
+          // var select = document.getElementById('Ultra');
+          // var option;
+          // for (var i=0; i<select.options.length; i++) {
+          //   option = select.options[i];
+          //   if (option.value == page_positions) {
+          //      option.setAttribute('selected', true);
+          //   }
+          // }
+          // let liFirst = document.createElement('li');
+          // liFirst.innerHTML = 'prepend';
+          // blog_pagination.prepend(liFirst)
+          // function getListContent() {
+          //   let fragment = new DocumentFragment();
+          //
+          //   for(let i=1; i<=3; i++) {
+          //     let li = document.createElement('li');
+          //     li.append(i);
+          //     fragment.append(li);
+          //   }
+          //
+          //   return fragment;
+          // }
+
+          // blog_pagination.append(getListContent()); // (*)
+          // var select_blog_pagination = document.getElementById('blog_pagination');
+          // var $newLi = document.createElement('li');
+          // $newLi.textContent = 'Фиолетовый';
+          // var $blog_pagination = document.querySelector('#colors');
+          // $blog_pagination.appendChild($newLi);
 
 
-         var byDate = list_product.slice(0);
-         byDate.sort(function(a,b) {
-             return a.doc_popularity - b.doc_popularity;
-         });
-         // console.log('by date:');
-         console.log(byDate);
 
-         var byName = list_product.slice(0);
-         byName.sort(function(a,b) {
-             var x = a.doc_title.toLowerCase();
-             var y = b.doc_title.toLowerCase();
-             return x < y ? -1 : x > y ? 1 : 0;
-         });
-
-         // console.log('by name:');
-         console.log(byName);
 
 
       });
@@ -167,13 +227,15 @@ if (selection_criteria === null){
          number_of_products = list_product.length;
          var number_of_products_text = 'Страница 1 - '+ page_positions +' из '+ number_of_products +'.';
          document.getElementById("number_of_products_id").innerText = number_of_products_text;
-         console.log(number_of_products);
+         // console.log(number_of_products);
       });
 
 }
 
 
-
+/*====================================================*/
+// Отображаем данные из массива на странице shop.html
+/*====================================================*/
 
 // Initialize Cloud Firestore and get a reference to the service
 var cycle_blok_shop = 0;
@@ -182,7 +244,7 @@ db.collection("product").get()
     .then((querySnapshot) => {
         querySnapshot.forEach((doc) => {
             // doc.data() is never undefined for query doc snapshots
-            console.log(doc.id, " => ", doc.data());
+            // console.log(doc.id, " => ", doc.data());
             cycle_blok_shop = cycle_blok_shop + 1;
             var doc_product = doc.data();
             var doc_id = doc.id;
@@ -231,7 +293,7 @@ db.collection("product").get()
             if (cycle_blok_shop > 0 && cycle_blok_shop <= page_positions){
             list_view.prepend(div); // вставить liFirst в начало <ol>
             }
-            console.log("Переполнен список");
+            // console.log("Переполнен список");
             // Заполняем список столбиком
             var html_grid_view = [
               '<div class="single-product">'+
@@ -272,7 +334,7 @@ db.collection("product").get()
             if (cycle_blok_shop > 0 && cycle_blok_shop <= page_positions){
             grid_view.prepend(div_grid_view); // вставить liFirst в начало <ol>
             }
-            console.log("Переполнен список");
+            // console.log("Переполнен список");
 
         });
     })
@@ -282,7 +344,7 @@ db.collection("product").get()
 
 /*====================================================*/
 
-// Заполнения shop.html Категория
+// Заполняем список с левой стороны shop.html Категория
 /*====================================================*/
 // Initialize Cloud Firestore and get a reference to the service
 var cycle_category = 0;
@@ -304,13 +366,13 @@ db.collection("product_group").get().then((querySnapshot) => {
         if (cycle_category > 0 && cycle_category <= 7){
         list_category.prepend(div_category); // вставить liFirst в начало <ol>
         }
-        console.log(doc.id, " => ", doc.data());
+        // console.log(doc.id, " => ", doc.data());
     });
 });
 
 
 /*====================================================*/
-// Заполнения shop.html Производитель
+// Заполняем список с левой стороны shop.html Производитель
 /*====================================================*/
 // Initialize Cloud Firestore and get a reference to the service
 var cycle_manufacturer = 0;
@@ -335,11 +397,11 @@ db.collection("manufacturer").get().then((querySnapshot) => {
         if (cycle_manufacturer > 0 && cycle_manufacturer <= 7){
         list_manufacturer.prepend(div_manufacturer); // вставить liFirst в начало <ol>
         }
-        console.log(doc.id, " => ", doc.data());
+        // console.log(doc.id, " => ", doc.data());
     });
 });
 /*====================================================*/
-// Записываем в localStorage карточку какова продукта открывать.
+// Записываем в localStorage id продукта, карточку какова откроем в product.html.
 /*====================================================*/
 function countRabbits(obj) {
   var h = obj.id;
@@ -397,7 +459,6 @@ function go_cart(obj) {
 }
 
 /*====================================================*/
-/*====================================================*/
 // Добавить позицию в список СРАВНИТЬ
 /*====================================================*/
 function go_compare(obj) {
@@ -410,7 +471,7 @@ function go_compare(obj) {
         .then((querySnapshot) => {
             querySnapshot.forEach((doc) => {
                 // doc.data() is never undefined for query doc snapshots
-                console.log(doc.id, " => ", doc.data());
+                // console.log(doc.id, " => ", doc.data());
                 var doc_compare = doc.data();
                 arrfy_compare = doc_compare.compare;
                 doc_compare_id = doc.id;
@@ -457,7 +518,7 @@ function go_wishlist(obj) {
         .then((querySnapshot) => {
             querySnapshot.forEach((doc) => {
                 // doc.data() is never undefined for query doc snapshots
-                console.log(doc.id, " => ", doc.data());
+                // console.log(doc.id, " => ", doc.data());
                 var doc_wishlist = doc.data();
                 arrfy_wishlist = doc_wishlist.wishlist;
                 doc_wishlist_id = doc.id;
@@ -501,7 +562,7 @@ function pagePositionsActiv() {
 }
 
 /*====================================================*/
-// Выбираем сортировку товаров.
+// Записываем в localStorage сортировку по группам товара для вывода на страницу.
 /*====================================================*/
 function pageSorterActiv() {
   page_sorter = document.getElementById("page_sorter").value;
@@ -526,7 +587,7 @@ function pageSorterActiv() {
 }
 
 /*====================================================*/
-// Выбираем сортировку ао возрастанию или убыванию.
+// Записываем в localStorage сортировку ао возрастанию или убыванию товара для вывода на страницу.
 /*====================================================*/
 function ascendingDescending() {
   var sascending_descending = document.getElementById("sascending_descending");
