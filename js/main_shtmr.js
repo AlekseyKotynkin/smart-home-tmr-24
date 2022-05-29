@@ -64,6 +64,38 @@ db.collection("product").where("p_Filtr_index", "==", "ipdl")
             var p_Title = doc_product.p_Title;
             var p_price_max = doc_product.p_price_max;
             var p_price_min = doc_product.p_price_min;
+            var p_popularity = doc_product.p_popularity;
+            var star_1_W;
+            if(p_popularity >=1){
+              star_1_W = "color: #f9ba48; font-size: 14px; line-height: 20px";
+            } else {
+              star_1_W = "color: ##444";
+            }
+            var star_2_W;
+            if(p_popularity >=2){
+              star_2_W = "color: #f9ba48; font-size: 14px; line-height: 20px";
+            } else {
+              star_2_W = "color: ##444";
+            }
+            var star_3_W;
+            if(p_popularity >=3){
+              star_3_W = "color: #f9ba48; font-size: 14px; line-height: 20px";
+            } else {
+              star_3_W = "color: ##444";
+            }
+            var star_4_W;
+            if(p_popularity >=4){
+              star_4_W = "color: #f9ba48; font-size: 14px; line-height: 20px";
+            } else {
+              star_4_W = "color: ##444";
+            }
+            var star_5_W;
+            if(p_popularity >=5){
+              star_5_W = "color: #f9ba48; font-size: 14px; line-height: 20px";
+            } else {
+              star_5_W = "color: ##444";
+            }
+
             var html = [
                     '<div class="pro-img">'+
                         '<a onclick="countRabbits(this)" id = '+ doc_id +' >'+
@@ -73,11 +105,11 @@ db.collection("product").where("p_Filtr_index", "==", "ipdl")
                     '</div>'+
                     '<div class="pro-content">'+
                         '<div class="product-rating">'+
-                            '<i class="fa fa-star"></i>'+
-                            '<i class="fa fa-star"></i>'+
-                            '<i class="fa fa-star"></i>'+
-                            '<i class="fa fa-star"></i>'+
-                            '<i class="fa fa-star"></i>'+
+                            '<span class="fa fa-star" style="'+ star_1_W +'"></span>'+
+                            '<span class="fa fa-star" style="'+ star_2_W +'"></span>'+
+                            '<span class="fa fa-star" style="'+ star_3_W +'"></span>'+
+                            '<span class="fa fa-star" style="'+ star_4_W +'"></span>'+
+                            '<span class="fa fa-star" style="'+ star_5_W +'"></span>'+
                         '</div>'+
                         '<h4><a onclick="countRabbits(this)" id = '+ doc_id +' href="product.html">'+p_Title+'</a></h4>'+
                         '<p><span class="price">оптовая '+p_price_min+' ₽</span></p>'+
@@ -120,6 +152,37 @@ db.collection("product").where("p_Filtr_index", "==", "ipdl")
                 var p_Title = doc_product.p_Title;
                 var p_price_max = doc_product.p_price_max;
                 var p_price_min = doc_product.p_price_min;
+                var p_popularity = doc_product.p_popularity;
+                var star_1;
+                if(p_popularity >=1){
+                  star_1 = "color: #f9ba48; font-size: 14px; line-height: 20px";
+                } else {
+                  star_1 = "color: ##444";
+                }
+                var star_2;
+                if(p_popularity >=2){
+                  star_2 = "color: #f9ba48; font-size: 14px; line-height: 20px";
+                } else {
+                  star_2 = "color: ##444";
+                }
+                var star_3;
+                if(p_popularity >=3){
+                  star_3 = "color: #f9ba48; font-size: 14px; line-height: 20px";
+                } else {
+                  star_3 = "color: ##444";
+                }
+                var star_4;
+                if(p_popularity >=4){
+                  star_4 = "color: #f9ba48; font-size: 14px; line-height: 20px";
+                } else {
+                  star_4 = "color: ##444";
+                }
+                var star_5;
+                if(p_popularity >=5){
+                  star_5 = "color: #f9ba48; font-size: 14px; line-height: 20px";
+                } else {
+                  star_5 = "color: ##444";
+                }
                 var html = [
                         '<div class="pro-img">'+
                             '<a onclick="countRabbits(this)" id = '+ doc_id +' >'+
@@ -129,11 +192,11 @@ db.collection("product").where("p_Filtr_index", "==", "ipdl")
                         '</div>'+
                         '<div class="pro-content">'+
                             '<div class="product-rating">'+
-                                '<i class="fa fa-star"></i>'+
-                                '<i class="fa fa-star"></i>'+
-                                '<i class="fa fa-star"></i>'+
-                                '<i class="fa fa-star"></i>'+
-                                '<i class="fa fa-star"></i>'+
+                                '<span class="fa fa-star" style="'+ star_1 +'"></span>'+
+                                '<span class="fa fa-star" style="'+ star_2 +'"></span>'+
+                                '<span class="fa fa-star" style="'+ star_3 +'"></span>'+
+                                '<span class="fa fa-star" style="'+ star_4 +'"></span>'+
+                                '<span class="fa fa-star" style="'+ star_5 +'"></span>'+
                             '</div>'+
                             '<h4><a onclick="countRabbits(this)" id = '+ doc_id +' href="product.html">'+p_Title+'</a></h4>'+
                             // '<p><span class="price">'+p_price_min+' ₽</span><del class="prev-price">'+p_price_max+' ₽</del></p>'+
@@ -178,6 +241,38 @@ db.collection("product").where("p_Filtr_index", "==", "ipdl")
                     var p_Title = doc_product.p_Title;
                     var p_price_max = doc_product.p_price_max;
                     var p_price_min = doc_product.p_price_min;
+                    var p_popularity = doc_product.p_popularity;
+                    var star_1_E;
+                    if(p_popularity >=1){
+                      star_1_E = "color: #f9ba48; font-size: 14px; line-height: 20px";
+                    } else {
+                      star_1_E = "color: ##444";
+                    }
+                    var star_2_E;
+                    if(p_popularity >=2){
+                      star_2_E = "color: #f9ba48; font-size: 14px; line-height: 20px";
+                    } else {
+                      star_2_E = "color: ##444";
+                    }
+                    var star_3_E;
+                    if(p_popularity >=3){
+                      star_3_E = "color: #f9ba48; font-size: 14px; line-height: 20px";
+                    } else {
+                      star_3_E = "color: ##444";
+                    }
+                    var star_4_E;
+                    if(p_popularity >=4){
+                      star_4_E = "color: #f9ba48; font-size: 14px; line-height: 20px";
+                    } else {
+                      star_4_E = "color: ##444";
+                    }
+                    var star_5_E;
+                    if(p_popularity >=5){
+                      star_5_E = "color: #f9ba48; font-size: 14px; line-height: 20px";
+                    } else {
+                      star_5_E = "color: ##444";
+                    }
+
                     var html = [
                             '<div class="pro-img">'+
                                 '<a onclick="countRabbits(this)" id = '+ doc_id +' >'+
@@ -187,11 +282,11 @@ db.collection("product").where("p_Filtr_index", "==", "ipdl")
                             '</div>'+
                             '<div class="pro-content">'+
                                 '<div class="product-rating">'+
-                                    '<i class="fa fa-star"></i>'+
-                                    '<i class="fa fa-star"></i>'+
-                                    '<i class="fa fa-star"></i>'+
-                                    '<i class="fa fa-star"></i>'+
-                                    '<i class="fa fa-star"></i>'+
+                                    '<span class="fa fa-star" style="'+ star_1_E +'"></span>'+
+                                    '<span class="fa fa-star" style="'+ star_2_E +'"></span>'+
+                                    '<span class="fa fa-star" style="'+ star_3_E +'"></span>'+
+                                    '<span class="fa fa-star" style="'+ star_4_E +'"></span>'+
+                                    '<span class="fa fa-star" style="'+ star_5_E +'"></span>'+
                                 '</div>'+
                                 '<h4><a onclick="countRabbits(this)" id = '+ doc_id +' href="product.html">'+p_Title+'</a></h4>'+
                                 // '<p><span class="price">'+p_price_min+' ₽</span><del class="prev-price">'+p_price_max+' ₽</del></p>'+
@@ -235,6 +330,38 @@ db.collection("product").where("p_Filtr_index", "==", "ipdl")
                         var p_Title = doc_product.p_Title;
                         var p_price_max = doc_product.p_price_max;
                         var p_price_min = doc_product.p_price_min;
+                        var p_popularity = doc_product.p_popularity;
+                        var star_1_R;
+                        if(p_popularity >=1){
+                          star_1_R = "color: #f9ba48; font-size: 14px; line-height: 20px";
+                        } else {
+                          star_1_R = "color: ##444";
+                        }
+                        var star_2_R;
+                        if(p_popularity >=2){
+                          star_2_R = "color: #f9ba48; font-size: 14px; line-height: 20px";
+                        } else {
+                          star_2_R = "color: ##444";
+                        }
+                        var star_3_R;
+                        if(p_popularity >=3){
+                          star_3_R = "color: #f9ba48; font-size: 14px; line-height: 20px";
+                        } else {
+                          star_3_R = "color: ##444";
+                        }
+                        var star_4_R;
+                        if(p_popularity >=4){
+                          star_4_R = "color: #f9ba48; font-size: 14px; line-height: 20px";
+                        } else {
+                          star_4_R = "color: ##444";
+                        }
+                        var star_5_R;
+                        if(p_popularity >=5){
+                          star_5_R = "color: #f9ba48; font-size: 14px; line-height: 20px";
+                        } else {
+                          star_5_R = "color: ##444";
+                        }
+
                         var html = [
                                 '<div class="pro-img">'+
                                     '<a onclick="countRabbits(this)" id = '+ doc_id +' >'+
@@ -244,11 +371,11 @@ db.collection("product").where("p_Filtr_index", "==", "ipdl")
                                 '</div>'+
                                 '<div class="pro-content">'+
                                     '<div class="product-rating">'+
-                                        '<i class="fa fa-star"></i>'+
-                                        '<i class="fa fa-star"></i>'+
-                                        '<i class="fa fa-star"></i>'+
-                                        '<i class="fa fa-star"></i>'+
-                                        '<i class="fa fa-star"></i>'+
+                                        '<span class="fa fa-star" style="'+ star_1_R +'"></span>'+
+                                        '<span class="fa fa-star" style="'+ star_2_R +'"></span>'+
+                                        '<span class="fa fa-star" style="'+ star_3_R +'"></span>'+
+                                        '<span class="fa fa-star" style="'+ star_4_R +'"></span>'+
+                                        '<span class="fa fa-star" style="'+ star_5_R +'"></span>'+
                                     '</div>'+
                                     '<h4><a onclick="countRabbits(this)" id = '+ doc_id +' href="product.html">'+p_Title+'</a></h4>'+
                                     // '<p><span class="price">'+p_price_min+' ₽</span><del class="prev-price">'+p_price_max+' ₽</del></p>'+
@@ -340,17 +467,49 @@ db.collection("product").where("p_Filtr_index", "==", "ipdl")
               var p_Title = doc_product.p_Title;
               var p_price_max = doc_product.p_price_max;
               var p_price_min = doc_product.p_price_min;
+              var p_popularity = doc_product.p_popularity;
+              var star_1_T;
+              if(p_popularity >=1){
+                star_1_T = "color: #f9ba48; font-size: 14px; line-height: 20px";
+              } else {
+                star_1_T = "color: ##444";
+              }
+              var star_2_T;
+              if(p_popularity >=2){
+                star_2_T = "color: #f9ba48; font-size: 14px; line-height: 20px";
+              } else {
+                star_2_T = "color: ##444";
+              }
+              var star_3_T;
+              if(p_popularity >=3){
+                star_3_T = "color: #f9ba48; font-size: 14px; line-height: 20px";
+              } else {
+                star_3_T = "color: ##444";
+              }
+              var star_4_T;
+              if(p_popularity >=4){
+                star_4_T = "color: #f9ba48; font-size: 14px; line-height: 20px";
+              } else {
+                star_4_T = "color: ##444";
+              }
+              var star_5_T;
+              if(p_popularity >=5){
+                star_5_T = "color: #f9ba48; font-size: 14px; line-height: 20px";
+              } else {
+                star_5_T = "color: ##444";
+              }
+
               var html = [
                       '<div class="pro-img">'+
                           '<a onclick="countRabbits(this)" id = '+ doc_id +' ><img class="img" src='+p_Foto_link+' alt="product-image"></a>'+
                       '</div>'+
                       '<div class="pro-content">'+
                           '<div class="product-rating">'+
-                              '<i class="fa fa-star"></i>'+
-                              '<i class="fa fa-star"></i>'+
-                              '<i class="fa fa-star"></i>'+
-                              '<i class="fa fa-star"></i>'+
-                              '<i class="fa fa-star"></i>'+
+                              '<span class="fa fa-star" style="'+ star_1_T +'"></span>'+
+                              '<span class="fa fa-star" style="'+ star_2_T +'"></span>'+
+                              '<span class="fa fa-star" style="'+ star_3_T +'"></span>'+
+                              '<span class="fa fa-star" style="'+ star_4_T +'"></span>'+
+                              '<span class="fa fa-star" style="'+ star_5_T +'"></span>'+
                           '</div>'+
                           '<h4><a onclick="countRabbits(this)" id = '+ doc_id +' href="product.html">'+p_Title+'</a></h4>'+
                           // '<p><span class="price">'+p_price_min+' ₽</span><del class="prev-price">'+p_price_max+'</del></p>'+

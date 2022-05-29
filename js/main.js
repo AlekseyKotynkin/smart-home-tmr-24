@@ -565,17 +565,17 @@ function authStateListenerGlob() {
     } else {
       // User is signed out
       // ...
-      var html = [
+      var html_w = [
             '<a><i class="fa fa-cog"></i></a>'+
             '<ul class="ht-dropdown">'+
                 '<li><a href="login.html">Вход</a></li>'+
                 '<li><a href="register.html">Регистрация</a></li>'+
             '</ul>'
       ].join('');
-      var div = document.createElement('li');
+      var div_w = document.createElement('li');
       // div.setAttribute('class', 'fa fa-user-circle-o');
-      div.innerHTML = html;
-      active_account.prepend(div); // вставить liFirst в начало <ol>
+      div_w.innerHTML = html_w;
+      active_account.prepend(div_w); // вставить liFirst в начало <ol>
     }
   });
   // [END auth_state_listener]

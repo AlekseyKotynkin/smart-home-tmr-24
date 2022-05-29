@@ -25,28 +25,23 @@
  21.Best Seller  Unique Activation
 
 ================================================*/
-// Проверяем авторизирован ли сеанс shop.html
+// Глобальные переменные на странице shop.html
 /*====================================================*/
 var db = firebase.firestore();
 var email;
 var list_product_array = [];
-
+/*====================================================*/
+// Проверяем авторизирован ли сеанс shop.html
+/*====================================================*/
 firebase.auth().onAuthStateChanged((user) => {
   if (user) {
-    // User is signed in, see docs for a list of available properties
-    // https://firebase.google.com/docs/reference/js/firebase.User
     var uid = user.uid;
     var displayName = user.displayName;
     email = user.email;
-    // ...
   } else {
-    // User is signed out
-    // ...
     email = "";
   }
 });
-// [END auth_state_listener]
-
 /*====================================================*/
 // Считываем какую страницу надо отображать на экране.
 /*====================================================*/
@@ -54,7 +49,6 @@ var number_page = localStorage.getItem('page_numerList');
 if (number_page === null){
   number_page = 1;
 }
-
 /*====================================================*/
 // Считываем сколько позиций товара надо отображать на странице.
 /*====================================================*/
@@ -94,9 +88,7 @@ var className = localStorage.getItem('page_sascending_descending');
   }
   if(className === "fa fa-arrow-up"){
     document.getElementById("sascending_descending").className = "fa fa-arrow-up";
-
   }
-
 /*====================================================*/
 // Формируем массив полного ассортимента или с отбором по группе
 /*====================================================*/
@@ -107,8 +99,6 @@ if (selection_criteria === null){
   db.collection("product").get()
       .then((querySnapshot) => {
           querySnapshot.forEach((doc) => {
-              // doc.data() is never undefined for query doc snapshots
-              // console.log(doc.id, " => ", doc.data());
               var doc_data = doc.data();
               var p_popularity = doc_data.p_popularity;
               var p_Title = doc_data.p_Title;
@@ -127,15 +117,12 @@ if (selection_criteria === null){
       .get()
       .then((querySnapshot) => {
           querySnapshot.forEach((doc) => {
-              // doc.data() is never undefined for query doc snapshots
               var doc_data = doc.data();
               var p_popularity = doc_data.p_popularity;
               var p_Title = doc_data.p_Title;
               var p_price_min = doc_data.p_price_min;
-              // console.log(doc.id, " => ", doc.data());
               var doc_map = { doc_title: p_Title, doc_popularity: p_popularity, doc_price: p_price_min, doc_id: doc.id, doc_data: doc.data() }
               list_product.push(doc_map);
-
           });
       })
       .catch((error) => {
@@ -143,50 +130,79 @@ if (selection_criteria === null){
       }).finally(() => {
          processingTheArray();
       });
-
 }
-
 /*====================================================*/
 // Обрабатываем массив.
 /*====================================================*/
 function processingTheArray() {
   number_of_products = list_product.length;
-  // var number_of_products_text = 'Страница 1 - '+ page_positions +' из '+ number_of_products +'.';
-  // document.getElementById("number_of_products_id").innerText = number_of_products_text;
-  if(page_sorter === "Position"){
-    var list_product_popularity = list_product.slice(0);
-    list_product_popularity.sort(function(a,b) {
-        return a.doc_popularity - b.doc_popularity;
-    });
-    list_product = list_product_popularity;
-  }
-  if(page_sorter === "Product Name"){
-    var list_product_title = list_product.slice(0);
-    list_product_title.sort(function(a,b) {
-        var x = a.doc_title.toLowerCase();
-        var y = b.doc_title.toLowerCase();
-        return x < y ? -1 : x > y ? 1 : 0;
-    });
-    list_product = list_product_title;
-  }
-  if(page_sorter === "Price"){
-    var list_product_price = list_product.slice(0);
-    list_product_price.sort(function(a,b) {
-        return a.doc_price - b.doc_price;
-    });
-    list_product = list_product_price;
+  var list_product_w = [];
+  list_product_array = [];
+  if(className === "fa fa-arrow-down"){
+    if(page_sorter === "Position"){
+      var list_product_popularity = list_product.slice(0);
+      list_product_popularity.sort(function(a,b) {
+          return a.doc_popularity - b.doc_popularity;
+      });
+      list_product_w = list_product_popularity;
+    }
+    if(page_sorter === "Product Name"){
+      var list_product_title = list_product.slice(0);
+      list_product_title.sort(function(a,b) {
+          var x = a.doc_title.toLowerCase();
+          var y = b.doc_title.toLowerCase();
+          return x < y ? -1 : x > y ? 1 : 0;
+      });
+      list_product_w = list_product_title;
+    }
+    if(page_sorter === "Price"){
+      var list_product_price = list_product.slice(0);
+      list_product_price.sort(function(a,b) {
+          return a.doc_price - b.doc_price;
+      });
+      list_product_w = list_product_price;
+    }
+
+  } else {
+    if(page_sorter === "Position"){
+      var list_product_popularity_1 = list_product.slice(0);
+      list_product_popularity_1.sort(function(a,b) {
+          return b.doc_popularity - a.doc_popularity;
+      });
+      list_product_w = list_product_popularity_1;
+    }
+    if(page_sorter === "Product Name"){
+      var list_product_title_1 = list_product.slice(0);
+      list_product_title_1.sort(function(a,b) {
+          var x = b.doc_title.toLowerCase();
+          var y = a.doc_title.toLowerCase();
+          return x < y ? -1 : x > y ? 1 : 0;
+      });
+      list_product_w = list_product_title_1;
+    }
+    if(page_sorter === "Price"){
+      var list_product_price_1 = list_product.slice(0);
+      list_product_price_1.sort(function(a,b) {
+          return b.doc_price - a.doc_price;
+      });
+      list_product_w = list_product_price_1;
+    }
   }
    var k = 0;
    var l = 0 + parseInt(page_positions);
-   // var list_product_array = [];
-   for (let i = 0; i <= list_product.length - 1; i = i + page_positions) {
-     var list_product_page = list_product.slice(k, l)
+   for (let i = 0; i <= list_product_w.length - 1; i = i + page_positions) {
+     var list_product_page = list_product_w.slice(k, l)
      k = parseInt(l);
      l = parseInt(l) + parseInt(page_positions);
      list_product_array.push(list_product_page);
    }
    var m = list_product_array.length;
-
+    if(m < number_page){
+      number_page = 1;
+      localStorage.setItem('page_numerList', number_page);
+    }
+   var parent = document.getElementById("blog_pagination");
+   parent.replaceChildren();
    for (let i = 1; i <= m; i++) { // выведет 0, затем 1, затем 2
      var select_blog_pagination = document.getElementById('blog_pagination');
      var html_blog_pagination = [
@@ -231,15 +247,17 @@ function processingTheArray() {
    document.getElementById("number_of_products_id").innerText = number_of_products_text;
    displayThePage();
 }
-
 /*====================================================*/
 // Отображаем данные из массива на странице shop.html
 /*====================================================*/
-
 function displayThePage(){
-var p = parseInt(number_page) - 1;
-var display_the_page_map = list_product_array[p];
-display_the_page_map.forEach((doc_page) => {
+    var parent_list_view = document.getElementById("list_view");
+    parent_list_view.replaceChildren();
+    var parent_grid_view_w = document.getElementById("grid_view_w");
+    parent_grid_view_w.replaceChildren();
+    var p = parseInt(number_page) - 1;
+    var display_the_page_map = list_product_array[p];
+    display_the_page_map.forEach((doc_page) => {
     var doc_product = doc_page.doc_data;
     var doc_id = doc_page.doc_id;
     var p_Foto_link = doc_product.p_Foto_link;
@@ -247,6 +265,37 @@ display_the_page_map.forEach((doc_page) => {
     var p_price_max = doc_product.p_price_max;
     var p_price_min = doc_product.p_price_min;
     var p_comment = doc_product.p_comment;
+    var p_popularity = doc_product.p_popularity;
+    var star_1;
+    if(p_popularity >=1){
+      star_1 = "color: #f9ba48; font-size: 14px; line-height: 20px";
+    } else {
+      star_1 = "color: ##444";
+    }
+    var star_2;
+    if(p_popularity >=2){
+      star_2 = "color: #f9ba48; font-size: 14px; line-height: 20px";
+    } else {
+      star_2 = "color: ##444";
+    }
+    var star_3;
+    if(p_popularity >=3){
+      star_3 = "color: #f9ba48; font-size: 14px; line-height: 20px";
+    } else {
+      star_3 = "color: ##444";
+    }
+    var star_4;
+    if(p_popularity >=4){
+      star_4 = "color: #f9ba48; font-size: 14px; line-height: 20px";
+    } else {
+      star_4 = "color: ##444";
+    }
+    var star_5;
+    if(p_popularity >=5){
+      star_5 = "color: #f9ba48; font-size: 14px; line-height: 20px";
+    } else {
+      star_5 = "color: ##444";
+    }
     // Заполняем список таблицей
     var html = [
       '<div class="pro-img">'+
@@ -258,11 +307,11 @@ display_the_page_map.forEach((doc_page) => {
       '</div>'+
       '<div class="pro-content">'+
           '<div class="product-rating">'+
-              '<i class="fa fa-star"></i>'+
-              '<i class="fa fa-star"></i>'+
-              '<i class="fa fa-star"></i>'+
-              '<i class="fa fa-star"></i>'+
-              '<i class="fa fa-star"></i>'+
+              '<span class="fa fa-star" style="'+ star_1 +'"></span>'+
+              '<span class="fa fa-star" style="'+ star_2 +'"></span>'+
+              '<span class="fa fa-star" style="'+ star_3 +'"></span>'+
+              '<span class="fa fa-star" style="'+ star_4 +'"></span>'+
+              '<span class="fa fa-star" style="'+ star_5 +'"></span>'+
           '</div>'+
           '<h4><a onclick="countRabbits(this)" id = '+ doc_id +' href="product.html">'+p_Title+'</a></h4>'+
           '<p><span class="price">оптовая '+p_price_min+' ₽</span><span class="prev-price">розничная '+p_price_max+' ₽</span></p>'+
@@ -299,11 +348,11 @@ display_the_page_map.forEach((doc_page) => {
           '</div>'+
           '<div class="pro-content">'+
               '<div class="product-rating">'+
-                  '<i class="fa fa-star"></i>'+
-                  '<i class="fa fa-star"></i>'+
-                  '<i class="fa fa-star"></i>'+
-                  '<i class="fa fa-star"></i>'+
-                  '<i class="fa fa-star"></i>'+
+                  '<span class="fa fa-star" style="'+ star_1 +'"></span>'+
+                  '<span class="fa fa-star" style="'+ star_2 +'"></span>'+
+                  '<span class="fa fa-star" style="'+ star_3 +'"></span>'+
+                  '<span class="fa fa-star" style="'+ star_4 +'"></span>'+
+                  '<span class="fa fa-star" style="'+ star_5 +'"></span>'+
               '</div>'+
               '<h4><a onclick="countRabbits(this)" id = '+ doc_id +' href="product.html">'+p_Title+'</a></h4>'+
               // '<p><span class="price">'+p_price_min+' ₽</span><del class="prev-price">'+p_price_max+' ₽</del></p>'+
@@ -325,21 +374,12 @@ display_the_page_map.forEach((doc_page) => {
     var div_grid_view = document.createElement('div');
     div_grid_view.setAttribute('class', 'col-lg-4 col-sm-6');
     div_grid_view.innerHTML = html_grid_view;
-    // if (cycle_blok_shop > 0 && cycle_blok_shop <= page_positions){
-    grid_view.prepend(div_grid_view); // вставить liFirst в начало <ol>
-    // }
-    // console.log("Переполнен список");
-
+    grid_view_w.prepend(div_grid_view); // вставить liFirst в начало <ol>
     });
-    // })
-    // .catch((error) => {
-    //     console.log("Error getting documents: ", error);
-    // });
-  }
+}
 /*====================================================*/
 // Заполняем список с левой стороны shop.html Категория
 /*====================================================*/
-// Initialize Cloud Firestore and get a reference to the service
 var cycle_category = 0;
 db.collection("product_group").get().then((querySnapshot) => {
     querySnapshot.forEach((doc) => {
@@ -555,16 +595,14 @@ function go_wishlist(obj) {
         window.location.replace("login.html");
       }
 }
-
 /*====================================================*/
 // Записываем в localStorage количество позиций для вывода на странице.
 /*====================================================*/
 function pagePositionsActiv() {
   page_positions = document.getElementById("Ultra").value;
   localStorage.setItem('page_positions', page_positions);
-  window.location.replace("shop.html");
+  processingTheArray();
 }
-
 /*====================================================*/
 // Записываем в localStorage сортировку по группам товара для вывода на страницу.
 /*====================================================*/
@@ -572,24 +610,15 @@ function pageSorterActiv() {
   page_sorter = document.getElementById("page_sorter").value;
   localStorage.setItem('page_sorter', page_sorter);
     if(page_sorter === "Position"){
-      // window.location.replace("shop.html");
-
-
-      window.location.replace("shop.html");
+      processingTheArray();
     }
     if(page_sorter === "Product Name"){
-
-
-      window.location.replace("shop.html");
+      processingTheArray();
     }
     if(page_sorter === "Price"){
-
-
-      window.location.replace("shop.html");
+      processingTheArray();
     }
-
 }
-
 /*====================================================*/
 // Записываем в localStorage сортировку ао возрастанию или убыванию товара для вывода на страницу.
 /*====================================================*/
@@ -599,38 +628,35 @@ function ascendingDescending() {
   if(className === "fa fa-arrow-up"){
     localStorage.setItem('page_sascending_descending', "fa fa-arrow-down");
     document.getElementById("sascending_descending").className = "fa fa-arrow-down";
+    processingTheArray();
   }
   if(className === "fa fa-arrow-down"){
     localStorage.setItem('page_sascending_descending', "fa fa-arrow-up");
     document.getElementById("sascending_descending").className = "fa fa-arrow-up";
+    processingTheArray();
   }
-
 }
-
 /*====================================================*/
 // Записываем в localStorage номер страницы для отображения.
 /*====================================================*/
 function openPageNumber(obj) {
   number_page = obj.innerHTML;
-  alert(number_page);
   localStorage.setItem('page_numerList', number_page);
-
+  processingTheArray();
 }
 /*====================================================*/
 // Уменьшить на одну позицию номер страницы для отображения и в в localStorage.
 /*====================================================*/
 function openPageNumber_minus() {
   number_page = parseInt(number_page) - 1;
-  alert(number_page);
   localStorage.setItem('page_numerList', number_page);
-
+  processingTheArray();
 }
 /*====================================================*/
 // Увеличить на одну позицию номер страницы для отображения и в в localStorage.
 /*====================================================*/
 function openPageNumber_plus() {
   number_page = parseInt(number_page) + 1;
-  alert(number_page);
   localStorage.setItem('page_numerList', number_page);
-
+  processingTheArray();
 }
