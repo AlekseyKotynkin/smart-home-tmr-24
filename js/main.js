@@ -303,29 +303,29 @@ $('.brand-banner').on('changed.owl.carousel initialized.owl.carousel', function 
         }
     })
 
-    /*----------------------------------------------------
-    11. Blog Activation
-    -----------------------------------------------------*/
-    $('.blog-active').owlCarousel({
-        loop: false,
-        nav: true,
-        dots: false,
-        smartSpeed: 1000,
-        navText: ["<i class='fa fa-angle-left'></i>", "<i class='fa fa-angle-right'></i>"],
-        margin: 30,
-        responsive: {
-            0: {
-                items: 1,
-                autoplay:true
-            },
-            768: {
-                items: 2
-            },
-            1000: {
-                items: 3
-            }
-        }
-    })
+    // /*----------------------------------------------------
+    // 11. Blog Activation
+    // -----------------------------------------------------*/
+    // $('.blog-active').owlCarousel({
+    //     loop: false,
+    //     nav: true,
+    //     dots: false,
+    //     smartSpeed: 1000,
+    //     navText: ["<i class='fa fa-angle-left'></i>", "<i class='fa fa-angle-right'></i>"],
+    //     margin: 30,
+    //     responsive: {
+    //         0: {
+    //             items: 1,
+    //             autoplay:true
+    //         },
+    //         768: {
+    //             items: 2
+    //         },
+    //         1000: {
+    //             items: 3
+    //         }
+    //     }
+    // })
     /*----------------------------------------------------
     12. Blog two Activation
     -----------------------------------------------------*/

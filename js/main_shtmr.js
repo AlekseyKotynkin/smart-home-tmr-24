@@ -29,7 +29,7 @@
 /*====================================================*/
 var email;
 var cycle_blok_product = 0;
-
+var list_bd = [];
 firebase.auth().onAuthStateChanged((user) => {
   if (user) {
     // User is signed in, see docs for a list of available properties
@@ -723,4 +723,120 @@ function go_wishlist(obj) {
         alert ('Для работы с функцией "ИЗБРАННОЕ" Вам необходимо авторизироваться!');
         window.location.replace("login.html");
       }
+}
+
+/*====================================================*/
+// Добавить позицию в блок НОВОСТЕЙ
+/*====================================================*/
+db.collection("blog_details")
+    // .where("capital", "==", true)
+    .get()
+    .then((querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+            // doc.data() is never undefined for query doc snapshots
+            console.log(doc.id, " => ", doc.data());
+            var doc_data = doc.data();
+            var bd_date = doc_data.bd_date;
+            var doc_map = { bd_date: bd_date, doc_id: doc.id, doc_data: doc.data() }
+            list_bd.push(doc_map);
+        });
+    })
+    .catch((error) => {
+        console.log("Error getting documents: ", error);
+    }).finally(() => {
+      // use slice() to copy the array and not just make a reference
+      var byDate = list_bd.slice(0);
+      byDate.sort(function(a,b) {
+          return a.bd_date - b.bd_date;
+      });
+      byDate.forEach((doc_page) => {
+      var doc_bd = doc_page.doc_data;
+      var doc_id = doc_page.doc_id;
+      var bd_date = doc_bd.bd_date;
+      var bd_picture = doc_bd.bd_picture;
+      var bd_picture_big = doc_bd.bd_picture_big;
+      var bd_text_litl = doc_bd.bd_text_litl;
+      var bd_text = doc_bd.bd_text;
+      var bd_text_big = doc_bd.bd_text_big;
+      var bd_title = doc_bd.bd_title;
+      var fireBaseTime = new Date(
+        bd_date.seconds * 1000 + bd_date.nanoseconds / 1000000,
+      );
+      var y=fireBaseTime.getFullYear();
+      var d=fireBaseTime.getDate();
+      var mon=fireBaseTime.getMonth();
+      switch (mon)
+      {
+        case 0: s="января"; break;
+        case 1: s="февраля"; break;
+        case 2: s="марта"; break;
+        case 3: s="апреля"; break;
+        case 4: s="мае"; break;
+        case 5: s="июня"; break;
+        case 6: s="июля"; break;
+        case 7: s="августа"; break;
+        case 8: s="сентября"; break;
+        case 9: s="октября"; break;
+        case 10: s="ноября"; break;
+        case 11: s="декабря"; break;
+      }
+      var bd_date_text =d+" "+s+" "+y;
+      // Заполняем список таблицей
+      var html_blog = [
+            '<div class="blog-img">'+
+                '<a href="blog-details.html" id = "'+ doc_id +'" onclick="openBlogDetails(this)" ><img src="'+ bd_picture +'" alt="blog-image"></a>'+
+            '</div>'+
+            '<div class="blog-content">'+
+                    '<h4 class="blog-title"><a href="blog-details.html" id = "'+ doc_id +'" onclick="openBlogDetails(this)" >'+ bd_text +'</a></h4>'+
+                '<div class="blog-meta">'+
+                    '<ul>'+
+                        '<li><span>Дата: </span> <a>'+ bd_date_text +'</a></li>'+
+                    '</ul>'+
+                '</div>'+
+                '<div class="readmore">'+
+                    '<a href="blog-details.html" id = "'+ doc_id +'" onclick="openBlogDetails(this)" >'+ bd_text_litl +'.....</a>'+
+                '</div>'+
+            '</div>'
+      ].join('');
+      var div_blog = document.createElement('div');
+      div_blog.setAttribute('class', 'single-blog');
+      div_blog.innerHTML = html_blog;
+      blog_details.prepend(div_blog); // вставить liFirst в начало <ol>
+      });
+    activBlogDetails();
+  });
+
+/*====================================================*/
+// Переход на позицию в блок ДЕТАЛЬНЫХ НОВОСТЕЙ blog-details.html
+/*====================================================*/
+function openBlogDetails(obj) {
+  var h = obj.id;
+  localStorage.setItem('blog_id', h);
+  window.location.replace("blog-details.html");
+}
+
+/*====================================================*/
+// Активировать нижнюю часть экрана с НОВОСТНЫМ блоком
+/*====================================================*/
+function activBlogDetails() {
+  $('.blog-active').owlCarousel({
+      loop: false,
+      nav: true,
+      dots: false,
+      smartSpeed: 1000,
+      navText: ["<i class='fa fa-angle-left'></i>", "<i class='fa fa-angle-right'></i>"],
+      margin: 30,
+      responsive: {
+          0: {
+              items: 1,
+              autoplay:true
+          },
+          768: {
+              items: 2
+          },
+          1000: {
+              items: 3
+          }
+      }
+  })
 }
