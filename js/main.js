@@ -475,33 +475,33 @@ $('.brand-banner').on('changed.owl.carousel initialized.owl.carousel', function 
     /*-------------------------------------
     20. Blog Realted Post activation
     --------------------------------------*/
-    $('.blog-related-post-active').owlCarousel({
-        loop: false,
-        margin: 30,
-        smartSpeed: 1000,
-        nav: false,
-        dots: false,
-        items: 2,
-        responsive: {
-            0: {
-                items: 1,
-                autoplay:true
-            },
-            480: {
-                items: 1
-            },
-            768: {
-                items: 2
-            },
-            992:{
-                margin: 29,
-                items: 2
-            },
-            1200: {
-                items: 2
-            }
-        }
-    })
+    // $('.blog-related-post-active').owlCarousel({
+    //     loop: false,
+    //     margin: 30,
+    //     smartSpeed: 1000,
+    //     nav: false,
+    //     dots: false,
+    //     items: 2,
+    //     responsive: {
+    //         0: {
+    //             items: 1,
+    //             autoplay:true
+    //         },
+    //         480: {
+    //             items: 1
+    //         },
+    //         768: {
+    //             items: 2
+    //         },
+    //         992:{
+    //             margin: 29,
+    //             items: 2
+    //         },
+    //         1200: {
+    //             items: 2
+    //         }
+    //     }
+    // })
 
     /*----------------------------------------------------
     21.Best Seller  Unique Activation

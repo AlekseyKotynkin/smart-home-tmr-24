@@ -59,7 +59,8 @@ var docRef = db.collection("blog_details").doc(blog_id);
 docRef.get().then((doc) => {
     if (doc.exists) {
         console.log("Document data:", doc.data());
-        var doc_bd = doc_page.doc_data;
+
+        var doc_bd = doc.data();
         var doc_id = blog_id;
         var bd_date = doc_bd.bd_date;
         var bd_picture = doc_bd.bd_picture;
@@ -93,7 +94,7 @@ docRef.get().then((doc) => {
         // Заполняем список таблицей
         var html_blog = [
           '<div class="blog-img">'+
-              '<img src="img/blog/details.jpg" alt="blog-image">'+
+              '<img src="'+ bd_picture_big +'" alt="blog-image">'+
           '</div>'+
           '<div class="blog-content">'+
               '<h1>Lorem ipsum dolor sit amet, consectl adip elit, sed do eiusmod tempor</h1>'+
@@ -225,7 +226,7 @@ db.collection("blog_details")
           case 1: s="февраля"; break;
           case 2: s="марта"; break;
           case 3: s="апреля"; break;
-          case 4: s="мае"; break;
+          case 4: s="мая"; break;
           case 5: s="июня"; break;
           case 6: s="июля"; break;
           case 7: s="августа"; break;
@@ -257,7 +258,7 @@ db.collection("blog_details")
         div_blog.innerHTML = html_blog;
         blog_details.prepend(div_blog); // вставить liFirst в начало <ol>
         });
-      // activBlogDetails();
+      activBlogDetails();
     });
 
 
@@ -273,25 +274,32 @@ function openBlogDetails(obj) {
 /*====================================================*/
 // Активировать нижнюю часть экрана с НОВОСТНЫМ блоком
 /*====================================================*/
-// function activBlogDetails() {
-//   $('.blog-active').owlCarousel({
-//       loop: false,
-//       nav: true,
-//       dots: false,
-//       smartSpeed: 1000,
-//       navText: ["<i class='fa fa-angle-left'></i>", "<i class='fa fa-angle-right'></i>"],
-//       margin: 30,
-//       responsive: {
-//           0: {
-//               items: 1,
-//               autoplay:true
-//           },
-//           768: {
-//               items: 2
-//           },
-//           1000: {
-//               items: 3
-//           }
-//       }
-//   })
-// }
+function activBlogDetails() {
+  $('.blog-related-post-active').owlCarousel({
+      loop: false,
+      margin: 30,
+      smartSpeed: 1000,
+      nav: false,
+      dots: false,
+      items: 2,
+      responsive: {
+          0: {
+              items: 1,
+              autoplay:true
+          },
+          480: {
+              items: 1
+          },
+          768: {
+              items: 2
+          },
+          992:{
+              margin: 29,
+              items: 2
+          },
+          1200: {
+              items: 2
+          }
+      }
+  })
+}
