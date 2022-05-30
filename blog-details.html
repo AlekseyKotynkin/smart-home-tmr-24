@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Blog Details || Страж </title>
+    <title>Статья || Страж </title>
     <meta name="description" content="Default Description">
     <meta name="keywords" content="E-commerce" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -49,7 +49,6 @@
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-functions.js"></script>
     <!-- init-firebase js -->
     <script src="js/init-firebase.js"></script>
-
 </head>
 
 <body>
@@ -300,7 +299,7 @@
                     <ul>
                         <li><a href="index.html">Главная</a></li>
                         <li><a href="blog.html">Новости</a></li>
-                        <li class="active"><a href="blog-details.html">Single Blog</a></li>
+                        <li class="active"><a href="blog-details.html">Статья</a></li>
                     </ul>
                 </div>
             </div>
@@ -314,7 +313,7 @@
                     <!-- Main Blog Start -->
                     <div class="col-lg-8">
                         <!-- Blog Details Start -->
-                        <div class="blog-details">
+                        <div id="blog_details_news" class="blog-details">
                             <div class="blog-img">
                                 <img src="img/blog/details.jpg" alt="blog-image">
                             </div>
@@ -385,7 +384,7 @@
                         <!-- Blog Realated Post Start -->
                         <div class="blog-related-post recent-post mtb-50">
                             <h3 class="sidebar-title">related blog post</h3>
-                            <div class="blog-related-post-active owl-carousel">
+                            <div id="blog_details" class="blog-related-post-active owl-carousel">
                                 <!-- Single Blog Start -->
                                 <div class="single-blog">
                                     <div class="blog-img">
@@ -406,7 +405,7 @@
                                 </div>
                                 <!-- Single Blog End -->
                                 <!-- Single Blog Start -->
-                                <div class="single-blog">
+                                <!-- <div class="single-blog">
                                     <div class="blog-img">
                                         <a href="blog-details.html"><img src="https://firebasestorage.googleapis.com/v0/b/smart-home-tmr-24.appspot.com/o/blog_news%2F%D0%BA%D0%BE%D0%BD%D1%86%D0%B5%D1%80%D1%82%D0%BD%D1%8B%D0%B9%20%D0%B7%D0%B0%D0%BB%20370%D1%85240.jpg?alt=media&token=1ef59f8b-0742-483a-8d1b-4174542d73c3" alt="blog-image"></a>
                                     </div>
@@ -422,10 +421,10 @@
                                             <a href="blog-details.html">Read More.....</a>
                                         </div>
                                     </div>
-                                </div>
+                                </div> -->
                                 <!-- Single Blog End -->
                                 <!-- Single Blog Start -->
-                                <div class="single-blog">
+                                <!-- <div class="single-blog">
                                     <div class="blog-img">
                                         <a href="blog-details.html"><img src="https://firebasestorage.googleapis.com/v0/b/smart-home-tmr-24.appspot.com/o/blog_news%2F%D1%81%D0%BA%D0%BB%D0%B0%D0%B4%20370%D1%85240.jpg?alt=media&token=e204c4da-3c3c-4618-8a26-d2c22be0ce8c" alt="blog-image"></a>
                                     </div>
@@ -441,10 +440,10 @@
                                             <a href="blog-details.html">Read More.....</a>
                                         </div>
                                     </div>
-                                </div>
+                                </div> -->
                                 <!-- Single Blog End -->
                                 <!-- Single Blog Start -->
-                                <div class="single-blog">
+                                <!-- <div class="single-blog">
                                     <div class="blog-img">
                                         <a href="blog-details.html"><img src="https://firebasestorage.googleapis.com/v0/b/smart-home-tmr-24.appspot.com/o/blog_news%2F%D0%A5%D0%BE%D0%BB%D0%BB%20%D0%90%D1%8D%D1%80%D0%BE%D0%BF%D0%BE%D1%80%D1%82%D0%B0%20370%D1%85240.jpg?alt=media&token=4623c58e-74cc-42d9-bce6-6e3094114d63" alt="blog-image"></a>
                                     </div>
@@ -460,10 +459,10 @@
                                             <a href="blog-details.html">Read More.....</a>
                                         </div>
                                     </div>
-                                </div>
+                                </div> -->
                                 <!-- Single Blog End -->
                                 <!-- Single Blog Start -->
-                                <div class="single-blog">
+                                <!-- <div class="single-blog">
                                     <div class="blog-img">
                                         <a href="blog-details.html"><img src="https://firebasestorage.googleapis.com/v0/b/smart-home-tmr-24.appspot.com/o/blog_news%2F%D0%BA%D0%BE%D0%BD%D1%86%D0%B5%D1%80%D1%82%D0%BD%D1%8B%D0%B9%20%D0%B7%D0%B0%D0%BB%20370%D1%85240.jpg?alt=media&token=1ef59f8b-0742-483a-8d1b-4174542d73c3" alt="blog-image"></a>
                                     </div>
@@ -479,10 +478,10 @@
                                             <a href="blog-details.html">Read More.....</a>
                                         </div>
                                     </div>
-                                </div>
+                                </div> -->
                                 <!-- Single Blog End -->
                                 <!-- Single Blog Start -->
-                                <div class="single-blog">
+                                <!-- <div class="single-blog">
                                     <div class="blog-img">
                                         <a href="blog-details.html"><img src="https://firebasestorage.googleapis.com/v0/b/smart-home-tmr-24.appspot.com/o/blog_news%2F%D1%81%D0%BA%D0%BB%D0%B0%D0%B4%20370%D1%85240.jpg?alt=media&token=e204c4da-3c3c-4618-8a26-d2c22be0ce8c" alt="blog-image"></a>
                                     </div>
@@ -498,7 +497,7 @@
                                             <a href="blog-details.html">Read More.....</a>
                                         </div>
                                     </div>
-                                </div>
+                                </div> -->
                                 <!-- Single Blog End -->
                             </div>
                         </div>
@@ -842,6 +841,8 @@
         <!-- Footer End -->
     </div>
     <!-- Wrapper End -->
+    <!-- main_shtmr js -->
+    <script src="js/main_shtmr_blog_details.js"></script>
     <!-- jquery 3.12.4 -->
     <script src="js/vendor/jquery-1.12.4.min.js"></script>
     <!-- mobile menu js  -->

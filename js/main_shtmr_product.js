@@ -43,6 +43,11 @@ firebase.auth().onAuthStateChanged((user) => {
 // Initialize Cloud Firestore and get a reference to the service
 var db = firebase.firestore();
 product_id = localStorage.getItem('product_id');
+if (number_page === null){
+  number_page = 1;
+}
+
+
 var docRef = db.collection("product").doc(product_id);
 docRef.get().then((doc) => {
     if (doc.exists) {
