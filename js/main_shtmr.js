@@ -759,6 +759,7 @@ db.collection("blog_details")
       var bd_text = doc_bd.bd_text;
       var bd_text_big = doc_bd.bd_text_big;
       var bd_title = doc_bd.bd_title;
+      var bd_author = doc_bd.bd_author;
       var fireBaseTime = new Date(
         bd_date.seconds * 1000 + bd_date.nanoseconds / 1000000,
       );
@@ -771,7 +772,7 @@ db.collection("blog_details")
         case 1: s="февраля"; break;
         case 2: s="марта"; break;
         case 3: s="апреля"; break;
-        case 4: s="мае"; break;
+        case 4: s="мая"; break;
         case 5: s="июня"; break;
         case 6: s="июля"; break;
         case 7: s="августа"; break;
@@ -787,14 +788,14 @@ db.collection("blog_details")
                 '<a href="blog-details.html" id = "'+ doc_id +'" onclick="openBlogDetails(this)" ><img src="'+ bd_picture +'" alt="blog-image"></a>'+
             '</div>'+
             '<div class="blog-content">'+
-                    '<h4 class="blog-title"><a href="blog-details.html" id = "'+ doc_id +'" onclick="openBlogDetails(this)" >'+ bd_text +'</a></h4>'+
+                    '<h4 class="blog-title"><a href="blog-details.html" id = "'+ doc_id +'" onclick="openBlogDetails(this)" >'+ bd_title +'</a></h4>'+
                 '<div class="blog-meta">'+
                     '<ul>'+
                         '<li><span>Дата: </span> <a>'+ bd_date_text +'</a></li>'+
                     '</ul>'+
                 '</div>'+
                 '<div class="readmore">'+
-                    '<a href="blog-details.html" id = "'+ doc_id +'" onclick="openBlogDetails(this)" >'+ bd_text_litl +'.....</a>'+
+                    '<a href="blog-details.html" id = "'+ doc_id +'" onclick="openBlogDetails(this)" >Читать далее.....</a>'+
                 '</div>'+
             '</div>'
       ].join('');
