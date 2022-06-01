@@ -221,7 +221,7 @@ db.collection("blog_details")
         // use slice() to copy the array and not just make a reference
         var byDate = list_bd.slice(0);
         byDate.sort(function(a,b) {
-            return a.bd_date - b.bd_date;
+            return b.bd_date - a.bd_date;
         });
         byDate.forEach((doc_page) => {
         var doc_bd = doc_page.doc_data;
@@ -271,7 +271,7 @@ db.collection("blog_details")
         div_blog.innerHTML = html_blog;
         blog_details_right.prepend(div_blog); // вставить liFirst в начало <ol>
         });
-      // activBlogDetails();
+      activateBlogReviews();
     });
 
 
@@ -319,119 +319,121 @@ function activBlogDetails() {
 /*====================================================*/
 // Заполняем блок КОММЕНТАРИЕВ К НОВОСТЯМ blog-details.html
 /*====================================================*/
-var list_bс = [];
-db.collection("blog_comment").where("bc_id", "==", blog_id)
-    .get()
-    .then((querySnapshot) => {
-        querySnapshot.forEach((doc) => {
-            // doc.data() is never undefined for query doc snapshots
-            console.log(doc.id, " => ", doc.data());
-            var doc_data = doc.data();
-            var bс_date = doc_data.bс_date;
-            var doc_map = { bс_date: bс_date, doc_id: doc.id, doc_data: doc.data() }
-            list_bс.push(doc_map);
-        });
-    })
-    .catch((error) => {
-        console.log("Error getting documents: ", error);
-      }).finally(() => {
-        // use slice() to copy the array and not just make a reference
-        var bc_length = list_bс.length;
-        if(bc_length === 0){
-          var html_blog_bc = [
-            '<div class="single-comment">'+
-                '<a class="reply" onclick="addСomment()" href="#">Прокомментировать</a>'+
-            '</div>'
-          ].join('');
-          var div_blog_bc = document.createElement('div');
-          div_blog_bc.setAttribute('class', 'single-blog');
-          div_blog_bc.innerHTML = html_blog_bc;
-          blog_details_comment.append(div_blog_bc); // вставить liFirst в начало <ol>
-        }
-        var elem = document.getElementById('blog_details_comment');
-        var text = elem.getElementsByTagName("h3")['0'].textContent;
-        elem.getElementsByTagName("h3")['0'].textContent = 'Комментарии к статье - '+ bc_length +'';
+function activateBlogReviews(){
+  var list_bс = [];
+  db.collection("blog_comment").where("bc_id", "==", blog_id)
+      .get()
+      .then((querySnapshot) => {
+          querySnapshot.forEach((doc) => {
+              // doc.data() is never undefined for query doc snapshots
+              console.log(doc.id, " => ", doc.data());
+              var doc_data = doc.data();
+              var bc_date = doc_data.bc_date;
+              var doc_map = { bc_date: bc_date, doc_id: doc.id, doc_data: doc.data() }
+              list_bс.push(doc_map);
+          });
+      })
+      .catch((error) => {
+          console.log("Error getting documents: ", error);
+        }).finally(() => {
+          // use slice() to copy the array and not just make a reference
+          var bc_length = list_bс.length;
+          if(bc_length === 0){
+            var html_blog_bc = [
+              '<div class="single-comment">'+
+                  '<a class="reply" onclick="addСomment()" href="#">Прокомментировать</a>'+
+              '</div>'
+            ].join('');
+            var div_blog_bc = document.createElement('div');
+            div_blog_bc.setAttribute('class', 'single-blog');
+            div_blog_bc.innerHTML = html_blog_bc;
+            blog_details_comment.append(div_blog_bc); // вставить liFirst в начало <ol>
+          } else {
+            var elem = document.getElementById('blog_details_comment');
+            var text = elem.getElementsByTagName("h3")['0'].textContent;
+            elem.getElementsByTagName("h3")['0'].textContent = 'Комментарии к статье - '+ bc_length +'';
 
-        var byDate_bc = list_bс.slice(0);
-        byDate_bc.sort(function(a,b) {
-            return a.bс_date - b.bс_date;
-        });
-        var cycle_bc_comment = 0;
+            var byDate_bc = list_bс.slice(0);
+            byDate_bc.sort(function(a,b) {
+                return b.bc_date - a.bc_date;
+            });
+            var cycle_bc_comment = 0;
 
-        byDate_bc.forEach((doc_page) => {
-        cycle_bc_comment = cycle_bc_comment + 1;
-        var doc_bc = doc_page.doc_data;
-        var doc_id = doc_page.doc_id;
-        var bc_date = doc_bc.bc_date;
-        var bc_user_email = doc_bc.bc_user_email;
-        var bc_text = doc_bc.bc_text;
-        var fireBaseTime = new Date(
-          bc_date.seconds * 1000 + bc_date.nanoseconds / 1000000,
-        );
-        var y=fireBaseTime.getFullYear();
-        var d=fireBaseTime.getDate();
-        var mon=fireBaseTime.getMonth();
-        var hours = fireBaseTime.getHours();
-        var minutes = fireBaseTime.getMinutes();
-        if(hours < 10 ){
-          hours = 0+""+hours;
-        }
-        if(minutes < 10){
-          minutes = 0+""+minutes;
-        }
+            byDate_bc.forEach((doc_page) => {
+            cycle_bc_comment = cycle_bc_comment + 1;
+            var doc_bc = doc_page.doc_data;
+            var doc_id = doc_page.doc_id;
+            var bc_date = doc_bc.bc_date;
+            var bc_user_email = doc_bc.bc_user_email;
+            var bc_text = doc_bc.bc_text;
+            var fireBaseTime = new Date(
+              bc_date.seconds * 1000 + bc_date.nanoseconds / 1000000,
+            );
+            var y=fireBaseTime.getFullYear();
+            var d=fireBaseTime.getDate();
+            var mon=fireBaseTime.getMonth();
+            var hours = fireBaseTime.getHours();
+            var minutes = fireBaseTime.getMinutes();
+            if(hours < 10 ){
+              hours = 0+""+hours;
+            }
+            if(minutes < 10){
+              minutes = 0+""+minutes;
+            }
 
-        switch (mon)
-        {
-          case 0: s="января"; break;
-          case 1: s="февраля"; break;
-          case 2: s="марта"; break;
-          case 3: s="апреля"; break;
-          case 4: s="мая"; break;
-          case 5: s="июня"; break;
-          case 6: s="июля"; break;
-          case 7: s="августа"; break;
-          case 8: s="сентября"; break;
-          case 9: s="октября"; break;
-          case 10: s="ноября"; break;
-          case 11: s="декабря"; break;
-        }
-        var bd_date_text =d+" "+s+" "+y;
-        var bd_time_text =hours+" : "+minutes;
+            switch (mon)
+            {
+              case 0: s="января"; break;
+              case 1: s="февраля"; break;
+              case 2: s="марта"; break;
+              case 3: s="апреля"; break;
+              case 4: s="мая"; break;
+              case 5: s="июня"; break;
+              case 6: s="июля"; break;
+              case 7: s="августа"; break;
+              case 8: s="сентября"; break;
+              case 9: s="октября"; break;
+              case 10: s="ноября"; break;
+              case 11: s="декабря"; break;
+            }
+            var bd_date_text =d+" "+s+" "+y;
+            var bd_time_text =hours+" : "+minutes;
 
-        // Заполняем список таблицей
-        if(cycle_bc_comment == bc_length){
-          var html_blog_bc = [
-            '<div class="single-comment">'+
-                '<div class="comment-details fix">'+
-                    '<h8><a href="#">'+ bc_user_email +'</a></h8>'+
-                    '<h8><p>'+ bd_date_text +' _ '+ bd_time_text +'</p></h8>'+
-                    '<p>'+ bc_text +'</p>'+
-                '</div>'+
-                '<a class="reply" onclick="addСomment()" href="#">Прокомментировать</a>'+
-            '</div>'
-          ].join('');
-          var div_blog_bc = document.createElement('div');
-          div_blog_bc.setAttribute('class', 'single-blog');
-          div_blog_bc.innerHTML = html_blog_bc;
-          blog_details_comment.append(div_blog_bc); // вставить liFirst в начало <ol>
-        } else {
-          var html_blog_bc_1 = [
-            '<div class="single-comment">'+
-                '<div class="comment-details fix">'+
-                    '<h8><a href="#">'+ bc_user_email +'</a></h8>'+
-                    '<h8><p>'+ bd_date_text +' _ '+ bd_time_text +'</p></h8>'+
-                    '<p>'+ bc_text +'</p>'+
-                '</div>'+
-            '</div>'
-          ].join('');
-          var div_blog_bc_1 = document.createElement('div');
-          div_blog_bc_1.setAttribute('class', 'single-blog');
-          div_blog_bc_1.innerHTML = html_blog_bc_1;
-          blog_details_comment.append(div_blog_bc_1); // вставить liFirst в начало <ol>
-        }
-        });
-    });
-
+            // Заполняем список таблицей
+            if(cycle_bc_comment == bc_length){
+              var html_blog_bc = [
+                '<div class="single-comment">'+
+                    '<div class="comment-details fix">'+
+                        '<h8><a href="#">'+ bc_user_email +'</a></h8>'+
+                        '<h8><p>'+ bd_date_text +' _ '+ bd_time_text +'</p></h8>'+
+                        '<p>'+ bc_text +'</p>'+
+                    '</div>'+
+                    '<a class="reply" onclick="addСomment()" href="#">Прокомментировать</a>'+
+                '</div>'
+              ].join('');
+              var div_blog_bc = document.createElement('div');
+              div_blog_bc.setAttribute('class', 'single-blog');
+              div_blog_bc.innerHTML = html_blog_bc;
+              blog_details_comment.append(div_blog_bc); // вставить liFirst в начало <ol>
+            } else {
+              var html_blog_bc_1 = [
+                '<div class="single-comment">'+
+                    '<div class="comment-details fix">'+
+                        '<h8><a href="#">'+ bc_user_email +'</a></h8>'+
+                        '<h8><p>'+ bd_date_text +' _ '+ bd_time_text +'</p></h8>'+
+                        '<p>'+ bc_text +'</p>'+
+                    '</div>'+
+                '</div>'
+              ].join('');
+              var div_blog_bc_1 = document.createElement('div');
+              div_blog_bc_1.setAttribute('class', 'single-blog');
+              div_blog_bc_1.innerHTML = html_blog_bc_1;
+              blog_details_comment.append(div_blog_bc_1); // вставить liFirst в начало <ol>
+            }
+            });
+          }
+      });
+}
 /*====================================================*/
 // Активировать нижнюю часть экрана с НОВОСТНЫМ блоком
 /*====================================================*/
@@ -453,13 +455,16 @@ db.collection("blog_comment").add({
 .then((docRef) => {
     console.log("Document written with ID: ", docRef.id);
     alert("Благодарим за комментарий!");
+    var parent_list_view = document.getElementById("blog_details_comment");
+    parent_list_view.replaceChildren();
+    var div_blog_bc_2 = document.createElement('h3');
+    div_blog_bc_2.setAttribute('class', 'sidebar-title');
+    div_blog_bc_2.innerHTML = "Ваш комментарий может стать первым.";
+    blog_details_comment.append(div_blog_bc_2); //
+    activateBlogReviews();
+
 })
 .catch((error) => {
     console.error("Error adding document: ", error);
 });
-
-
-
-
-
 }
