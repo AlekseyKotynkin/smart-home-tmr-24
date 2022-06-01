@@ -221,136 +221,140 @@ docRef.get().then((doc) => {
            }
          }
          // Заполняем характеристики
-          for (let entry of p_specifications_map) { // то же самое, что и recipeMap.entries()
+        for (var entry of p_specifications_map) { // то же самое, что и recipeMap.entries()
 
-           var tr = document.createElement("tr");
-           tr.className = 'cart_item';
-           /*====================================================*/
-           var div_title_to = document.createElement('strong');
-           div_title_to.className = 'product-quantity';
+         var tr = document.createElement("tr");
+         tr.className = 'cart_item';
+         /*====================================================*/
+         var div_title_to = document.createElement('strong');
+         div_title_to.className = 'product-quantity';
 
-           var div_title = document.createElement('td');
-           div_title.className = 'product-name';
-           div_title.innerHTML = entry.title;
-           div_title.appendChild(div_title_to);
-           /*====================================================*/
-           var div_meaning_to = document.createElement('span');
-           div_meaning_to.className = 'amount';
-           div_meaning_to.innerHTML = entry.meaning;
+         var div_title = document.createElement('td');
+         div_title.className = 'product-name';
+         div_title.innerHTML = entry.title;
+         div_title.appendChild(div_title_to);
+         /*====================================================*/
+         var div_meaning_to = document.createElement('span');
+         div_meaning_to.className = 'amount';
+         div_meaning_to.innerHTML = entry.meaning;
 
-           var div_meaning = document.createElement('td');
-           div_meaning.className = 'product-total';
-           div_meaning.appendChild(div_meaning_to);
-           /*====================================================*/
-           tr.appendChild(div_title);
-           tr.appendChild(div_meaning);
-           /*====================================================*/
-           container.appendChild(tr);
+         var div_meaning = document.createElement('td');
+         div_meaning.className = 'product-total';
+         div_meaning.appendChild(div_meaning_to);
+         /*====================================================*/
+         tr.appendChild(div_title);
+         tr.appendChild(div_meaning);
+         /*====================================================*/
+         container.appendChild(tr);
 
-        }
-       // Заполняем сопутствующие товары
-        var h = p_upsell_doc_map.length;
-        for (let i = 0; i < h; i++) {
-          var cycle_upsell_doc_map = 0;
-          var id_doc = p_upsell_doc_map[i];
-          var docRef = db.collection("product").doc(id_doc);
-          docRef.get().then((doc) => {
-              if (doc.exists) {
-                  var doc_product = doc.data();
-                  var doc_id = doc.id;
-                  var p_Foto_link = doc_product.p_Foto_link;
-                  var p_Title = doc_product.p_Title;
-                  var p_price_max = doc_product.p_price_max;
-                  var p_price_min = doc_product.p_price_min;
-                  var p_comment = doc_product.p_comment;
-                  var p_sale = doc_product.p_sale;
-                  var html_sale ='';
-                  if (p_sale !== '') {
-                    html_sale ='<span class="sticker-new">'+p_sale+'</span>';
+      }
+      // Заполняем сопутствующие товары
+         var h = p_upsell_doc_map.length;
+         for (var i = 0; i < h; i++) {
+           var cycle_upsell_doc_map = 0;
+           var id_doc = p_upsell_doc_map[i];
+           var docRef = db.collection("product").doc(id_doc);
+           docRef.get().then((doc) => {
+               if (doc.exists) {
+                   var doc_product = doc.data();
+                   var doc_id = doc.id;
+                   var p_Foto_link = doc_product.p_Foto_link;
+                   var p_Title = doc_product.p_Title;
+                   var p_price_max = doc_product.p_price_max;
+                   var p_price_min = doc_product.p_price_min;
+                   var p_comment = doc_product.p_comment;
+                   var p_sale = doc_product.p_sale;
+                   var html_sale ='';
+                   if (p_sale !== '') {
+                     html_sale ='<span class="sticker-new">'+p_sale+'</span>';
+                    }
+                   var p_popularity = doc_product.p_popularity;
+                   var star_1_W;
+                   if(p_popularity >=1){
+                     star_1_W = "color: #f9ba48; font-size: 14px; line-height: 20px";
+                   } else {
+                     star_1_W = "color: ##444";
                    }
-                  var p_popularity = doc_product.p_popularity;
-                  var star_1_W;
-                  if(p_popularity >=1){
-                    star_1_W = "color: #f9ba48; font-size: 14px; line-height: 20px";
-                  } else {
-                    star_1_W = "color: ##444";
-                  }
-                  var star_2_W;
-                  if(p_popularity >=2){
-                    star_2_W = "color: #f9ba48; font-size: 14px; line-height: 20px";
-                  } else {
-                    star_2_W = "color: ##444";
-                  }
-                  var star_3_W;
-                  if(p_popularity >=3){
-                    star_3_W = "color: #f9ba48; font-size: 14px; line-height: 20px";
-                  } else {
-                    star_3_W = "color: ##444";
-                  }
-                  var star_4_W;
-                  if(p_popularity >=4){
-                    star_4_W = "color: #f9ba48; font-size: 14px; line-height: 20px";
-                  } else {
-                    star_4_W = "color: ##444";
-                  }
-                  var star_5_W;
-                  if(p_popularity >=5){
-                    star_5_W = "color: #f9ba48; font-size: 14px; line-height: 20px";
-                  } else {
-                    star_5_W = "color: ##444";
-                  }
-                  // Заполняем список таблицей
-                  var html = [
-                    '<div class="pro-img">'+
-                        '<a onclick="countRabbits(this)" id = '+ doc_id +' >'+
-                            '<img class="primary-img" src='+p_Foto_link+' alt="single-product">'+
-                            '<img class="secondary-img" src='+p_Foto_link+' alt="single-product">'+
-                        '</a>'+
-                    '</div>'+
-                    '<div class="pro-content">'+
-                        '<div class="product-rating">'+
-                            '<span class="fa fa-star" style="'+ star_1_W +'"></span>'+
-                            '<span class="fa fa-star" style="'+ star_2_W +'"></span>'+
-                            '<span class="fa fa-star" style="'+ star_3_W +'"></span>'+
-                            '<span class="fa fa-star" style="'+ star_4_W +'"></span>'+
-                            '<span class="fa fa-star" style="'+ star_5_W +'"></span>'+
-                        '</div>'+
-                        '<h4><a onclick="countRabbits(this)" id = '+ doc_id +' href="#">'+p_Title+'</a></h4>'+
-                        '<p><span class="price">оптовая '+p_price_min+' ₽</span></p>'+
-                        '<p><span class="prev-price">розничная '+p_price_max+' ₽</span></p>'+
-                        '<div class="pro-actions">'+
-                            '<div class="actions-secondary">'+
-                                '<a id = '+doc_id+' onclick = "go_wishlist(this)" href="#" data-toggle="tooltip" title="в избранное"><i class="fa fa-heart"></i></a>'+
-                                '<a id = '+doc_id+' onclick = "go_cart(this)" class="add-cart" href="#" data-toggle="tooltip" title="в корзину">в корзину</a>'+
-                                '<a id = '+doc_id+' onclick = "go_compare(this)" href="#" data-toggle="tooltip" title="сравнить"><i class="fa fa-signal"></i></a>'+
-                            '</div>'+
-                        '</div>'+
-                    '</div>'+
-                    html_sale
-                  ].join('');
-                  var div = document.createElement('div');
-                  div.setAttribute('class', 'single-product');
-                  div.innerHTML = html;
-                  upsell_product.prepend(div); // вставить liFirst в начало <ol>
-                  cycle_upsell_doc_map = cycle_upsell_doc_map + 1;
-                  if (cycle_upsell_doc_map === h){
-                    UpsellPro()
-                  }
-              } else {
-                  // doc.data() will be undefined in this case
-                  console.log("No such document!");
-              }
+                   var star_2_W;
+                   if(p_popularity >=2){
+                     star_2_W = "color: #f9ba48; font-size: 14px; line-height: 20px";
+                   } else {
+                     star_2_W = "color: ##444";
+                   }
+                   var star_3_W;
+                   if(p_popularity >=3){
+                     star_3_W = "color: #f9ba48; font-size: 14px; line-height: 20px";
+                   } else {
+                     star_3_W = "color: ##444";
+                   }
+                   var star_4_W;
+                   if(p_popularity >=4){
+                     star_4_W = "color: #f9ba48; font-size: 14px; line-height: 20px";
+                   } else {
+                     star_4_W = "color: ##444";
+                   }
+                   var star_5_W;
+                   if(p_popularity >=5){
+                     star_5_W = "color: #f9ba48; font-size: 14px; line-height: 20px";
+                   } else {
+                     star_5_W = "color: ##444";
+                   }
+                   // Заполняем список таблицей
+                   var html = [
+                     '<div class="pro-img">'+
+                         '<a onclick="countRabbits(this)" id = '+ doc_id +' >'+
+                             '<img class="primary-img" src='+p_Foto_link+' alt="single-product">'+
+                             '<img class="secondary-img" src='+p_Foto_link+' alt="single-product">'+
+                         '</a>'+
+                     '</div>'+
+                     '<div class="pro-content">'+
+                         '<div class="product-rating">'+
+                             '<span class="fa fa-star" style="'+ star_1_W +'"></span>'+
+                             '<span class="fa fa-star" style="'+ star_2_W +'"></span>'+
+                             '<span class="fa fa-star" style="'+ star_3_W +'"></span>'+
+                             '<span class="fa fa-star" style="'+ star_4_W +'"></span>'+
+                             '<span class="fa fa-star" style="'+ star_5_W +'"></span>'+
+                         '</div>'+
+                         '<h4><a onclick="countRabbits(this)" id = '+ doc_id +' href="#">'+p_Title+'</a></h4>'+
+                         '<p><span class="price">оптовая '+p_price_min+' ₽</span></p>'+
+                         '<p><span class="prev-price">розничная '+p_price_max+' ₽</span></p>'+
+                         '<div class="pro-actions">'+
+                             '<div class="actions-secondary">'+
+                                 '<a id = '+doc_id+' onclick = "go_wishlist(this)" href="#" data-toggle="tooltip" title="в избранное"><i class="fa fa-heart"></i></a>'+
+                                 '<a id = '+doc_id+' onclick = "go_cart(this)" class="add-cart" href="#" data-toggle="tooltip" title="в корзину">в корзину</a>'+
+                                 '<a id = '+doc_id+' onclick = "go_compare(this)" href="#" data-toggle="tooltip" title="сравнить"><i class="fa fa-signal"></i></a>'+
+                             '</div>'+
+                         '</div>'+
+                     '</div>'+
+                     html_sale
+                   ].join('');
+                   var div = document.createElement('div');
+                   div.setAttribute('class', 'single-product');
+                   div.innerHTML = html;
+                   upsell_product.prepend(div); // вставить liFirst в начало <ol>
+                   cycle_upsell_doc_map = cycle_upsell_doc_map + 1;
+                   if (cycle_upsell_doc_map === h){
+                     UpsellPro()
+                   }
+                 } else {
+                     // doc.data() will be undefined in this case
+                     console.log("No such document!");
+                 }
 
-          }).catch((error) => {
-              console.log("Error getting document:", error);
-          });
+             }).catch((error) => {
+                 console.log("Error getting document:", error);
+             });
 
-        }
+           }
 
     } else {
         // doc.data() will be undefined in this case
         console.log("No such document!");
     }
+
+
+
+
 
 }).catch((error) => {
     console.log("Error getting document:", error);
