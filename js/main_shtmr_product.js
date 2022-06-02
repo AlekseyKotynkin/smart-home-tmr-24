@@ -249,7 +249,13 @@ docRef.get().then((doc) => {
 
       }
       // Заполняем сопутствующие товары
+         if(p_upsell_doc_map === undefined){
+           document.getElementById("upsell_product_conteiner").remove();
+         }
          var h = p_upsell_doc_map.length;
+         if(h === 0){
+           document.getElementById("upsell_product_conteiner").remove();
+         }
          for (var i = 0; i < h; i++) {
            var cycle_upsell_doc_map = 0;
            var id_doc = p_upsell_doc_map[i];
@@ -451,7 +457,6 @@ function go_cart(obj) {
 
 }
 
-/*====================================================*/
 /*====================================================*/
 // Добавить позицию в список СРАВНИТЬ
 /*====================================================*/
