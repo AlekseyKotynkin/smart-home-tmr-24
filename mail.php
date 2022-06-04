@@ -1,55 +1,90 @@
 <?php
 
-    // Only process POST reqeusts.
-    // if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        // Get the form fields and remove whitespace.
-        // $name = strip_tags(trim($_POST["name"]));
-				// $name = str_replace(array("\r","\n"),array(" "," "),$name);
-        // $email = filter_var(trim($_POST["email"]), FILTER_SANITIZE_EMAIL);
-        // $subject = trim($_POST["subject"]);
-        // $website = trim($_POST["website"]);
-        // $message = trim($_POST["message"]);
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
-        // Check that data was sent to the mailer.
-        // if ( empty($name) OR empty($subject) OR empty($website) OR empty($message) OR !filter_var($email, FILTER_VALIDATE_EMAIL)) {
-            // Set a 400 (bad request) response code and exit.
-        //     http_response_code(400);
-        //     echo "Please complete the form and try again.";
-        //     exit;
-        // }
+  # BEGIN Setting reCaptcha v3 validation data
+  $url = "https://www.google.com/recaptcha/api/siteverify";
+  $data = [
+    'secret' => "6LccVUMgAAAAAI20ITqNJQGed-m4pYIb9gnb0ee6",
+    'response' => $_POST['token'],
+    'remoteip' => $_SERVER['REMOTE_ADDR']
+  ];
 
-        // Set the recipient email address.
-        // FIXME: Update this to your desired email address.
-        // $recipient = "admin@yoursite.com";
+  $options = array(
+    'http' => array(
+      'header'  => "Content-type: application/x-www-form-urlencoded\r\n",
+      'method'  => 'POST',
+      'content' => http_build_query($data)
+    )
+    );
 
-        // Set the email subject.
-        // $subject = "New contact from $name";
+  # Creates and returns stream context with options supplied in options preset
+  $context  = stream_context_create($options);
+  # file_get_contents() is the preferred way to read the contents of a file into a string
+  $response = file_get_contents($url, false, $context);
+  # Takes a JSON encoded string and converts it into a PHP variable
+  $res = json_decode($response, true);
+  # END setting reCaptcha v3 validation data
 
-        // Build the email content.
-        // $email_content = "Name: $name\n";
-        // $email_content .= "Email: $email\n\n";
-        // $email_content .= "Subject: $subject\n\n";
-        // $email_content .= "Website: $website\n\n";
-        // $email_content .= "Message:\n$message\n";
+    // print_r($response);
+# Post form OR output alert and bypass post if false. NOTE: score conditional is optional
+# since the successful score default is set at >= 0.5 by Google. Some developers want to
+# be able to control score result conditions, so I included that in this example.
 
-        // Build the email headers.
-        // $email_headers = "From: $name <$email>";
+  if ($res['success'] == true && $res['score'] >= 0.5) {
 
-        // Send the email.
-        // if (mail($recipient, $subject, $email_content, $email_headers)) {
-            // Set a 200 (okay) response code.
-            // http_response_code(200);
-            // echo "Thank You! Your message has been sent.";
-        // } else {
-            // Set a 500 (internal server error) response code.
-            // http_response_code(500);
-            // echo "Oops! Something went wrong and we couldn't send your message.";
-    //     }
-    //
-    // } else {
-        // Not a POST request, set a 403 (forbidden) response code.
-        // http_response_code(403);
-        // echo "There was a problem with your submission, please try again.";
-    // }
+    # Recipient email
+    # Адрес электронной почты получателя
+    $mail_to = "cay211076@gmail.com";
 
-?>
+    # Sender form data
+    $subject = trim($_POST["subject"]);
+    $name = str_replace(array("\r","\n"),array(" "," ") , strip_tags(trim($_POST["name"])));
+    $email = filter_var(trim($_POST["email"]), FILTER_SANITIZE_EMAIL);
+    $phone = trim($_POST["phone"]);
+    $message = trim($_POST["message"]);
+
+    if (empty($name) OR !filter_var($email, FILTER_VALIDATE_EMAIL) OR empty($phone) OR empty($subject) OR empty($message)) {
+      # Set a 400 (bad request) response code and exit
+      http_response_code(400);
+      echo '<p class="alert-warning">Пожалуйста, заполните форму и повторите попытку.</p>';
+      exit;
+    }
+
+    # Mail content
+    $content = "Name: $name\n";
+    $content .= "Email: $email\n\n";
+    $content .= "Phone: $phone\n";
+    $content .= "Message:\n$message\n";
+
+    # Email headers
+    $headers = "From: $name <$email>";
+
+    # Send the email
+    $success = mail($mail_to, $subject, $content, $headers);
+
+    if ($success) {
+      # Set a 200 (okay) response code
+      http_response_code(200);
+      echo '<p class="alert alert-success">Спасибо! Ваше сообщение было успешно отправлено.</p>';
+      echo '<script type="text/javascript">',
+     'sendTheReverseForm();',
+     '</script>';
+    } else {
+      # Set a 500 (internal server error) response code
+      http_response_code(500);
+      echo '<p class="alert alert-warning">Что-то пошло не так, ваше сообщение не удалось отправить.</p>';
+    }
+
+  } else {
+
+    echo '<div class="alert alert-danger">
+        Ошибка! Срок действия токена безопасности истек, или вы бот.
+       </div>';
+  }
+
+} else {
+  # Not a POST request, set a 403 (forbidden) response code
+  http_response_code(403);
+  echo '<p class="alert-warning">Возникла проблема с вашей отправкой, пожалуйста, попробуйте еще раз.</p>';
+} ?>

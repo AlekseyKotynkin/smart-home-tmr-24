@@ -21,7 +21,7 @@
     <!-- owl carousel css -->
     <link rel="stylesheet" href="css/owl.carousel.min.css">
     <!-- slick css -->
-   <link rel="stylesheet" href="css/slick.css">
+    <link rel="stylesheet" href="css/slick.css">
     <!-- price slider css -->
     <link rel="stylesheet" href="css/jquery-ui.min.css">
     <!-- fontawesome css -->
@@ -36,9 +36,11 @@
     <link rel="stylesheet" href="style.css">
     <!-- responsive css -->
     <link rel="stylesheet" href="css/responsive.css">
+
+    <link rel="preconnect" href="https://www.google.com">
+    <link rel="preconnect" href="https://www.gstatic.com" crossorigin>
     <!-- modernizr js -->
     <script src="js/vendor/modernizr-2.8.3.min.js"></script>
-    <script src="https://www.google.com/recaptcha/api.js"></script>
     <!-- Firebase -->
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app-check.js"></script>
@@ -49,7 +51,6 @@
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-functions.js"></script>
     <!-- init-firebase js -->
     <script src="js/init-firebase.js"></script>
-
     <!-- Yandex Maps -->
     <script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU&amp;apikey=ab308eaf-3b28-4299-bba6-f130870295da" type="text/javascript"></script>
     <script type="text/javascript">
@@ -57,6 +58,16 @@
       function init(){
         var myMap = new ymaps.Map("map", {center: [55.857149, 37.558858], zoom: 17});
       }
+    </script>
+    <!-- reCaptcha v3 -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <script src="https://www.google.com/recaptcha/api.js?render=6LccVUMgAAAAAHqi0SQ5unpbwgwx3HCn1jWBymQI"></script>
+    <script>
+      grecaptcha.ready(function() {
+          grecaptcha.execute('6LccVUMgAAAAAHqi0SQ5unpbwgwx3HCn1jWBymQI', {action: 'homepage'}).then(function(token) {
+             // console.log("проходит что то")
+          });
+      });
     </script>
 </head>
 
@@ -85,7 +96,7 @@
                                 <form action="#">
                                     <!-- <input type="text" class="email" placeholder="Search Your Product" name="product"> -->
                                     <input type="text" class="email" placeholder="Поиск Вашего Продукта" name="product">
-                                    <button type="submit" class="submit" onclic="searchForYourProduct()"></button>
+                                    <button class="submit" onclic="searchForYourProduct()"></button>
                                 </form>
                             </div>
                         </div>
@@ -347,16 +358,16 @@
                         </form>
                     </div>
                 </div>
-                <div class="row">
+                <!-- <div class="row">
                     <div class="col-sm-12">
                         <p class="text-capitalize mb-40"></p>
                         <form class="contact-form" action="mail.php" method="post">
                             <div class="address-wrapper">
                                 <div class="address-wrapper">
                                   <div class="brand-area pb-60">
-                                      <div class="container">
+                                      <div class="container"> -->
                                           <!-- Brand Banner Start -->
-                                          <div class="brand-banner owl-carousel">
+                                          <!-- <div class="brand-banner owl-carousel"> -->
                                             <!-- <div class="single-brand">
                                                 <div class="footer-content">
                                                     <div class="loc-address">
@@ -402,64 +413,82 @@
                                                     </div>
                                                 </div>
                                             </div> -->
-                                          </div>
+                                          <!-- </div> -->
                                           <!-- Brand Banner End -->
-                                      </div>
+                                      <!-- </div>
                                   </div>
                                 </div>
                             </div>
                         </form>
                     </div>
-                </div>
+                </div> -->
 
             </div>
         </div>
         <!-- Contact Email Area End -->
         <!-- Contact Email Area Start -->
-        <div class="contact-email-area ptb-60">
+        <div class="brand-area pb-60">
             <div class="container">
                 <div class="row">
-                    <div class="col-sm-12">
-                        <h3>Форма обратной связи</h3>
-                        <p class="text-none mb-40">Есть вопросы? Может есть предложения? Оставьте свои контакты, и мы свяжемся с Вами!</p>
-                        <form id="contact-form" class="contact-form" action="mail.php" method="post">
-                            <div class="address-wrapper">
+                    <section style="margin: 50px 20px;">
+                      <!-- <div style="max-width: 768px; margin: auto;"> -->
+                        <!-- contact form -->
+                        <div class="card">
+                          <h2 class="card-header">Форма обратной связи</h2>
+                          <div class="card-body">
+                            <form id="contact-form" class="contact_form" method="post" action="mail.php">
+                              <!-- form fields -->
+                              <div class="row">
+                                <div class="col-md-6 form-group">
+                                  <input name="name" type="text" class="form-control" placeholder="ФИО" required>
+                                </div>
+                                <div class="col-md-6 form-group">
+                                  <input name="email" type="email" class="form-control" placeholder="Электронная почта" required>
+                                </div>
+                                <div class="col-md-6 form-group">
+                                  <input name="phone" type="text" class="form-control" placeholder="Номер телефона" required>
+                                </div>
+                                <div class="col-md-6 form-group">
+                                  <input name="subject" type="text" class="form-control" placeholder="Тема" required>
+                                </div>
+                                <div class="col-12 form-group">
+                                  <textarea name="message" class="form-control" rows="5" placeholder="Текст сообщения" required></textarea>
+                                </div>
+                                <!-- form message prompt -->
                                 <div class="row">
-                                    <div class="col-md-12">
-                                        <div class="address-fname">
-                                            <input type="text" name="name" placeholder="ФИО">
-                                        </div>
+                                  <div class="col-12">
+                                    <div class="contact_msg" style="display: none">
+                                      <p>Ваше сообщение было отправлено.</p>
                                     </div>
-                                    <div class="col-md-6">
-                                        <div class="address-email">
-                                            <input type="email" name="email" placeholder="Электронная почта">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="address-web">
-                                            <input type="text" name="website" placeholder="Ваш сайт">
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-12">
-                                        <div class="address-subject">
-                                            <input type="text" name="subject" placeholder="Тема сообщения">
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-12">
-                                        <div class="address-textarea">
-                                            <textarea name="message" placeholder="Текст сообщения"></textarea>
-                                        </div>
-                                    </div>
+                                  </div>
                                 </div>
-                            </div>
-                            <p class="form-message ml-15"></p>
-                            <div class="col-xs-12 footer-content mail-content">
-                                <div class="send-email">
-                                    <input type="submit" value="Отправить" class="submit">
+                                <div class="col-12">
+                                  <input type="submit" value="Отправить" class="btn btn-success" name="post">
                                 </div>
-                            </div>
-                        </form>
-                    </div>
+                                <!-- hidden reCaptcha token input -->
+                                <input type="hidden" id="token" name="token">
+                              </div>
+                            </form>
+                          </div>
+                        </div>
+                      <!-- </div> -->
+                    </section>
+                    <script>
+                      grecaptcha.ready(function() {
+                        grecaptcha.execute('6LccVUMgAAAAAHqi0SQ5unpbwgwx3HCn1jWBymQI', {action: 'homepage'}).then(function(token) {
+                           // console.log(token);
+                           document.getElementById("token").value = token;
+                        });
+                        // refresh token every minute to prevent expiration
+                        setInterval(function(){
+                          grecaptcha.execute('6LccVUMgAAAAAHqi0SQ5unpbwgwx3HCn1jWBymQI', {action: 'homepage'}).then(function(token) {
+                            console.log( 'refreshed token:', token );
+                            document.getElementById("token").value = token;
+                          });
+                        }, 60000);
+
+                      });
+                    </script>
                 </div>
             </div>
         </div>
@@ -640,6 +669,8 @@
         <!-- Footer End -->
     </div>
     <!-- Wrapper End -->
+    <!-- main_shtmr_contact js -->
+    <script src="js\main_shtmr_contact.js"></script>
     <!-- jquery 3.12.4 -->
     <script src="js/vendor/jquery-1.12.4.min.js"></script>
     <!-- mobile menu js  -->
