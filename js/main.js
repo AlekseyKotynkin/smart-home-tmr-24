@@ -538,22 +538,27 @@ $('.brand-banner').on('changed.owl.carousel initialized.owl.carousel', function 
       form_data;
 
     // Success function
+    // Функция успеха
     function done_func(response) {
       message.fadeIn()
       message.html(response);
       setTimeout(function () {
         message.fadeOut();
-      }, 10000);
+        sendTheReverseForm();
+      }, 1000);
       form.find('input:not([type="submit"]), textarea').val('');
     }
 
     // fail function
+    // функция сбоя
     function fail_func(data) {
       message.fadeIn()
       message.html(data.responseText);
+
       setTimeout(function () {
         message.fadeOut();
-      }, 10000);
+        alert("Что то пошло не так!");
+      }, 1000);
     }
 
     form.submit(function (e) {
@@ -569,7 +574,6 @@ $('.brand-banner').on('changed.owl.carousel initialized.owl.carousel', function 
     });
 
 })(jQuery);
-
 
 /*====================================================*/
 //  22.Заполнения index.html блок отражение авторизации
@@ -797,4 +801,50 @@ function openTheCatalog_Bracket() {
 function openTheCatalog_ServiceEquipment() {
   localStorage.setItem('selection_criteria', "service_equipment");
   window.location.replace("shop.html");
+}
+
+
+function sendTheReverseForm() {
+
+  // получаем форму
+
+  var form = document.forms["contact-form"]; // <form name="my"> element
+  var form_name = form.elements[0].value; // ФИО
+  var form_email = form.elements[1].value; // электронный адрес
+  var form_telefon = form.elements[2].value; // электронный адрес
+  var form_subject = form.elements[3].value; // тема сообщения
+  var form_text = form.elements[4].value; // текст сообщения
+  // if(form_name == ""){
+  //   alert("")
+  // }
+  // if(form_email == ""){
+  //   alert("")
+  // }
+  // if(form_telefon == ""){
+  //   alert("")
+  // }
+  // if(form_subject == ""){
+  //   alert("")
+  // }
+  // if(form_text == ""){
+  //   alert("")
+  // }
+
+  // Add a new document with a generated id.
+  db.collection("reverse_form").add({
+    form_name: form_name,
+    form_email: form_email,
+    form_telefon: form_telefon,
+    form_subject: form_subject,
+    form_text: form_text,
+    dateExample: firebase.firestore.Timestamp.fromDate(new Date())
+  })
+  .then((docRef) => {
+      console.log("Document written with ID: ", docRef.id);
+  })
+  .catch((error) => {
+      console.error("Error adding document: ", error);
+  });
+
+  alert("Сообщение отправлено!")
 }

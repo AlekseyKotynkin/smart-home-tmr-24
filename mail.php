@@ -34,7 +34,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   if ($res['success'] == true && $res['score'] >= 0.5) {
 
     # Recipient email
-    # Адрес электронной почты получателя
     $mail_to = "cay211076@gmail.com";
 
     # Sender form data
@@ -47,7 +46,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (empty($name) OR !filter_var($email, FILTER_VALIDATE_EMAIL) OR empty($phone) OR empty($subject) OR empty($message)) {
       # Set a 400 (bad request) response code and exit
       http_response_code(400);
-      echo '<p class="alert-warning">Пожалуйста, заполните форму и повторите попытку.</p>';
+      echo '<p class="alert-warning">Please complete the form and try again.</p>';
       exit;
     }
 
@@ -66,25 +65,22 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if ($success) {
       # Set a 200 (okay) response code
       http_response_code(200);
-      echo '<p class="alert alert-success">Спасибо! Ваше сообщение было успешно отправлено.</p>';
-      echo '<script type="text/javascript">',
-     'sendTheReverseForm();',
-     '</script>';
+      echo '<p class="alert alert-success">Thank You! Your message has been successfully sent.</p>';
     } else {
       # Set a 500 (internal server error) response code
       http_response_code(500);
-      echo '<p class="alert alert-warning">Что-то пошло не так, ваше сообщение не удалось отправить.</p>';
+      echo '<p class="alert alert-warning">Something went wrong, your message could not be sent.</p>';
     }
 
   } else {
 
     echo '<div class="alert alert-danger">
-        Ошибка! Срок действия токена безопасности истек, или вы бот.
+        Error! The security token has expired or you are a bot.
        </div>';
   }
 
 } else {
   # Not a POST request, set a 403 (forbidden) response code
   http_response_code(403);
-  echo '<p class="alert-warning">Возникла проблема с вашей отправкой, пожалуйста, попробуйте еще раз.</p>';
+  echo '<p class="alert-warning">There was a problem with your submission, please try again.</p>';
 } ?>
