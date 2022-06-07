@@ -58,20 +58,18 @@
       function init(){
         var myMap = new ymaps.Map("map", {center: [55.857149, 37.558858], zoom: 17});
       }
-    </script>
-    <!-- reCaptcha v3 -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-    <script src="https://www.google.com/recaptcha/api.js?render=6LccVUMgAAAAAHqi0SQ5unpbwgwx3HCn1jWBymQI"></script>
+    <!-- https://replain.cc/ -->
     <script>
-      grecaptcha.ready(function() {
-          grecaptcha.execute('6LccVUMgAAAAAHqi0SQ5unpbwgwx3HCn1jWBymQI', {action: 'homepage'}).then(function(token) {
-             // console.log("проходит что то")
-          });
-      });
+      window.replainSettings = { id: 'd0cf32e1-4134-4211-a26f-1e414e280121' };
+        (function(u){var s=document.createElement('script');s.async=true;s.src=u;
+        var x=document.getElementsByTagName('script')[0];x.parentNode.insertBefore(s,x);
+        })('https://widget.replain.cc/dist/client.js');
     </script>
+    <!-- /https://replain.cc/ -->
 </head>
 
 <body>
+
     <!--[if lt IE 8]>
     <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
@@ -427,17 +425,14 @@
         </div>
         <!-- Contact Email Area End -->
         <!-- Contact Email Area Start -->
-        <div class="brand-area pb-60">
+        <!-- <div class="brand-area pb-60">
             <div class="container">
                 <div class="row">
                     <section style="margin: 50px 20px;">
-                      <!-- <div style="max-width: 768px; margin: auto;"> -->
-                        <!-- contact form -->
                         <div class="card">
                           <h2 class="card-header">Форма обратной связи</h2>
                           <div class="card-body">
                             <form id="contact-form" class="contact_form" method="post" action="mail.php">
-                              <!-- form fields -->
                               <div class="row">
                                 <div class="col-md-6 form-group">
                                   <input name="name" type="text" class="form-control" placeholder="ФИО" required>
@@ -454,7 +449,6 @@
                                 <div class="col-12 form-group">
                                   <textarea name="message" class="form-control" rows="5" placeholder="Текст сообщения" required></textarea>
                                 </div>
-                                <!-- form message prompt -->
                                 <div class="row">
                                   <div class="col-12">
                                     <div class="contact_msg" style="display: none">
@@ -465,33 +459,15 @@
                                 <div class="col-12">
                                   <input type="submit" value="Отправить" class="btn btn-success" name="post">
                                 </div>
-                                <!-- hidden reCaptcha token input -->
                                 <input type="hidden" id="token" name="token">
                               </div>
                             </form>
                           </div>
                         </div>
-                      <!-- </div> -->
                     </section>
-                    <script>
-                      grecaptcha.ready(function() {
-                        grecaptcha.execute('6LccVUMgAAAAAHqi0SQ5unpbwgwx3HCn1jWBymQI', {action: 'homepage'}).then(function(token) {
-                           // console.log(token);
-                           document.getElementById("token").value = token;
-                        });
-                        // refresh token every minute to prevent expiration
-                        setInterval(function(){
-                          grecaptcha.execute('6LccVUMgAAAAAHqi0SQ5unpbwgwx3HCn1jWBymQI', {action: 'homepage'}).then(function(token) {
-                            console.log( 'refreshed token:', token );
-                            document.getElementById("token").value = token;
-                          });
-                        }, 60000);
-
-                      });
-                    </script>
                 </div>
             </div>
-        </div>
+        </div> -->
         <!-- Contact Email Area End -->
         <!-- Brand Logo Start -->
         <div class="brand-area pb-60">
@@ -583,7 +559,7 @@
                                         <li><a href="#">Jobs</a></li>
                                         <li><a href="#">Delivery Information</a></li>
                                         <li><a href="#">Order History</a></li> -->
-                                        <li><a href="#">Политика обработки персональных данных.</a></li>
+                                        <li><a href="personal_agreement.html" target="_blank">Политика обработки персональных данных.</a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -595,6 +571,9 @@
                                 <h3 class="footer-title">Личный кабинет</h3>
                                 <div class="footer-content">
                                     <ul class="footer-list">
+                                      <li><a href="login.html">Вход</a></li>
+                                      <li><a href="register.html">Регистрация</a></li>
+
                                         <!-- <li><a href="account.html">My account</a></li>
                                         <li><a href="#">Checkout</a></li>
                                         <li><a href="#">Вход</a></li>

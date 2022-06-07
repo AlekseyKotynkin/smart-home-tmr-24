@@ -530,48 +530,6 @@ $('.brand-banner').on('changed.owl.carousel initialized.owl.carousel', function 
             }
         }
     })
-    /*----------------------------------------------------
-    21.reCaptcha v3
-    -----------------------------------------------------*/
-    var form = $('.contact_form'),
-      message = $('.contact_msg'),
-      form_data;
-
-    // Success function
-    // Функция успеха
-    function done_func(response) {
-      message.fadeIn()
-      message.html(response);
-      setTimeout(function () {
-        message.fadeOut();
-        sendTheReverseForm();
-      }, 1000);
-      form.find('input:not([type="submit"]), textarea').val('');
-    }
-
-    // fail function
-    // функция сбоя
-    function fail_func(data) {
-      message.fadeIn()
-      message.html(data.responseText);
-
-      setTimeout(function () {
-        message.fadeOut();
-        alert("Что то пошло не так!");
-      }, 1000);
-    }
-
-    form.submit(function (e) {
-      e.preventDefault();
-      form_data = $(this).serialize();
-      $.ajax({
-        type: 'POST',
-        url: form.attr('action'),
-        data: form_data
-      })
-      .done(done_func)
-      .fail(fail_func);
-    });
 
 })(jQuery);
 
