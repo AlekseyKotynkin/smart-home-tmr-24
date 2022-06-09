@@ -1,0 +1,6 @@
+User-agent: Yandex
+Disallow: /login.html
+Disallow: /register.html
+Disallow: /forgot-password.html
+Disallow: /login.html
+Sitemap: https://shtmr.ru/sitemap.xml

@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset
+      xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+            http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+<!-- created with Free Online Sitemap Generator www.xml-sitemaps.com -->
+
+
+<url>
+  <loc>https://shtmr.ru/</loc>
+  <lastmod>2022-06-08T16:20:02+00:00</lastmod>
+  <priority>1.00</priority>
+</url>
+<url>
+  <loc>https://shtmr.ru/index.html</loc>
+  <lastmod>2022-06-08T16:20:02+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://shtmr.ru/shop.html</loc>
+  <lastmod>2022-06-08T16:20:02+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://shtmr.ru/about.html</loc>
+  <lastmod>2022-06-08T16:20:02+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://shtmr.ru/contact.html</loc>
+  <lastmod>2022-06-08T16:20:02+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://shtmr.ru/product.html</loc>
+  <lastmod>2022-06-08T16:20:02+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://shtmr.ru/blog.html</loc>
+  <lastmod>2022-06-08T16:20:02+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://shtmr.ru/personal_agreement.html</loc>
+  <lastmod>2022-06-08T16:20:02+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://shtmr.ru/login.html</loc>
+  <lastmod>2022-06-08T16:20:02+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://shtmr.ru/register.html</loc>
+  <lastmod>2022-06-08T16:20:02+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://shtmr.ru/blog-details.html</loc>
+  <lastmod>2022-06-08T16:20:02+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://shtmr.ru/404.html</loc>
+  <lastmod>2022-06-08T16:20:02+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://shtmr.ru/forgot-password.html</loc>
+  <lastmod>2022-06-08T16:20:02+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://shtmr.ru/compare.html</loc>
+  <lastmod>2022-06-08T16:20:02+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://shtmr.ru/cart.html</loc>
+  <lastmod>2022-06-08T16:20:02+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://shtmr.ru/wishlist.html</loc>
+  <lastmod>2022-06-08T16:20:02+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+
+</urlset>
