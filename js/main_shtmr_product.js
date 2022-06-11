@@ -42,10 +42,20 @@ firebase.auth().onAuthStateChanged((user) => {
 
 // Initialize Cloud Firestore and get a reference to the service
 var db = firebase.firestore();
-product_id = localStorage.getItem('product_id');
-if (product_id === null){
-  window.location.replace("index.html");
-}
+// Получаем GET параметр из URL
+var paramsString = document.location.search; // ?page=4&limit=10&sortby=desc
+var searchParams = new URLSearchParams(paramsString);
+var product_id_GET = searchParams.get("page");
+if (product_id_GET === null){
+  // Получаем параметр из localStorage
+  product_id = localStorage.getItem('product_id');
+  if (product_id === null){
+      window.location.replace("index.html");
+  }
+}else{
+  product_id = product_id_GET;
+};
+// Получаем данные номенклатуры
 var docRef = db.collection("product").doc(product_id);
 docRef.get().then((doc) => {
     if (doc.exists) {
