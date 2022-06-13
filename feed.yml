@@ -1,0 +1,342 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<yml_catalog date="2022-06-13T11:37:38+03:00">
+    <shop>
+        <name>Страж</name>
+        <company>OOO КЛЕЕВЫЕ СИСТЕМЫ</company>
+        <url>https://shtmr.ru</url>
+        <email>cay211076@yandex.ru</email>
+        <currencies>
+            <currency id="RUR" rate="1"/>
+        </currencies>
+        <categories>
+            <category id="1">Каталог</category>
+            <category id="10" parentId="1">-Линейные Извещатели ИПДЛ-</category>
+            <category id="20" parentId="1">-Кронштейны-</category>
+            <category id="30" parentId="1">-Кожухи-</category>
+            <category id="40" parentId="1">-Сервисное Оборудование-</category>
+        </categories>
+        <delivery-options>
+            <option cost="500" days="3"/>
+        </delivery-options>
+        <pickup-options>
+            <option cost="500" days="3"/>
+        </pickup-options>
+        <offers>
+            <offer id="IPDLx52SMx8x100">
+                <name>Извещатель линейный ИП212-52СМ (ИПДЛ-52СМ) (8-100м) однопозиционный четырехпроводный</name>
+                <vendor>ООО «ИВС-Сигналспецавтоматика»</vendor>
+                <url>https://shtmr.ru/product.html?page=CjnJOBJxcRzmOAhDiBKM</url>
+                <price>13938</price>
+                <oldprice>14744</oldprice>
+                <enable_auto_discounts>true</enable_auto_discounts>
+                <currencyId>RUR</currencyId>
+                <categoryId>10</categoryId>
+                <vat>VAT_20</vat>
+                <picture>https://avatars.mds.yandex.net/get-marketpic/5858533/picd03878ca9823b93cb01c2943751d5ae2/orig</picture>
+                <delivery>true</delivery>
+                <pickup>true</pickup>
+                <delivery-options>
+                    <option cost="500" days="1-3" order-before="18"/>
+                </delivery-options>
+                <pickup-options>
+                    <option cost="0" days="1-3"/>
+                </pickup-options>
+                <store>true</store>
+                <description>
+                    <![CDATA[
+                        <h3>Извещатель линейный ИП212-52СМ (ИПДЛ-52СМ) (8-100м) однопозиционный четырехпроводный</h3>
+                        <p>Однопозиционный, дальность от 8...100 м, 2-е схемы включения: с питанием по ШС и от отдельного источника питания, 3 вых.реле (ПОЖАР-НЗ, ПОЖАР-НР, НЕИСПРАВНОСТЬ-НЗ), U-пит.10/30В, I-потр. 1.5 мА, IP40, t-раб.-30/+55°С.</p>
+                ]]>
+                </description>
+                <sales_notes>Необходима предоплата.</sales_notes>
+                <manufacturer_warranty>true</manufacturer_warranty>
+                <country_of_origin>Россия</country_of_origin>
+                <barcode>4673725957087</barcode>
+                <param name="Цвет">белый</param>
+                <weight>1.7</weight>
+                <dimensions>22/32/12</dimensions>
+                <count>10</count>
+                </offer>
+            <offer id="IPDLx52SMx8x80">
+                <name>Извещатель линейный ИП212-52СМ (ИПДЛ-52СМ) (8-80м) однопозиционный четырехпроводный</name>
+                <vendor>ООО «ИВС-Сигналспецавтоматика»</vendor>
+                <url>https://shtmr.ru/product.html?page=YxPT65kR7REOxQ9Z8chP</url>
+                <price>12075</price>
+                <oldprice>12800</oldprice>
+                <enable_auto_discounts>true</enable_auto_discounts>
+                <currencyId>RUR</currencyId>
+                <categoryId>10</categoryId>
+                <vat>VAT_20</vat>
+                <picture>https://avatars.mds.yandex.net/get-marketpic/5457020/pic801d7eda4575b1c89c0348cb804635d5/orig</picture>
+                <delivery>true</delivery>
+                <pickup>true</pickup>
+                <delivery-options>
+                    <option cost="500" days="1-3" order-before="18"/>
+                </delivery-options>
+                <pickup-options>
+                    <option cost="0" days="1-3"/>
+                </pickup-options>
+                <store>true</store>
+                <description>
+                    <![CDATA[
+                        <h3>Извещатель линейный ИП212-52СМ (ИПДЛ-52СМ) (8-80м) однопозиционный четырехпроводный</h3>
+                        <p>Однопозиционный, дальность от 8...80 м, 2-е схемы включения: с питанием по ШС и от отдельного источника питания, 3 вых.реле (ПОЖАР-НЗ, ПОЖАР-НР, НЕИСПРАВНОСТЬ-НЗ), U-пит.10/30В, I-потр. 1.5 мА, IP40, t-раб.-30/+55°С.</p>
+                ]]>
+                </description>
+                <sales_notes>Необходима предоплата.</sales_notes>
+                <manufacturer_warranty>true</manufacturer_warranty>
+                <country_of_origin>Россия</country_of_origin>
+                <barcode>4673725957049</barcode>
+                <param name="Цвет">белый</param>
+                <weight>1.25</weight>
+                <dimensions>22/32/12</dimensions>
+                <count>20</count>
+                </offer>
+            <offer id="IPDLx52Mx8x100">
+                <name>Извещатель линейный ИП212-52М (ИПДЛ-52М) (8-100 м) однопозиционный</name>
+                <vendor>ООО «ИВС-Сигналспецавтоматика»</vendor>
+                <url>https://shtmr.ru/product.html?page=ve4lelJUVaeVo4Hf7sqw</url>
+                <price>13938</price>
+                <oldprice>14744</oldprice>
+                <enable_auto_discounts>true</enable_auto_discounts>
+                <currencyId>RUR</currencyId>
+                <categoryId>10</categoryId>
+                <vat>VAT_20</vat>
+                <picture>https://avatars.mds.yandex.net/get-marketpic/5715725/pic5acef35750a8b09858c3daf5e700a538/orig</picture>
+                <delivery>true</delivery>
+                <pickup>true</pickup>
+                <delivery-options>
+                    <option cost="500" days="1-3" order-before="18"/>
+                </delivery-options>
+                <pickup-options>
+                    <option cost="0" days="1-3"/>
+                </pickup-options>
+                <store>true</store>
+                <description>
+                    <![CDATA[
+                        <h3>Извещатель линейный ИП212-52М (ИПДЛ-52М) (8-100 м) однопозиционный</h3>
+                        <p>Однопозиционный, дальность от 8...100 м, 2-е схемы включения: с питанием по ШС и от отдельного источника питания, 3 выходное реле (ПОЖАР-НЗ, ПОЖАР-НР, НЕИСПРАВНОСТЬ-НЗ), U-пит.10/30В, I-потр. 1.5 мА, IP40, t-раб.-30/+55°С.</p>
+                ]]>
+                </description>
+                <sales_notes>Необходима предоплата.</sales_notes>
+                <manufacturer_warranty>true</manufacturer_warranty>
+                <country_of_origin>Россия</country_of_origin>
+                <barcode>4673725957032</barcode>
+                <param name="Цвет">белый</param>
+                <weight>1.85</weight>
+                <dimensions>22/42/9</dimensions>
+                <count>10</count>
+                </offer>
+            <offer id="IPDLx52Sx8x140">
+                <name>Извещатель линейный ИП212-52С (ИПДЛ-52С) (8-140 м) двухпозиционный</name>
+                <vendor>ООО «ИВС-Сигналспецавтоматика»</vendor>
+                <url>https://shtmr.ru/product.html?page=zspe8FYQ7mZITGtD5nC8</url>
+                <price>12972</price>
+                <oldprice>13736</oldprice>
+                <enable_auto_discounts>true</enable_auto_discounts>
+                <currencyId>RUR</currencyId>
+                <categoryId>10</categoryId>
+                <vat>VAT_20</vat>
+                <picture>https://avatars.mds.yandex.net/get-marketpic/5220566/pic1c75a4447d24a17b126aa399a5b36a57/orig</picture>
+                <delivery>true</delivery>
+                <pickup>true</pickup>
+                <delivery-options>
+                    <option cost="500" days="1-3" order-before="18"/>
+                </delivery-options>
+                <pickup-options>
+                    <option cost="0" days="1-3"/>
+                </pickup-options>
+                <store>true</store>
+                <description>
+                    <![CDATA[
+                        <h3>Извещатель линейный ИП212-52С (ИПДЛ-52С) (8-140 м) двухпозиционный</h3>
+                        <p>Двухпозиционный, дальность от 8...140 м, 2-е схемы включения: с питанием по ШС и от отдельного источника питания, 3 вых.реле (ПОЖАР-НЗ, ПОЖАР-НР, НЕИСПРАВНОСТЬ-НЗ), U-пит.10/30В, I-потр. 2.5 мА, IP40, t-раб.-30/+55°С.</p>
+                ]]>
+                </description>
+                <sales_notes>Необходима предоплата.</sales_notes>
+                <manufacturer_warranty>true</manufacturer_warranty>
+                <country_of_origin>Россия</country_of_origin>
+                <barcode>4673725957094</barcode>
+                <param name="Цвет">белый</param>
+                <weight>1.25</weight>
+                <dimensions>22/32/12</dimensions>
+                <count>5</count>
+                </offer>
+            <offer id="IPDLx52SMDx8x100">
+                <name>Извещатель линейный ИП212-52СМД (ИПДЛ-52СМД) (8-100м) однопозиционный двухпроводный</name>
+                <vendor>ООО «ИВС-Сигналспецавтоматика»</vendor>
+                <url>https://shtmr.ru/product.html?page=82ZFueXjDqRxo0T2oAWS</url>
+                <price>13938</price>
+                <oldprice>14744</oldprice>
+                <enable_auto_discounts>true</enable_auto_discounts>
+                <currencyId>RUR</currencyId>
+                <categoryId>10</categoryId>
+                <vat>VAT_20</vat>
+                <picture>https://avatars.mds.yandex.net/get-marketpic/5858533/picd03878ca9823b93cb01c2943751d5ae2/orig</picture>
+                <delivery>true</delivery>
+                <pickup>true</pickup>
+                <delivery-options>
+                    <option cost="500" days="1-3" order-before="18"/>
+                </delivery-options>
+                <pickup-options>
+                    <option cost="0" days="1-3"/>
+                </pickup-options>
+                <store>true</store>
+                <description>
+                    <![CDATA[
+                        <h3>Извещатель линейный ИП212-52СМД (ИПДЛ-52СМД) (8-100м) однопозиционный двухпроводный</h3>
+                        <p>Однопозиционный, 2-х проводный,  дальность от 8...100 м, U-шс.10...30В, I-потр. 0.7 мА, IP40, t-раб.-30...+55°С.</p>
+                ]]>
+                </description>
+                <sales_notes>Необходима предоплата.</sales_notes>
+                <manufacturer_warranty>true</manufacturer_warranty>
+                <country_of_origin>Россия</country_of_origin>
+                <barcode>4673725957070</barcode>
+                <param name="Цвет">белый</param>
+                <weight>1.7</weight>
+                <dimensions>22/32/12</dimensions>
+                <count>5</count>
+                </offer>
+            <offer id="IPDLx52SMDx8x60">
+                <name>Извещатель линейный ИП212-52СМД (ИПДЛ-52СМД) (8-60м) однопозиционный двухпроводный</name>
+                <vendor>ООО «ИВС-Сигналспецавтоматика»</vendor>
+                <url>https://shtmr.ru/product.html?page=XIBPieBvimIdkR5lpQJ1</url>
+                <price>10902</price>
+                <oldprice>11576</oldprice>
+                <enable_auto_discounts>true</enable_auto_discounts>
+                <currencyId>RUR</currencyId>
+                <categoryId>10</categoryId>
+                <vat>VAT_20</vat>
+                <picture>https://avatars.mds.yandex.net/get-marketpic/1721823/pic1788bff03ad82c320cb272b0a95c41f3/orig</picture>
+                <delivery>true</delivery>
+                <pickup>true</pickup>
+                <delivery-options>
+                    <option cost="500" days="1-3" order-before="18"/>
+                </delivery-options>
+                <pickup-options>
+                    <option cost="0" days="1-3"/>
+                </pickup-options>
+                <store>true</store>
+                <description>
+                    <![CDATA[
+                        <h3>Извещатель линейный ИП212-52СМД (ИПДЛ-52СМД) (8-60м) однопозиционный двухпроводный</h3>
+                        <p>Однопозиционный, 2-х проводный, дальность от 8...60 м, U-шс.10...30В, I-потр. 0.7 мА, IP40, t-раб.-30...+55°С.</p>
+                ]]>
+                </description>
+                <sales_notes>Необходима предоплата.</sales_notes>
+                <manufacturer_warranty>true</manufacturer_warranty>
+                <country_of_origin>Россия</country_of_origin>
+                <barcode>4673725957056</barcode>
+                <param name="Цвет">белый</param>
+                <weight>0.7</weight>
+                <dimensions>13/17/11</dimensions>
+                <count>30</count>
+                </offer>
+            <offer id="IPDLx52SMDx8x80">
+                <name>Извещатель линейный ИП212-52СМД (ИПДЛ-52СМД) (8-80м) однопозиционный двухпроводный</name>
+                <vendor>ООО «ИВС-Сигналспецавтоматика»</vendor>
+                <url>https://shtmr.ru/product.html?page=RZdcCkGVG72ubmOprpfi</url>
+                <price>12075</price>
+                <oldprice>12800</oldprice>
+                <enable_auto_discounts>true</enable_auto_discounts>
+                <currencyId>RUR</currencyId>
+                <categoryId>10</categoryId>
+                <vat>VAT_20</vat>
+                <picture>https://avatars.mds.yandex.net/get-marketpic/5457020/pic801d7eda4575b1c89c0348cb804635d5/orig</picture>
+                <delivery>true</delivery>
+                <pickup>true</pickup>
+                <delivery-options>
+                    <option cost="500" days="1-3" order-before="18"/>
+                </delivery-options>
+                <pickup-options>
+                    <option cost="0" days="1-3"/>
+                </pickup-options>
+                <store>true</store>
+                <description>
+                    <![CDATA[
+                        <h3>Извещатель линейный ИП212-52СМД (ИПДЛ-52СМД) (8-80м) однопозиционный двухпроводный</h3>
+                        <p>Однопозиционный, 2-х проводный, дальность от 8...80 м, U-шс.10...30В, I-потр. 0.7 мА, IP40, t-раб.-30...+55°С.</p>
+                ]]>
+                </description>
+                <sales_notes>Необходима предоплата.</sales_notes>
+                <manufacturer_warranty>true</manufacturer_warranty>
+                <country_of_origin>Россия</country_of_origin>
+                <barcode>4673725957063</barcode>
+                <param name="Цвет">белый</param>
+                <weight>1.25</weight>
+                <dimensions>22/32/12</dimensions>
+                <count>10</count>
+                </offer>
+            <offer id="IPDLx52x8x100">
+                <name>Извещатель линейный ИП212-52 (ИПДЛ-52) (8-100 м) двухпозиционный</name>
+                <vendor>ООО «ИВС-Сигналспецавтоматика»</vendor>
+                <url>https://shtmr.ru/product.html?page=Gt4RDnKjEwXsBfR1J93s</url>
+                <price>13938</price>
+                <oldprice>14744</oldprice>
+                <enable_auto_discounts>true</enable_auto_discounts>
+                <currencyId>RUR</currencyId>
+                <categoryId>10</categoryId>
+                <vat>VAT_20</vat>
+                <picture>https://avatars.mds.yandex.net/get-marketpic/5455004/pic209da8bd7e901e83acbed980e92d2ebe/orig</picture>
+                <delivery>true</delivery>
+                <pickup>true</pickup>
+                <delivery-options>
+                    <option cost="500" days="1-3" order-before="18"/>
+                </delivery-options>
+                <pickup-options>
+                    <option cost="0" days="1-3"/>
+                </pickup-options>
+                <store>true</store>
+                <description>
+                    <![CDATA[
+                        <h3>Извещатель линейный ИП212-52 (ИПДЛ-52) (8-100 м) двухпозиционный</h3>
+                        <p>Двухпозиционный, дальность от 8...100 м, 2-е схемы включения: с питанием по ШС и от отдельного источника питания, 3 выходное реле (ПОЖАР-НЗ, ПОЖАР-НР, НЕИСПРАВНОСТЬ-НЗ), U-пит.10/30В, I-потр. 2.5 мА, IP40, t-раб.-30/+55°С.</p>
+                ]]>
+                </description>
+                <sales_notes>Необходима предоплата.</sales_notes>
+                <manufacturer_warranty>true</manufacturer_warranty>
+                <country_of_origin>Россия</country_of_origin>
+                <barcode>4673725957025</barcode>
+                <param name="Цвет">белый</param>
+                <weight>1.55</weight>
+                <dimensions>22/32/12</dimensions>
+                <count>5</count>
+                </offer>
+            <offer id="IPDLx52Mx8x80">
+                <name>Извещатель линейный ИП212-52М (ИПДЛ-52М) (8-80 м)  однопозиционный</name>
+                <vendor>ООО «ИВС-Сигналспецавтоматика»</vendor>
+                <url>https://shtmr.ru/product.html?page=WfmHHjNwgfgJ6i9WvPh3</url>
+                <price>12075</price>
+                <oldprice>12800</oldprice>
+                <enable_auto_discounts>true</enable_auto_discounts>
+                <currencyId>RUR</currencyId>
+                <categoryId>10</categoryId>
+                <vat>VAT_20</vat>
+                <picture>https://avatars.mds.yandex.net/get-marketpic/5858144/picdaaa45b63b6dc4c05bf9b65f439a60f8/orig</picture>
+                <delivery>true</delivery>
+                <pickup>true</pickup>
+                <delivery-options>
+                    <option cost="500" days="1-3" order-before="18"/>
+                </delivery-options>
+                <pickup-options>
+                    <option cost="0" days="1-3"/>
+                </pickup-options>
+                <store>true</store>
+                <description>
+                    <![CDATA[
+                        <h3>Извещатель линейный ИП212-52М (ИПДЛ-52М) (8-80 м)  однопозиционный</h3>
+                        <p>Однопозиционный, дальность от 8...80 м, 2-е схемы включения: с питанием по ШС и от отдельного источника питания, 3 выходное реле (ПОЖАР-НЗ, ПОЖАР-НР, НЕИСПРАВНОСТЬ-НЗ), U-пит.10/30В, I-потр. 1.5 мА, IP40, t-раб.-30/+55°С.</p>
+                ]]>
+                </description>
+                <sales_notes>Необходима предоплата.</sales_notes>
+                <manufacturer_warranty>true</manufacturer_warranty>
+                <country_of_origin>Россия</country_of_origin>
+                <barcode>4673725957018</barcode>
+                <param name="Цвет">белый</param>
+                <weight>1.4</weight>
+                <dimensions>22/42/9</dimensions>
+                <count>30</count>
+                </offer>
+        </offers>
+    </shop>
+</yml_catalog>
