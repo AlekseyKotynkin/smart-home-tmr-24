@@ -359,7 +359,7 @@ $('.brand-banner').on('changed.owl.carousel initialized.owl.carousel', function 
     -----------------------------*/
     $.scrollUp({
         scrollName: 'scrollUp', // Element ID
-        topDistance: '550', // Distance from top before showing element (px)
+        topDistance: '550', // 550 первоначальное значение Distance from top before showing element (px) Расстояние от вершины до отображения элемента (пикселей)
         topSpeed: 1000, // Speed back to top (ms)
         animation: 'fade', // Fade, slide, none
         scrollSpeed: 900,
